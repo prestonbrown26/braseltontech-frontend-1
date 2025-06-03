@@ -48,7 +48,7 @@ export default function SponsorPage() {
                 </svg>
               </div>
               <div className="text-2xl font-bold text-gray-800 mb-2 text-center">Thank you for your interest in sponsoring!</div>
-              <div className="text-base text-gray-700 text-center max-w-md">We'll be in touch soon.</div>
+              <div className="text-base text-gray-700 text-center max-w-md">We&apos;ll be in touch soon.</div>
             </div>
           ) : (
             <form className="flex flex-col gap-5" onSubmit={handleSubmit}>

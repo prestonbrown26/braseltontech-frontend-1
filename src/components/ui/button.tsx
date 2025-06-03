@@ -42,7 +42,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (asChild) {
   return (
         <Slot
-          ref={ref as any}
+          ref={ref as unknown as React.Ref<HTMLButtonElement>}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         transition={{ duration: 0.1 }}
         ref={ref}
         className={cn(buttonVariants({ variant, size, className }))}
-        {...(props as any)}
+        {...(props as Record<string, unknown>)}
       />
     );
   }
