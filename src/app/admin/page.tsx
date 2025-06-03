@@ -46,7 +46,7 @@ export default function AdminPage() {
   const [error, setError] = useState("");
   const [rsvpEventFilter, setRsvpEventFilter] = useState<string>("all");
   const [contactRepliedFilter, setContactRepliedFilter] = useState("all");
-  const [pendingReplied, setPendingReplied] = useState<{ [id: number]: boolean }>({});
+  const [pendingReplied, setPendingReplied] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const t = localStorage.getItem("admin_token");
