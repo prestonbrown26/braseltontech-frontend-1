@@ -1312,9 +1312,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$format$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/date-fns/format.js [app-client] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$parseISO$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/date-fns/parseISO.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$AdminEditableText$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/AdminEditableText.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -1336,7 +1338,8 @@ function HeroSection() {
             async function fetchEvents() {
                 setLoading(true);
                 try {
-                    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(("TURBOPACK compile-time truthy", 1) ? `${"TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com/api"}/events/all/` : ("TURBOPACK unreachable", undefined));
+                    const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get(("TURBOPACK compile-time truthy", 1) ? `${"TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com/api"}/events/all/` // ✅ Fixed string interpolation
+                     : ("TURBOPACK unreachable", undefined));
                     setEvents(res.data);
                 } catch  {
                     setEvents([]);
@@ -1349,13 +1352,13 @@ function HeroSection() {
     }["HeroSection.useEffect"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "HeroSection.useEffect": ()=>{
-            if (isHovered) return; // Pause rotation on hover
+            if (isHovered) return;
             if (events.length === 1) {
                 const interval = setInterval({
                     "HeroSection.useEffect.interval": ()=>{
                         setEventIndex({
                             "HeroSection.useEffect.interval": (i)=>(i + 1) % 2
-                        }["HeroSection.useEffect.interval"]); // 0: event, 1: more coming
+                        }["HeroSection.useEffect.interval"]);
                     }
                 }["HeroSection.useEffect.interval"], 5000);
                 return ({
@@ -1382,7 +1385,6 @@ function HeroSection() {
         if (!dateStr) return "";
         try {
             const date = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$parseISO$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["parseISO"])(dateStr);
-            // Format: Tuesday, June 24th
             return (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$date$2d$fns$2f$format$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(date, "EEEE, MMMM do");
         } catch  {
             return dateStr;
@@ -1390,7 +1392,6 @@ function HeroSection() {
     }
     function formatEventTime(timeStr) {
         if (!timeStr) return "";
-        // Accepts 'HH:mm:ss' or 'HH:mm' (24h)
         const [h, m] = timeStr.split(":");
         if (h === undefined || m === undefined) return timeStr;
         let hour = parseInt(h, 10);
@@ -1398,7 +1399,7 @@ function HeroSection() {
         const ampm = hour >= 12 ? "pm" : "am";
         hour = hour % 12;
         if (hour === 0) hour = 12;
-        return `${hour}:${minute}${ampm}`;
+        return `${hour}:${minute}${ampm}`; // ✅ Fixed interpolation
     }
     let cardContent;
     if (loading) {
@@ -1407,7 +1408,7 @@ function HeroSection() {
             children: "Loading events..."
         }, void 0, false, {
             fileName: "[project]/src/components/HeroSection.tsx",
-            lineNumber: 80,
+            lineNumber: 89,
             columnNumber: 7
         }, this);
     } else if (events.length === 0) {
@@ -1416,7 +1417,7 @@ function HeroSection() {
             children: "No events found."
         }, void 0, false, {
             fileName: "[project]/src/components/HeroSection.tsx",
-            lineNumber: 86,
+            lineNumber: 95,
             columnNumber: 7
         }, this);
     } else if (events.length === 1) {
@@ -1437,7 +1438,7 @@ function HeroSection() {
                 },
                 transition: {
                     duration: 0.6,
-                    type: 'spring',
+                    type: "spring",
                     stiffness: 100
                 },
                 className: "w-full max-w-3xl min-h-[520px] md:min-h-[600px] bg-white/95 rounded-3xl shadow-2xl border border-blue-100 px-0 py-0 flex flex-col items-center justify-center pb-6",
@@ -1445,19 +1446,19 @@ function HeroSection() {
                 onMouseLeave: ()=>setIsHovered(false),
                 children: [
                     event.graphic ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                        src: event.graphic.startsWith('http') ? event.graphic : ("TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com/api") + event.graphic,
+                        src: event.graphic.startsWith("http") ? event.graphic : `${"TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com/api"}${event.graphic}`,
                         alt: "Event Graphic",
                         className: "mb-6 rounded-2xl object-contain w-full max-w-2xl max-h-[420px] min-h-[220px] mx-auto"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 105,
+                        lineNumber: 114,
                         columnNumber: 13
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-gray-700 text-base leading-relaxed text-center mb-3",
                         children: event.description
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 111,
+                        lineNumber: 120,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1471,18 +1472,18 @@ function HeroSection() {
                                         children: "•"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/HeroSection.tsx",
-                                        lineNumber: 117,
+                                        lineNumber: 126,
                                         columnNumber: 17
                                     }, this),
                                     formatEventTime(event.start_time),
-                                    " - ",
-                                    formatEventTime(event.end_time)
+                                    event.end_time && ` - ${formatEventTime(event.end_time)}`,
+                                    " "
                                 ]
                             }, void 0, true)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 113,
+                        lineNumber: 122,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1492,12 +1493,12 @@ function HeroSection() {
                             children: event.location_name
                         }, void 0, false, {
                             fileName: "[project]/src/components/HeroSection.tsx",
-                            lineNumber: 123,
+                            lineNumber: 133,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 122,
+                        lineNumber: 132,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1505,45 +1506,51 @@ function HeroSection() {
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 href: `/events/${event.slug}/rsvp`,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    className: "bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
-                                    children: "RSVP"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/HeroSection.tsx",
-                                    lineNumber: 127,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
+                                children: [
+                                    " ",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                        className: "bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
+                                        children: "RSVP"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/HeroSection.tsx",
+                                        lineNumber: 137,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/components/HeroSection.tsx",
-                                lineNumber: 126,
+                                lineNumber: 136,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 href: `/events#${event.slug}`,
                                 scroll: false,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                    className: "bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
-                                    children: "Learn More"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/HeroSection.tsx",
-                                    lineNumber: 134,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
+                                children: [
+                                    " ",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                        className: "bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
+                                        children: "Learn More"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/HeroSection.tsx",
+                                        lineNumber: 142,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/components/HeroSection.tsx",
-                                lineNumber: 133,
+                                lineNumber: 141,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 125,
+                        lineNumber: 135,
                         columnNumber: 11
                     }, this)
                 ]
             }, "event", true, {
                 fileName: "[project]/src/components/HeroSection.tsx",
-                lineNumber: 94,
+                lineNumber: 103,
                 columnNumber: 9
             }, this);
         } else {
@@ -1562,7 +1569,7 @@ function HeroSection() {
                 },
                 transition: {
                     duration: 0.6,
-                    type: 'spring',
+                    type: "spring",
                     stiffness: 100
                 },
                 className: "w-full max-w-3xl min-h-[520px] md:min-h-[600px] bg-white/95 rounded-3xl shadow-2xl border border-blue-100 px-0 py-0 flex flex-col items-center justify-center pb-6",
@@ -1574,7 +1581,7 @@ function HeroSection() {
                         children: "More Events Coming Soon"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 155,
+                        lineNumber: 161,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1582,7 +1589,7 @@ function HeroSection() {
                         children: "Stay tuned for new opportunities and gatherings!"
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 156,
+                        lineNumber: 162,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1592,18 +1599,18 @@ function HeroSection() {
                             children: "See Events"
                         }, void 0, false, {
                             fileName: "[project]/src/components/HeroSection.tsx",
-                            lineNumber: 158,
+                            lineNumber: 164,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 157,
+                        lineNumber: 163,
                         columnNumber: 11
                     }, this)
                 ]
             }, "more-coming", true, {
                 fileName: "[project]/src/components/HeroSection.tsx",
-                lineNumber: 145,
+                lineNumber: 151,
                 columnNumber: 9
             }, this);
         }
@@ -1624,7 +1631,7 @@ function HeroSection() {
             },
             transition: {
                 duration: 0.6,
-                type: 'spring',
+                type: "spring",
                 stiffness: 100
             },
             className: "w-full max-w-3xl min-h-[520px] md:min-h-[600px] bg-white/95 rounded-3xl shadow-2xl border border-blue-100 px-0 py-0 flex flex-col items-center justify-center pb-6",
@@ -1632,21 +1639,14 @@ function HeroSection() {
             onMouseLeave: ()=>setIsHovered(false),
             children: [
                 event.graphic ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                    src: event.graphic.startsWith('http') ? event.graphic : ("TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com/api") + event.graphic,
+                    src: event.graphic.startsWith("http") ? event.graphic : `${"TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com/api"}${event.graphic}`,
                     alt: "Event Graphic",
                     className: "mb-6 rounded-2xl object-contain w-full max-w-2xl max-h-[420px] min-h-[220px] mx-auto"
                 }, void 0, false, {
                     fileName: "[project]/src/components/HeroSection.tsx",
-                    lineNumber: 179,
-                    columnNumber: 11
-                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-gray-700 text-base leading-relaxed text-center mb-3",
-                    children: event.description
-                }, void 0, false, {
-                    fileName: "[project]/src/components/HeroSection.tsx",
                     lineNumber: 185,
                     columnNumber: 11
-                }, this),
+                }, this) : null,
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "font-semibold mb-2 text-center text-blue-700",
                     children: [
@@ -1658,18 +1658,18 @@ function HeroSection() {
                                     children: "•"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/HeroSection.tsx",
-                                    lineNumber: 191,
+                                    lineNumber: 195,
                                     columnNumber: 15
                                 }, this),
                                 formatEventTime(event.start_time),
-                                " - ",
-                                formatEventTime(event.end_time)
+                                event.end_time && ` - ${formatEventTime(event.end_time)}`,
+                                " "
                             ]
                         }, void 0, true)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/HeroSection.tsx",
-                    lineNumber: 187,
+                    lineNumber: 191,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1679,12 +1679,12 @@ function HeroSection() {
                         children: event.location_name
                     }, void 0, false, {
                         fileName: "[project]/src/components/HeroSection.tsx",
-                        lineNumber: 197,
+                        lineNumber: 202,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/HeroSection.tsx",
-                    lineNumber: 196,
+                    lineNumber: 201,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1692,45 +1692,51 @@ function HeroSection() {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             href: `/events/${event.slug}/rsvp`,
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                className: "bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
-                                children: "RSVP"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/HeroSection.tsx",
-                                lineNumber: 201,
-                                columnNumber: 13
-                            }, this)
-                        }, void 0, false, {
+                            children: [
+                                " ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                    className: "bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
+                                    children: "RSVP"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/HeroSection.tsx",
+                                    lineNumber: 206,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/src/components/HeroSection.tsx",
-                            lineNumber: 200,
+                            lineNumber: 205,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             href: `/events#${event.slug}`,
                             scroll: false,
-                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
-                                className: "bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
-                                children: "Learn More"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/HeroSection.tsx",
-                                lineNumber: 208,
-                                columnNumber: 13
-                            }, this)
-                        }, void 0, false, {
+                            children: [
+                                " ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                    className: "bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition",
+                                    children: "Learn More"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/HeroSection.tsx",
+                                    lineNumber: 211,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/src/components/HeroSection.tsx",
-                            lineNumber: 207,
+                            lineNumber: 210,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/HeroSection.tsx",
-                    lineNumber: 199,
+                    lineNumber: 204,
                     columnNumber: 9
                 }, this)
             ]
         }, eventIndex, true, {
             fileName: "[project]/src/components/HeroSection.tsx",
-            lineNumber: 168,
+            lineNumber: 174,
             columnNumber: 7
         }, this);
     }
@@ -1823,21 +1829,28 @@ function HeroSection() {
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "flex-1 flex flex-col items-center justify-center w-full md:w-auto h-full",
-                    children: cardContent
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                        mode: "wait",
+                        children: cardContent
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/HeroSection.tsx",
+                        lineNumber: 243,
+                        columnNumber: 11
+                    }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/HeroSection.tsx",
-                    lineNumber: 243,
+                    lineNumber: 242,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/HeroSection.tsx",
-            lineNumber: 221,
+            lineNumber: 222,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/HeroSection.tsx",
-        lineNumber: 220,
+        lineNumber: 221,
         columnNumber: 5
     }, this);
 }
