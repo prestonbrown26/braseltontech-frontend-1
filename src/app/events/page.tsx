@@ -113,9 +113,13 @@ export default function EventsPage() {
                   {typeof event.graphic === "string" && event.graphic && (
                     <div className="flex-1 flex items-center justify-center mt-8 md:mt-0">
                       <img
-                        src={event.graphic.startsWith('http') ? event.graphic : (process.env.NEXT_PUBLIC_API_BASE_URL + event.graphic)}
+                        src={
+                          event.graphic.startsWith('http')
+                            ? event.graphic
+                            : (process.env.NEXT_PUBLIC_API_BASE_URL + event.graphic)
+                        }
                         alt="Event Graphic"
-                        className="mb-6 rounded-2xl object-contain w-full max-w-2xl max-h-[420px] min-h-[220px] mx-auto"
+                        className="rounded-lg object-contain w-full max-w-xs max-h-80"
                       />
                     </div>
                   )}
