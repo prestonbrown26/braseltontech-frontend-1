@@ -380,12 +380,12 @@ export default function AdminPage() {
                         )
                         .map((c: Record<string, unknown>) => (
                           <tr key={c.id as React.Key} className="border-b">
-                            <td className="p-2">{c.id}</td>
-                            <td className="p-2 font-semibold">{c.first_name} {c.last_name}</td>
-                            <td className="p-2">{c.email}</td>
-                            <td className="p-2">{c.subject}</td>
-                            <td className="p-2 max-w-xs truncate" title={c.message}>{c.message}</td>
-                            <td className="p-2">{c.submitted_at ? format(parseISO(c.submitted_at), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                            <td className="p-2">{c.id as string}</td>
+                            <td className="p-2 font-semibold">{c.first_name as string} {c.last_name as string}</td>
+                            <td className="p-2">{c.email as string}</td>
+                            <td className="p-2">{c.subject as string}</td>
+                            <td className="p-2">{c.message as string}</td>
+                            <td className="p-2">{c.submitted_at ? format(parseISO(c.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                             <td className="p-2 text-center">
                               <input
                                 type="checkbox"
@@ -415,7 +415,7 @@ export default function AdminPage() {
                     >
                       <option value="all">All Events</option>
                       {events.map((event: Record<string, unknown>) => (
-                        <option key={event.id} value={event.id}>{event.title as string}</option>
+                        <option key={event.id as React.Key} value={event.id as string}>{event.title as string}</option>
                       ))}
                     </select>
                   </div>
@@ -435,18 +435,29 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {rsvps
-                        .filter((r: Record<string, unknown>) => rsvpEventFilter === "all" || String(r.event?.id ?? r.event) === rsvpEventFilter)
+                        .filter((r: Record<string, unknown>) =>
+                          rsvpEventFilter === "all" ||
+                          (
+                            typeof r.event === "object" && r.event !== null && "id" in r.event
+                              ? String((r.event as { id: unknown }).id)
+                              : String(r.event)
+                          ) === rsvpEventFilter
+                        )
                         .map((r: Record<string, unknown>) => (
-                          <tr key={r.id} className="border-b">
-                            <td className="p-2">{r.id}</td>
-                            <td className="p-2 font-semibold">{r.event?.title as string || (events.find((e: Record<string, unknown>) => e.id === r.event)?.title as string || r.event)}</td>
-                            <td className="p-2">{r.first_name} {r.last_name}</td>
-                            <td className="p-2">{r.business_name}</td>
-                            <td className="p-2">{r.email}</td>
-                            <td className="p-2">{r.phone}</td>
-                            <td className="p-2">{r.number_of_attendees}</td>
+                          <tr key={r.id as React.Key} className="border-b">
+                            <td className="p-2">{r.id as string}</td>
+                            <td className="p-2 font-semibold">
+                              {typeof r.event === "object" && r.event !== null && "title" in r.event
+                                ? (r.event as { title?: unknown }).title as string
+                                : (events.find((e: Record<string, unknown>) => e.id === r.event)?.title as string || (r.event as string))}
+                            </td>
+                            <td className="p-2">{r.first_name as string} {r.last_name as string}</td>
+                            <td className="p-2">{r.business_name as string}</td>
+                            <td className="p-2">{r.email as string}</td>
+                            <td className="p-2">{r.phone as string}</td>
+                            <td className="p-2">{r.number_of_attendees as string}</td>
                             <td className="p-2">{r.opt_in_call ? "Yes" : "No"}</td>
-                            <td className="p-2">{r.submitted_at ? format(parseISO(r.submitted_at), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                            <td className="p-2">{r.submitted_at ? format(parseISO(r.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                           </tr>
                         ))}
                     </tbody>
