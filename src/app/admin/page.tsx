@@ -133,11 +133,11 @@ export default function AdminPage() {
                     <tbody>
                       {events.map((event: Record<string, unknown>) => (
                         <tr key={event.id as React.Key} className="border-b">
-                          <td className="p-2 font-semibold">{event.title}</td>
-                          <td className="p-2">{event.date ? formatEventDate(event.date) : ""}</td>
-                          <td className="p-2">{event.start_time ? formatEventTime(event.start_time) : ""}</td>
-                          <td className="p-2">{event.end_time ? formatEventTime(event.end_time) : ""}</td>
-                          <td className="p-2">{event.location_name}</td>
+                          <td className="p-2 font-semibold">{event.title as string}</td>
+                          <td className="p-2">{event.date ? formatEventDate(event.date as string) : ""}</td>
+                          <td className="p-2">{event.start_time ? formatEventTime(event.start_time as string) : ""}</td>
+                          <td className="p-2">{event.end_time ? formatEventTime(event.end_time as string) : ""}</td>
+                          <td className="p-2">{event.location_name as string}</td>
                           <td className="p-2">
                             <Button size="sm" variant="outline" onClick={() => {
                               setActiveTab("rsvp");
@@ -186,15 +186,15 @@ export default function AdminPage() {
                     <tbody>
                       {mentorSignups.map((m: Record<string, unknown>) => (
                         <tr key={m.id as React.Key} className="border-b">
-                          <td className="p-2">{m.id}</td>
-                          <td className="p-2 font-semibold">{m.first_name} {m.last_name}</td>
-                          <td className="p-2">{m.email}</td>
-                          <td className="p-2">{m.phone}</td>
-                          <td className="p-2">{m.linkedin}</td>
-                          <td className="p-2">{m.company}</td>
-                          <td className="p-2">{m.areas_of_expertise}</td>
-                          <td className="p-2 max-w-xs truncate" title={m.why_mentor}>{m.why_mentor}</td>
-                          <td className="p-2">{m.submitted_at ? format(parseISO(m.submitted_at), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                          <td className="p-2">{m.id as string}</td>
+                          <td className="p-2 font-semibold">{m.first_name as string} {m.last_name as string}</td>
+                          <td className="p-2">{m.email as string}</td>
+                          <td className="p-2">{m.phone as string}</td>
+                          <td className="p-2">{m.linkedin as string}</td>
+                          <td className="p-2">{m.company as string}</td>
+                          <td className="p-2">{m.areas_of_expertise as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={m.why_mentor as string}>{m.why_mentor as string}</td>
+                          <td className="p-2">{m.submitted_at ? format(parseISO(m.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -220,14 +220,14 @@ export default function AdminPage() {
                     <tbody>
                       {sponsorSignups.map((s: Record<string, unknown>) => (
                         <tr key={s.id as React.Key} className="border-b">
-                          <td className="p-2">{s.id}</td>
-                          <td className="p-2 font-semibold">{s.first_name} {s.last_name}</td>
-                          <td className="p-2">{s.business_name}</td>
-                          <td className="p-2">{s.email}</td>
-                          <td className="p-2">{s.phone}</td>
-                          <td className="p-2">{s.address}</td>
-                          <td className="p-2">{s.website}</td>
-                          <td className="p-2">{s.submitted_at ? format(parseISO(s.submitted_at), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                          <td className="p-2">{s.id as string}</td>
+                          <td className="p-2 font-semibold">{s.first_name as string} {s.last_name as string}</td>
+                          <td className="p-2">{s.business_name as string}</td>
+                          <td className="p-2">{s.email as string}</td>
+                          <td className="p-2">{s.phone as string}</td>
+                          <td className="p-2">{s.address as string}</td>
+                          <td className="p-2">{s.website as string}</td>
+                          <td className="p-2">{s.submitted_at ? format(parseISO(s.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -253,14 +253,14 @@ export default function AdminPage() {
                     <tbody>
                       {joinSignups.map((j: Record<string, unknown>) => (
                         <tr key={j.id as React.Key} className="border-b">
-                          <td className="p-2">{j.id}</td>
-                          <td className="p-2 font-semibold">{j.first_name} {j.last_name}</td>
-                          <td className="p-2">{j.email}</td>
-                          <td className="p-2">{j.phone}</td>
-                          <td className="p-2">{j.linkedin}</td>
-                          <td className="p-2 max-w-xs truncate" title={j.about}>{j.about}</td>
-                          <td className="p-2 max-w-xs truncate" title={j.why_join}>{j.why_join}</td>
-                          <td className="p-2">{j.submitted_at ? format(parseISO(j.submitted_at), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                          <td className="p-2">{j.id as string}</td>
+                          <td className="p-2 font-semibold">{j.first_name as string} {j.last_name as string}</td>
+                          <td className="p-2">{j.email as string}</td>
+                          <td className="p-2">{j.phone as string}</td>
+                          <td className="p-2">{j.linkedin as string}</td>
+                          <td className="p-2">{j.about as string}</td>
+                          <td className="p-2">{j.why_join as string}</td>
+                          <td className="p-2">{j.submitted_at ? format(parseISO(j.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -288,16 +288,16 @@ export default function AdminPage() {
                     <tbody>
                       {levelupSignups.map((l: Record<string, unknown>) => (
                         <tr key={l.id as React.Key} className="border-b">
-                          <td className="p-2">{l.id}</td>
-                          <td className="p-2 font-semibold">{l.first_name} {l.last_name}</td>
-                          <td className="p-2">{l.startup_name}</td>
-                          <td className="p-2">{l.email}</td>
-                          <td className="p-2">{l.phone}</td>
-                          <td className="p-2">{l.linkedin}</td>
-                          <td className="p-2">{l.website}</td>
-                          <td className="p-2 max-w-xs truncate" title={l.about_startup}>{l.about_startup}</td>
-                          <td className="p-2 max-w-xs truncate" title={l.why_help}>{l.why_help}</td>
-                          <td className="p-2">{l.submitted_at ? format(parseISO(l.submitted_at), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                          <td className="p-2">{l.id as string}</td>
+                          <td className="p-2 font-semibold">{l.first_name as string} {l.last_name as string}</td>
+                          <td className="p-2">{l.startup_name as string}</td>
+                          <td className="p-2">{l.email as string}</td>
+                          <td className="p-2">{l.phone as string}</td>
+                          <td className="p-2">{l.linkedin as string}</td>
+                          <td className="p-2">{l.website as string}</td>
+                          <td className="p-2">{l.about_startup as string}</td>
+                          <td className="p-2">{l.why_help as string}</td>
+                          <td className="p-2">{l.submitted_at ? format(parseISO(l.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -411,7 +411,7 @@ export default function AdminPage() {
                     >
                       <option value="all">All Events</option>
                       {events.map((event: Record<string, unknown>) => (
-                        <option key={event.id} value={event.id}>{event.title}</option>
+                        <option key={event.id} value={event.id}>{event.title as string}</option>
                       ))}
                     </select>
                   </div>
@@ -435,7 +435,7 @@ export default function AdminPage() {
                         .map((r: Record<string, unknown>) => (
                           <tr key={r.id} className="border-b">
                             <td className="p-2">{r.id}</td>
-                            <td className="p-2 font-semibold">{r.event?.title || (events.find((e: Record<string, unknown>) => e.id === r.event)?.title || r.event)}</td>
+                            <td className="p-2 font-semibold">{r.event?.title as string || (events.find((e: Record<string, unknown>) => e.id === r.event)?.title as string || r.event)}</td>
                             <td className="p-2">{r.first_name} {r.last_name}</td>
                             <td className="p-2">{r.business_name}</td>
                             <td className="p-2">{r.email}</td>
