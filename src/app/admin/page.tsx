@@ -131,7 +131,7 @@ export default function AdminPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {events.map((event: any) => (
+                      {events.map((event: Record<string, unknown>) => (
                         <tr key={event.id} className="border-b">
                           <td className="p-2 font-semibold">{event.title}</td>
                           <td className="p-2">{event.date ? formatEventDate(event.date) : ""}</td>
@@ -153,7 +153,7 @@ export default function AdminPage() {
                                     getEventDeleteUrl(event.id),
                                     { headers: { Authorization: `Bearer ${token}` } }
                                   );
-                                  setEvents(events.filter((e: any) => e.id !== event.id));
+                                  setEvents(events.filter((e: Record<string, unknown>) => e.id !== event.id));
                                 } catch {
                                   alert("Failed to delete event.");
                                 }
@@ -184,7 +184,7 @@ export default function AdminPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {mentorSignups.map((m: any) => (
+                      {mentorSignups.map((m: Record<string, unknown>) => (
                         <tr key={m.id} className="border-b">
                           <td className="p-2">{m.id}</td>
                           <td className="p-2 font-semibold">{m.first_name} {m.last_name}</td>
@@ -218,7 +218,7 @@ export default function AdminPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {sponsorSignups.map((s: any) => (
+                      {sponsorSignups.map((s: Record<string, unknown>) => (
                         <tr key={s.id} className="border-b">
                           <td className="p-2">{s.id}</td>
                           <td className="p-2 font-semibold">{s.first_name} {s.last_name}</td>
@@ -251,7 +251,7 @@ export default function AdminPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {joinSignups.map((j: any) => (
+                      {joinSignups.map((j: Record<string, unknown>) => (
                         <tr key={j.id} className="border-b">
                           <td className="p-2">{j.id}</td>
                           <td className="p-2 font-semibold">{j.first_name} {j.last_name}</td>
@@ -286,7 +286,7 @@ export default function AdminPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {levelupSignups.map((l: any) => (
+                      {levelupSignups.map((l: Record<string, unknown>) => (
                         <tr key={l.id} className="border-b">
                           <td className="p-2">{l.id}</td>
                           <td className="p-2 font-semibold">{l.first_name} {l.last_name}</td>
@@ -334,7 +334,7 @@ export default function AdminPage() {
                                   )
                                 )
                               );
-                              setContactSubmissions((prev: any[]) => prev.map((x) =>
+                              setContactSubmissions((prev: Array<Record<string, unknown>>) => prev.map((x) =>
                                 pendingReplied[x.id] !== undefined ? { ...x, replied: pendingReplied[x.id] } : x
                               ));
                               setPendingReplied({});
@@ -369,12 +369,12 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {contactSubmissions
-                        .filter((c: any) =>
+                        .filter((c: Record<string, unknown>) =>
                           contactRepliedFilter === "all" ? true :
                           contactRepliedFilter === "replied" ? (pendingReplied[c.id] !== undefined ? pendingReplied[c.id] : !!c.replied) :
                           !(pendingReplied[c.id] !== undefined ? pendingReplied[c.id] : !!c.replied)
                         )
-                        .map((c: any) => (
+                        .map((c: Record<string, unknown>) => (
                           <tr key={c.id} className="border-b">
                             <td className="p-2">{c.id}</td>
                             <td className="p-2 font-semibold">{c.first_name} {c.last_name}</td>
@@ -410,7 +410,7 @@ export default function AdminPage() {
                       onChange={e => setRsvpEventFilter(e.target.value)}
                     >
                       <option value="all">All Events</option>
-                      {events.map((event: any) => (
+                      {events.map((event: Record<string, unknown>) => (
                         <option key={event.id} value={event.id}>{event.title}</option>
                       ))}
                     </select>
@@ -431,11 +431,11 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {rsvps
-                        .filter((r: any) => rsvpEventFilter === "all" || String(r.event?.id ?? r.event) === rsvpEventFilter)
-                        .map((r: any) => (
+                        .filter((r: Record<string, unknown>) => rsvpEventFilter === "all" || String(r.event?.id ?? r.event) === rsvpEventFilter)
+                        .map((r: Record<string, unknown>) => (
                           <tr key={r.id} className="border-b">
                             <td className="p-2">{r.id}</td>
-                            <td className="p-2 font-semibold">{r.event?.title || (events.find((e: any) => e.id === r.event)?.title || r.event)}</td>
+                            <td className="p-2 font-semibold">{r.event?.title || (events.find((e: Record<string, unknown>) => e.id === r.event)?.title || r.event)}</td>
                             <td className="p-2">{r.first_name} {r.last_name}</td>
                             <td className="p-2">{r.business_name}</td>
                             <td className="p-2">{r.email}</td>

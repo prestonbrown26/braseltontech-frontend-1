@@ -131,19 +131,19 @@ function NavBar() {
                             className: "h-8 w-8 rounded-full mr-3 object-cover"
                         }, void 0, false, {
                             fileName: "[project]/src/components/NavBar.tsx",
-                            lineNumber: 56,
+                            lineNumber: 55,
                             columnNumber: 11
                         }, this),
                         "BraseltonTech"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/NavBar.tsx",
-                    lineNumber: 55,
+                    lineNumber: 54,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/NavBar.tsx",
-                lineNumber: 54,
+                lineNumber: 53,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -176,12 +176,12 @@ function NavBar() {
                                             children: link.label
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 72,
+                                            lineNumber: 71,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 66,
+                                        lineNumber: 65,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -227,12 +227,12 @@ function NavBar() {
                                                             children: "Companies"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 88,
+                                                            lineNumber: 87,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 87,
+                                                        lineNumber: 86,
                                                         columnNumber: 27
                                                     }, this),
                                                     companiesList.map((company)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -262,28 +262,28 @@ function NavBar() {
                                                                 children: company.name
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/NavBar.tsx",
-                                                                lineNumber: 92,
+                                                                lineNumber: 91,
                                                                 columnNumber: 31
                                                             }, this)
                                                         }, company.id, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 91,
+                                                            lineNumber: 90,
                                                             columnNumber: 29
                                                         }, this))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/NavBar.tsx",
-                                                lineNumber: 86,
+                                                lineNumber: 85,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 76,
+                                            lineNumber: 75,
                                             columnNumber: 23
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 74,
+                                        lineNumber: 73,
                                         columnNumber: 19
                                     }, this)
                                 ]
@@ -307,12 +307,12 @@ function NavBar() {
                                             children: link.label
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 125,
+                                            lineNumber: 124,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 118,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -358,12 +358,12 @@ function NavBar() {
                                                             children: "Get Involved"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 141,
+                                                            lineNumber: 140,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 140,
+                                                        lineNumber: 139,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -382,12 +382,12 @@ function NavBar() {
                                                             children: "Join Braselton Tech"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 144,
+                                                            lineNumber: 143,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 143,
+                                                        lineNumber: 142,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -406,12 +406,12 @@ function NavBar() {
                                                             children: "Level Up Your Startup"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 147,
+                                                            lineNumber: 146,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 146,
+                                                        lineNumber: 145,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -430,12 +430,12 @@ function NavBar() {
                                                             children: "Become a Sponsor"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 150,
+                                                            lineNumber: 149,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 149,
+                                                        lineNumber: 148,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -454,28 +454,28 @@ function NavBar() {
                                                             children: "Become a Mentor"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 153,
+                                                            lineNumber: 152,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 152,
+                                                        lineNumber: 151,
                                                         columnNumber: 27
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/NavBar.tsx",
-                                                lineNumber: 139,
+                                                lineNumber: 138,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 129,
+                                            lineNumber: 128,
                                             columnNumber: 23
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 127,
+                                        lineNumber: 126,
                                         columnNumber: 19
                                     }, this)
                                 ]
@@ -499,12 +499,12 @@ function NavBar() {
                                             children: link.label
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 168,
+                                            lineNumber: 167,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 162,
+                                        lineNumber: 161,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -550,12 +550,12 @@ function NavBar() {
                                                             children: "About"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 184,
+                                                            lineNumber: 183,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 183,
+                                                        lineNumber: 182,
                                                         columnNumber: 27
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -574,28 +574,28 @@ function NavBar() {
                                                             children: "Meet the Board"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/NavBar.tsx",
-                                                            lineNumber: 187,
+                                                            lineNumber: 186,
                                                             columnNumber: 29
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 186,
+                                                        lineNumber: 185,
                                                         columnNumber: 27
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/NavBar.tsx",
-                                                lineNumber: 182,
+                                                lineNumber: 181,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 172,
+                                            lineNumber: 171,
                                             columnNumber: 23
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 169,
                                         columnNumber: 19
                                     }, this)
                                 ]
@@ -619,12 +619,12 @@ function NavBar() {
                                             children: link.label
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 202,
+                                            lineNumber: 201,
                                             columnNumber: 21
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 196,
+                                        lineNumber: 195,
                                         columnNumber: 19
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -669,27 +669,27 @@ function NavBar() {
                                                         children: "Events"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/NavBar.tsx",
-                                                        lineNumber: 218,
+                                                        lineNumber: 217,
                                                         columnNumber: 29
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/NavBar.tsx",
-                                                    lineNumber: 217,
+                                                    lineNumber: 216,
                                                     columnNumber: 27
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/NavBar.tsx",
-                                                lineNumber: 216,
+                                                lineNumber: 215,
                                                 columnNumber: 25
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/NavBar.tsx",
-                                            lineNumber: 206,
+                                            lineNumber: 205,
                                             columnNumber: 23
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 204,
+                                        lineNumber: 203,
                                         columnNumber: 19
                                     }, this)
                                 ]
@@ -709,27 +709,27 @@ function NavBar() {
                                     children: link.label
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/NavBar.tsx",
-                                    lineNumber: 227,
+                                    lineNumber: 226,
                                     columnNumber: 19
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NavBar.tsx",
-                                lineNumber: 226,
+                                lineNumber: 225,
                                 columnNumber: 17
                             }, this)
                         }, link.href, false, {
                             fileName: "[project]/src/components/NavBar.tsx",
-                            lineNumber: 63,
+                            lineNumber: 62,
                             columnNumber: 13
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/components/NavBar.tsx",
-                    lineNumber: 61,
+                    lineNumber: 60,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/NavBar.tsx",
-                lineNumber: 60,
+                lineNumber: 59,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -766,7 +766,7 @@ function NavBar() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/NavBar.tsx",
-                        lineNumber: 244,
+                        lineNumber: 243,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].span, {
@@ -778,7 +778,7 @@ function NavBar() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/NavBar.tsx",
-                        lineNumber: 245,
+                        lineNumber: 244,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].span, {
@@ -790,13 +790,13 @@ function NavBar() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/components/NavBar.tsx",
-                        lineNumber: 246,
+                        lineNumber: 245,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/NavBar.tsx",
-                lineNumber: 235,
+                lineNumber: 234,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -816,12 +816,12 @@ function NavBar() {
                             children: "Contact"
                         }, void 0, false, {
                             fileName: "[project]/src/components/NavBar.tsx",
-                            lineNumber: 250,
+                            lineNumber: 249,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/NavBar.tsx",
-                        lineNumber: 249,
+                        lineNumber: 248,
                         columnNumber: 9
                     }, this),
                     !isAdmin && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -838,12 +838,12 @@ function NavBar() {
                             children: "Log In"
                         }, void 0, false, {
                             fileName: "[project]/src/components/NavBar.tsx",
-                            lineNumber: 261,
+                            lineNumber: 260,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/NavBar.tsx",
-                        lineNumber: 260,
+                        lineNumber: 259,
                         columnNumber: 11
                     }, this),
                     isAdmin && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -862,12 +862,12 @@ function NavBar() {
                                     children: "Admin"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/NavBar.tsx",
-                                    lineNumber: 274,
+                                    lineNumber: 273,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NavBar.tsx",
-                                lineNumber: 273,
+                                lineNumber: 272,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -887,7 +887,7 @@ function NavBar() {
                                 children: "Log Out"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NavBar.tsx",
-                                lineNumber: 283,
+                                lineNumber: 282,
                                 columnNumber: 13
                             }, this)
                         ]
@@ -895,7 +895,7 @@ function NavBar() {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/NavBar.tsx",
-                lineNumber: 248,
+                lineNumber: 247,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -946,12 +946,12 @@ function NavBar() {
                                     children: link.label
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/NavBar.tsx",
-                                    lineNumber: 313,
+                                    lineNumber: 312,
                                     columnNumber: 17
                                 }, this)
                             }, link.href, false, {
                                 fileName: "[project]/src/components/NavBar.tsx",
-                                lineNumber: 312,
+                                lineNumber: 311,
                                 columnNumber: 15
                             }, this)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -968,12 +968,12 @@ function NavBar() {
                                 children: "Contact"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NavBar.tsx",
-                                lineNumber: 317,
+                                lineNumber: 316,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/NavBar.tsx",
-                            lineNumber: 316,
+                            lineNumber: 315,
                             columnNumber: 13
                         }, this),
                         !isAdmin && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -990,12 +990,12 @@ function NavBar() {
                                 children: "Log In"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/NavBar.tsx",
-                                lineNumber: 328,
+                                lineNumber: 327,
                                 columnNumber: 17
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/NavBar.tsx",
-                            lineNumber: 327,
+                            lineNumber: 326,
                             columnNumber: 15
                         }, this),
                         isAdmin && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1014,12 +1014,12 @@ function NavBar() {
                                         children: "Admin"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/NavBar.tsx",
-                                        lineNumber: 341,
+                                        lineNumber: 340,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/NavBar.tsx",
-                                    lineNumber: 340,
+                                    lineNumber: 339,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].button, {
@@ -1039,7 +1039,7 @@ function NavBar() {
                                     children: "Log Out"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/NavBar.tsx",
-                                    lineNumber: 350,
+                                    lineNumber: 349,
                                     columnNumber: 17
                                 }, this)
                             ]
@@ -1047,18 +1047,18 @@ function NavBar() {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/NavBar.tsx",
-                    lineNumber: 301,
+                    lineNumber: 300,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/components/NavBar.tsx",
-                lineNumber: 299,
+                lineNumber: 298,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/NavBar.tsx",
-        lineNumber: 53,
+        lineNumber: 52,
         columnNumber: 5
     }, this);
 }

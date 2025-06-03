@@ -44,7 +44,7 @@ export default function EventsPage() {
       try {
         const res = await axios.get(API_ENDPOINTS.eventsAll);
         setEvents(res.data);
-      } catch (err) {
+      } catch {
         setError("Could not load events.");
       } finally {
         setLoading(false);

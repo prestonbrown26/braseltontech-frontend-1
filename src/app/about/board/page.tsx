@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import AdminEditableText from "@/components/AdminEditableText";
 import AdminEditableImage from "@/components/AdminEditableImage";
 

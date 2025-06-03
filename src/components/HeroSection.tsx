@@ -26,7 +26,7 @@ export default function HeroSection() {
             : "http://localhost:8000/api/events/all/"
         );
         setEvents(res.data);
-      } catch (err) {
+      } catch {
         setEvents([]);
       } finally {
         setLoading(false);
