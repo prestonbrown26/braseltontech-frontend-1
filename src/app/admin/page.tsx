@@ -334,9 +334,13 @@ export default function AdminPage() {
                                   )
                                 )
                               );
-                              setContactSubmissions((prev: Array<Record<string, unknown>>) => prev.map((x) =>
-                                pendingReplied[x.id] !== undefined ? { ...x, replied: pendingReplied[x.id] } : x
-                              ));
+                              setContactSubmissions((prev: Array<Record<string, unknown>>) =>
+                                prev.map((x) =>
+                                  pendingReplied[x.id as string] !== undefined
+                                    ? { ...x, replied: pendingReplied[x.id as string] }
+                                    : x
+                                )
+                              );
                               setPendingReplied({});
                             } catch {
                               alert("Failed to update replied status.");
@@ -371,8 +375,8 @@ export default function AdminPage() {
                       {contactSubmissions
                         .filter((c: Record<string, unknown>) =>
                           contactRepliedFilter === "all" ? true :
-                          contactRepliedFilter === "replied" ? (pendingReplied[c.id] !== undefined ? pendingReplied[c.id] : !!c.replied) :
-                          !(pendingReplied[c.id] !== undefined ? pendingReplied[c.id] : !!c.replied)
+                          contactRepliedFilter === "replied" ? (pendingReplied[c.id as string] !== undefined ? pendingReplied[c.id as string] : !!c.replied) :
+                          !(pendingReplied[c.id as string] !== undefined ? pendingReplied[c.id as string] : !!c.replied)
                         )
                         .map((c: Record<string, unknown>) => (
                           <tr key={c.id} className="border-b">
@@ -385,9 +389,9 @@ export default function AdminPage() {
                             <td className="p-2 text-center">
                               <input
                                 type="checkbox"
-                                checked={pendingReplied[c.id] !== undefined ? pendingReplied[c.id] : !!c.replied}
+                                checked={pendingReplied[c.id as string] !== undefined ? pendingReplied[c.id as string] : !!c.replied}
                                 onChange={e => {
-                                  setPendingReplied(prev => ({ ...prev, [c.id]: e.target.checked }));
+                                  setPendingReplied(prev => ({ ...prev, [c.id as string]: e.target.checked }));
                                 }}
                                 className="w-5 h-5 accent-blue-600 cursor-pointer"
                               />
