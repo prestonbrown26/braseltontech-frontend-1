@@ -132,7 +132,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {events.map((event: Record<string, unknown>) => (
-                        <tr key={event.id} className="border-b">
+                        <tr key={event.id as React.Key} className="border-b">
                           <td className="p-2 font-semibold">{event.title}</td>
                           <td className="p-2">{event.date ? formatEventDate(event.date) : ""}</td>
                           <td className="p-2">{event.start_time ? formatEventTime(event.start_time) : ""}</td>
@@ -185,7 +185,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {mentorSignups.map((m: Record<string, unknown>) => (
-                        <tr key={m.id} className="border-b">
+                        <tr key={m.id as React.Key} className="border-b">
                           <td className="p-2">{m.id}</td>
                           <td className="p-2 font-semibold">{m.first_name} {m.last_name}</td>
                           <td className="p-2">{m.email}</td>
@@ -219,7 +219,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {sponsorSignups.map((s: Record<string, unknown>) => (
-                        <tr key={s.id} className="border-b">
+                        <tr key={s.id as React.Key} className="border-b">
                           <td className="p-2">{s.id}</td>
                           <td className="p-2 font-semibold">{s.first_name} {s.last_name}</td>
                           <td className="p-2">{s.business_name}</td>
@@ -252,7 +252,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {joinSignups.map((j: Record<string, unknown>) => (
-                        <tr key={j.id} className="border-b">
+                        <tr key={j.id as React.Key} className="border-b">
                           <td className="p-2">{j.id}</td>
                           <td className="p-2 font-semibold">{j.first_name} {j.last_name}</td>
                           <td className="p-2">{j.email}</td>
@@ -287,7 +287,7 @@ export default function AdminPage() {
                     </thead>
                     <tbody>
                       {levelupSignups.map((l: Record<string, unknown>) => (
-                        <tr key={l.id} className="border-b">
+                        <tr key={l.id as React.Key} className="border-b">
                           <td className="p-2">{l.id}</td>
                           <td className="p-2 font-semibold">{l.first_name} {l.last_name}</td>
                           <td className="p-2">{l.startup_name}</td>
