@@ -379,7 +379,7 @@ export default function AdminPage() {
                           !(pendingReplied[c.id as string] !== undefined ? pendingReplied[c.id as string] : !!c.replied)
                         )
                         .map((c: Record<string, unknown>) => (
-                          <tr key={c.id} className="border-b">
+                          <tr key={c.id as React.Key} className="border-b">
                             <td className="p-2">{c.id}</td>
                             <td className="p-2 font-semibold">{c.first_name} {c.last_name}</td>
                             <td className="p-2">{c.email}</td>
