@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { API_ENDPOINTS } from "@/lib/api";
 
 const expertiseOptions = [
   "Startup Operations",
@@ -38,7 +39,7 @@ export default function MentorPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/mentor-signup/` : "http://localhost:8000/api/mentor-signup/", {
+      await axios.post(API_ENDPOINTS.mentorSignup, {
         first_name: form.first_name,
         last_name: form.last_name,
         email: form.email,

@@ -5,6 +5,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { getEventUrl, getEventRsvpUrl } from "@/lib/api";
 
 export default function RSVPPage() {
   const { slug } = useParams();
@@ -27,11 +28,7 @@ export default function RSVPPage() {
       setEventLoading(true);
       setEventError("");
       try {
-        const res = await axios.get(
-          process.env.NEXT_PUBLIC_API_BASE_URL
-            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${slug}/`
-            : `http://localhost:8000/api/events/${slug}/`
-        );
+        const res = await axios.get(getEventUrl(slug));
         setEventTitle(res.data.title);
       } catch (err) {
         setEventError("Could not load event details.");
@@ -53,14 +50,9 @@ export default function RSVPPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      await axios.post(
-        process.env.NEXT_PUBLIC_API_BASE_URL
-          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${slug}/rsvp/`
-          : `http://localhost:8000/api/events/${slug}/rsvp/`,
-        {
-          ...form,
-        }
-      );
+      await axios.post(getEventRsvpUrl(slug), {
+        ...form,
+      });
       setSubmitted(true);
     } catch (err) {
       alert("There was an error submitting your RSVP. Please try again later.");

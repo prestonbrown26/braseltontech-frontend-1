@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { API_ENDPOINTS } from "@/lib/api";
 
 export default function CreateEventPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -24,20 +25,15 @@ export default function CreateEventPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      await axios.post(
-        process.env.NEXT_PUBLIC_API_BASE_URL
-          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/`
-          : "http://localhost:8000/api/events/",
-        {
-          title: form.title,
-          date: form.date,
-          start_time: form.start_time,
-          end_time: form.end_time,
-          location_name: form.location_name,
-          location_address: form.location_address,
-          description: form.description,
-        }
-      );
+      await axios.post(API_ENDPOINTS.events, {
+        title: form.title,
+        date: form.date,
+        start_time: form.start_time,
+        end_time: form.end_time,
+        location_name: form.location_name,
+        location_address: form.location_address,
+        description: form.description,
+      });
       setSubmitted(true);
     } catch (err) {
       alert("There was an error creating the event. Please try again later.");

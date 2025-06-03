@@ -40,12 +40,12 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     if (asChild) {
-      return (
+  return (
         <Slot
           ref={ref as any}
-          className={cn(buttonVariants({ variant, size, className }))}
-          {...props}
-        />
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    />
       );
     }
     return (

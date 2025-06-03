@@ -5,6 +5,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { API_ENDPOINTS } from "@/lib/api";
 
 export default function CreateEventPage() {
   const router = useRouter();
@@ -41,9 +42,7 @@ export default function CreateEventPage() {
       Object.entries(form).forEach(([key, value]) => formData.append(key, value));
       if (graphic) formData.append("graphic", graphic);
       await axios.post(
-        process.env.NEXT_PUBLIC_API_BASE_URL
-          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/`
-          : "http://localhost:8000/api/events/",
+        API_ENDPOINTS.events,
         formData,
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
       );

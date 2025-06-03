@@ -6,6 +6,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { format, parseISO } from "date-fns";
+import { API_ENDPOINTS, getEventDeleteUrl, getAdminContactSubmissionUrl } from "@/lib/api";
 
 function formatEventDate(dateStr: string) {
   if (!dateStr) return "";
@@ -62,16 +63,15 @@ export default function AdminPage() {
     setError("");
     async function fetchAll() {
       try {
-        const api = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
         const headers = { Authorization: `Bearer ${token}` };
         const [eventsRes, mentorRes, sponsorRes, joinRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
-          axios.get(`${api}/events/all/`, { headers }),
-          axios.get(`${api}/admin/mentor-signups/`, { headers }),
-          axios.get(`${api}/admin/sponsor-signups/`, { headers }),
-          axios.get(`${api}/admin/join-signups/`, { headers }),
-          axios.get(`${api}/admin/levelup-signups/`, { headers }),
-          axios.get(`${api}/admin/contact-submissions/`, { headers }),
-          axios.get(`${api}/admin/rsvps/`, { headers }),
+          axios.get(API_ENDPOINTS.eventsAll, { headers }),
+          axios.get(API_ENDPOINTS.adminMentorSignups, { headers }),
+          axios.get(API_ENDPOINTS.adminSponsorSignups, { headers }),
+          axios.get(API_ENDPOINTS.adminJoinSignups, { headers }),
+          axios.get(API_ENDPOINTS.adminLevelupSignups, { headers }),
+          axios.get(API_ENDPOINTS.adminContactSubmissions, { headers }),
+          axios.get(API_ENDPOINTS.adminRsvps, { headers }),
         ]);
         setEvents(eventsRes.data);
         setMentorSignups(mentorRes.data);
@@ -150,9 +150,7 @@ export default function AdminPage() {
                               if (confirm("Delete this event?")) {
                                 try {
                                   await axios.delete(
-                                    process.env.NEXT_PUBLIC_API_BASE_URL
-                                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${event.id}/delete/`
-                                      : `http://localhost:8000/api/events/${event.id}/delete/`,
+                                    getEventDeleteUrl(event.id),
                                     { headers: { Authorization: `Bearer ${token}` } }
                                   );
                                   setEvents(events.filter((e: any) => e.id !== event.id));
@@ -326,12 +324,11 @@ export default function AdminPage() {
                         <Button
                           className="ml-4"
                           onClick={async () => {
-                            const api = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
                             try {
                               await Promise.all(
                                 Object.entries(pendingReplied).map(([id, replied]) =>
                                   axios.patch(
-                                    `${api}/admin/contact-submissions/${id}/`,
+                                    getAdminContactSubmissionUrl(id),
                                     { replied },
                                     { headers: { Authorization: `Bearer ${token}` } }
                                   )

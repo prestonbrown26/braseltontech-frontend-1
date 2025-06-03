@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { API_ENDPOINTS } from "@/lib/api";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -16,7 +17,7 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact-submission/` : "http://localhost:8000/api/contact-submission/", {
+      await axios.post(API_ENDPOINTS.contactSubmission, {
         first_name: form.first_name,
         last_name: form.last_name,
         email: form.email,

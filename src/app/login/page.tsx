@@ -5,6 +5,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { API_ENDPOINTS } from "@/lib/api";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -22,9 +23,7 @@ export default function LoginPage() {
     setError("");
     try {
       const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_BASE_URL
-          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/login/`
-          : "http://localhost:8000/api/admin/login/",
+        API_ENDPOINTS.adminLogin,
         {
           username: form.email,
           password: form.password,

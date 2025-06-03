@@ -4,6 +4,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { API_ENDPOINTS } from "@/lib/api";
 
 export default function LevelUpPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -17,7 +18,7 @@ export default function LevelUpPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      await axios.post(process.env.NEXT_PUBLIC_API_BASE_URL ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/levelup-signup/` : "http://localhost:8000/api/levelup-signup/", {
+      await axios.post(API_ENDPOINTS.levelUpSignup, {
         first_name: form.first_name,
         last_name: form.last_name,
         startup_name: form.startupName,

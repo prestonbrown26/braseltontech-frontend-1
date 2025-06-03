@@ -5,6 +5,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { getEventUrl, getEventUpdateUrl } from "@/lib/api";
 
 export default function EditEventPage() {
   const router = useRouter();
@@ -31,9 +32,7 @@ export default function EditEventPage() {
       try {
         const token = localStorage.getItem("admin_token");
         const res = await axios.get(
-          process.env.NEXT_PUBLIC_API_BASE_URL
-            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${slug}/`
-            : `http://localhost:8000/api/events/${slug}/`,
+          getEventUrl(slug),
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setForm({
@@ -76,9 +75,7 @@ export default function EditEventPage() {
       Object.entries(form).forEach(([key, value]) => formData.append(key, value));
       if (graphic) formData.append("graphic", graphic);
       await axios.patch(
-        process.env.NEXT_PUBLIC_API_BASE_URL
-          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${slug}/update/`
-          : `http://localhost:8000/api/events/${slug}/update/`,
+        getEventUpdateUrl(slug),
         formData,
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
       );

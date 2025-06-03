@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { format, parseISO } from "date-fns";
+import { API_ENDPOINTS } from "@/lib/api";
 
 function formatEventDate(dateStr: string) {
   if (!dateStr) return "";
@@ -41,11 +42,7 @@ export default function EventsPage() {
       setLoading(true);
       setError("");
       try {
-        const res = await axios.get(
-          process.env.NEXT_PUBLIC_API_BASE_URL
-            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/all/`
-            : "http://localhost:8000/api/events/all/"
-        );
+        const res = await axios.get(API_ENDPOINTS.eventsAll);
         setEvents(res.data);
       } catch (err) {
         setError("Could not load events.");

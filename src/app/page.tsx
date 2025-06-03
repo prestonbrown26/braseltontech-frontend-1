@@ -12,8 +12,8 @@ export default function Home() {
         <HeroSection />
         <FeaturesSection />
         <CallToActionSection />
-      </div>
+        </div>
       <Footer />
-    </main>
+      </main>
   );
 }

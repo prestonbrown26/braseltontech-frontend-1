@@ -1463,7 +1463,7 @@ function JoinPage() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(process.env.NEXT_PUBLIC_API_BASE_URL ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/join-signup/` : "http://localhost:8000/api/join-signup/", {
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(("TURBOPACK compile-time truthy", 1) ? `${"TURBOPACK compile-time value", "https://braseltontech-backend-1.onrender.com"}/join-signup/` : ("TURBOPACK unreachable", undefined), {
                 first_name: form.first_name,
                 last_name: form.last_name,
                 email: form.email,
