@@ -8,7 +8,7 @@ import { format, parseISO } from "date-fns";
 import AdminEditableText from "./AdminEditableText";
 
 export default function HeroSection() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Array<Record<string, unknown>>>([]);
   const [eventIndex, setEventIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);

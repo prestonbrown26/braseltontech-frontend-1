@@ -31,7 +31,7 @@ export default function LoginPage() {
       );
       localStorage.setItem("admin_token", res.data.access);
       router.push("/admin");
-    } catch (err: any) {
+    } catch {
       setError("Invalid email or password.");
     } finally {
       setLoading(false);

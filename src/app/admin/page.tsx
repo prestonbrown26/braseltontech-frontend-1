@@ -35,13 +35,13 @@ export default function AdminPage() {
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("events");
-  const [events, setEvents] = useState<any[]>([]);
-  const [mentorSignups, setMentorSignups] = useState<any[]>([]);
-  const [sponsorSignups, setSponsorSignups] = useState<any[]>([]);
-  const [joinSignups, setJoinSignups] = useState<any[]>([]);
-  const [levelupSignups, setLevelupSignups] = useState<any[]>([]);
-  const [contactSubmissions, setContactSubmissions] = useState<any[]>([]);
-  const [rsvps, setRsvps] = useState<any[]>([]);
+  const [events, setEvents] = useState<Array<Record<string, unknown>>>([]);
+  const [mentorSignups, setMentorSignups] = useState<Array<Record<string, unknown>>>([]);
+  const [sponsorSignups, setSponsorSignups] = useState<Array<Record<string, unknown>>>([]);
+  const [joinSignups, setJoinSignups] = useState<Array<Record<string, unknown>>>([]);
+  const [levelupSignups, setLevelupSignups] = useState<Array<Record<string, unknown>>>([]);
+  const [contactSubmissions, setContactSubmissions] = useState<Array<Record<string, unknown>>>([]);
+  const [rsvps, setRsvps] = useState<Array<Record<string, unknown>>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [rsvpEventFilter, setRsvpEventFilter] = useState<string>("all");
@@ -80,7 +80,7 @@ export default function AdminPage() {
         setLevelupSignups(levelupRes.data);
         setContactSubmissions(contactRes.data);
         setRsvps(rsvpRes.data);
-      } catch (err) {
+      } catch {
         setError("Failed to load admin data. Please check your login or try again.");
       } finally {
         setLoading(false);

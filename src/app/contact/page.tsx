@@ -25,7 +25,7 @@ export default function ContactPage() {
         message: form.message,
       });
       setSubmitted(true);
-    } catch (err) {
+    } catch {
       alert("There was an error submitting the form. Please try again later.");
     }
   }

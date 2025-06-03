@@ -35,7 +35,7 @@ export default function CreateEventPage() {
         description: form.description,
       });
       setSubmitted(true);
-    } catch (err) {
+    } catch {
       alert("There was an error creating the event. Please try again later.");
     }
   }

@@ -50,7 +50,7 @@ export default function MentorPage() {
         why_mentor: form.why,
       });
       setSubmitted(true);
-    } catch (err) {
+    } catch {
       alert("There was an error submitting the form. Please try again later.");
     }
   }

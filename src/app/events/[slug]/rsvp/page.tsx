@@ -30,7 +30,7 @@ export default function RSVPPage() {
       try {
         const res = await axios.get(getEventUrl(slug));
         setEventTitle(res.data.title);
-      } catch (err) {
+      } catch {
         setEventError("Could not load event details.");
       } finally {
         setEventLoading(false);
@@ -54,7 +54,7 @@ export default function RSVPPage() {
         ...form,
       });
       setSubmitted(true);
-    } catch (err) {
+    } catch {
       alert("There was an error submitting your RSVP. Please try again later.");
     }
   }

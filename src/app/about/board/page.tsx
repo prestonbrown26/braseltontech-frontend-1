@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -74,6 +73,15 @@ export default function BoardPage() {
   const [bios, setBios] = useState(members.map(m => m.bio));
   const [imgs, setImgs] = useState(members.map(m => m.img));
 
+  const handleClick = (anchor: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.getElementById(anchor);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.history.replaceState(null, '', `#${anchor}`);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#f0f6ff] to-[#a7c7ff]">
       <NavBar />
@@ -86,19 +94,11 @@ export default function BoardPage() {
               <ul className="text-gray-700 text-base sm:text-lg space-y-1 font-medium">
                 {members.map((member) => {
                   const anchor = member.name.replace(/\s+/g, '-').replace(/\./g, '').toLowerCase();
-                  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-                    e.preventDefault();
-                    const el = document.getElementById(anchor);
-                    if (el) {
-                      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      window.history.replaceState(null, '', `#${anchor}`);
-                    }
-                  }, []);
                   return (
                     <li key={member.name}>
                       <motion.a
                         href={`#${anchor}`}
-                        onClick={handleClick}
+                        onClick={handleClick(anchor)}
                         whileHover={{ scale: 1.08 }}
                         transition={{ duration: 0.1 }}
                         style={{ display: 'inline-block' }}

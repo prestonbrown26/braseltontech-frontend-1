@@ -28,7 +28,7 @@ export default function JoinPage() {
         why_join: form.why,
       });
       setSubmitted(true);
-    } catch (err) {
+    } catch {
       alert("There was an error submitting the form. Please try again later.");
     }
   }

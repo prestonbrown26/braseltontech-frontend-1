@@ -47,7 +47,7 @@ export default function CreateEventPage() {
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
       );
       router.push("/admin");
-    } catch (err) {
+    } catch {
       setError("Failed to create event. Please check your input and try again.");
     } finally {
       setLoading(false);
