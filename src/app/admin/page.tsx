@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { format, parseISO } from "date-fns";
 import { API_ENDPOINTS, getEventDeleteUrl, getAdminContactSubmissionUrl } from "@/lib/api";
+import Cookies from 'js-cookie';
 
 function formatEventDate(dateStr: string) {
   if (!dateStr) return "";
@@ -122,6 +123,14 @@ export default function AdminPage() {
     fetchAll();
   }, [token, router]);
 
+  const handleLogout = () => {
+    // Clear both localStorage and cookies
+    localStorage.removeItem("admin_token");
+    Cookies.remove('admin_token', { path: '/' });
+    // Redirect to login
+    router.push("/login");
+  };
+
   if (!token) return null;
 
   return (
@@ -138,7 +147,7 @@ export default function AdminPage() {
             </div>
           )}
           
-          <div className="flex gap-4 justify-center mb-8">
+          <div className="flex flex-wrap gap-4 justify-center mb-8">
             <Button onClick={() => setActiveTab("events")} variant={activeTab === "events" ? "default" : "outline"}>Events</Button>
             <Button onClick={() => setActiveTab("mentor")} variant={activeTab === "mentor" ? "default" : "outline"}>Mentor Signups</Button>
             <Button onClick={() => setActiveTab("sponsor")} variant={activeTab === "sponsor" ? "default" : "outline"}>Sponsor Signups</Button>
@@ -146,6 +155,7 @@ export default function AdminPage() {
             <Button onClick={() => setActiveTab("levelup")} variant={activeTab === "levelup" ? "default" : "outline"}>Level Up</Button>
             <Button onClick={() => setActiveTab("contact")} variant={activeTab === "contact" ? "default" : "outline"}>Contact</Button>
             <Button onClick={() => setActiveTab("rsvp")} variant={activeTab === "rsvp" ? "default" : "outline"}>RSVPs</Button>
+            <Button onClick={handleLogout} variant="outline" className="bg-red-50 hover:bg-red-100">Logout</Button>
           </div>
           {loading ? (
             <div className="text-center text-gray-600">Loading...</div>
