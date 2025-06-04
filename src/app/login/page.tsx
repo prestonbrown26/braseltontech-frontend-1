@@ -16,24 +16,43 @@ export default function LoginPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     try {
-      const res = await axios.post(
+      const response = await axios.post(
         API_ENDPOINTS.adminLogin,
         { username: form.email, password: form.password }
       );
-      // Store the token
-      localStorage.setItem('braseltontech_token', res.data.access);
-      localStorage.setItem('braseltontech_refresh', res.data.refresh);
+      localStorage.setItem('admin_token', response.data.access);
       router.push('/admin');
-    } catch {
-      setError('Invalid email or password');
+    } catch (error) {
+      console.error("Login error:", error);
+      
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          if (error.response.status === 401) {
+            setError('Invalid email or password');
+          } else if (error.response.status === 404) {
+            setError('Login service not available. Please check backend connection.');
+          } else {
+            setError(`Login failed: ${error.response.status} - ${error.response.statusText}`);
+          }
+        } else if (error.request) {
+          // The request was made but no response was received
+          setError('No response from server. Please check your internet connection.');
+        } else {
+          setError('Login failed. Please try again later.');
+        }
+      } else {
+        setError('Invalid email or password');
+      }
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#f0f6ff] to-[#a7c7ff]">

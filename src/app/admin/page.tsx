@@ -80,14 +80,36 @@ export default function AdminPage() {
         setLevelupSignups(levelupRes.data);
         setContactSubmissions(contactRes.data);
         setRsvps(rsvpRes.data);
-      } catch {
-        setError("Failed to load admin data. Please check your login or try again.");
+      } catch (error) {
+        console.error("Admin data fetch error:", error);
+        // Show more detailed error information
+        let errorMessage = "Failed to load admin data. Please check your login or try again.";
+        
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            errorMessage += ` Server responded with status: ${error.response.status}`;
+            if (error.response.status === 401) {
+              errorMessage = "Your session has expired. Please log in again.";
+              localStorage.removeItem("admin_token");
+              setTimeout(() => router.push("/login"), 2000);
+            } else if (error.response.status === 404) {
+              errorMessage = "API endpoint not found. Please check backend configuration.";
+            }
+          } else if (error.request) {
+            // The request was made but no response was received
+            errorMessage = "No response from server. Please check your internet connection or server status.";
+          }
+        }
+        
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
     }
     fetchAll();
-  }, [token]);
+  }, [token, router]);
 
   if (!token) return null;
 
