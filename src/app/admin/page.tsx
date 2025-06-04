@@ -47,13 +47,24 @@ export default function AdminPage() {
   const [rsvpEventFilter, setRsvpEventFilter] = useState<string>("all");
   const [contactRepliedFilter, setContactRepliedFilter] = useState("all");
   const [pendingReplied, setPendingReplied] = useState<Record<string, boolean>>({});
+  const [debugInfo, setDebugInfo] = useState<string>("");
+
+  // Add debugging on initial load
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setDebugInfo(`Page URL: ${window.location.href}`);
+      console.log("Admin page loading, URL:", window.location.href);
+    }
+  }, []);
 
   useEffect(() => {
     const t = localStorage.getItem("admin_token");
     if (!t) {
+      console.log("No admin token found, redirecting to login");
       router.push("/login");
       return;
     }
+    console.log("Admin token found, length:", t.length);
     setToken(t);
   }, [router]);
 
@@ -119,6 +130,14 @@ export default function AdminPage() {
       <main className="flex-1 py-12 px-4">
         <div className="max-w-[98vw] md:max-w-screen-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 border border-blue-100 overflow-x-auto">
           <h1 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">Admin Dashboard</h1>
+          
+          {/* Debug info - only visible during development */}
+          {process.env.NODE_ENV === 'development' && debugInfo && (
+            <div className="mb-4 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm">
+              <p className="font-mono">Debug: {debugInfo}</p>
+            </div>
+          )}
+          
           <div className="flex gap-4 justify-center mb-8">
             <Button onClick={() => setActiveTab("events")} variant={activeTab === "events" ? "default" : "outline"}>Events</Button>
             <Button onClick={() => setActiveTab("mentor")} variant={activeTab === "mentor" ? "default" : "outline"}>Mentor Signups</Button>

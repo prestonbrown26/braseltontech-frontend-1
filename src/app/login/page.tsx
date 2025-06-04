@@ -1,16 +1,19 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { API_ENDPOINTS } from "@/lib/api";
+import Cookies from 'js-cookie';
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get('from') || '/admin/';
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -25,8 +28,20 @@ export default function LoginPage() {
         API_ENDPOINTS.adminLogin,
         { username: form.email, password: form.password }
       );
+      
+      // Store token in localStorage for client-side auth
       localStorage.setItem('admin_token', response.data.access);
-      router.push('/admin');
+      
+      // Also store in cookies for middleware
+      Cookies.set('admin_token', response.data.access, { 
+        expires: 7, // 7 days
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict'
+      });
+      
+      // Redirect to the admin page or the original destination
+      router.push(from);
     } catch (error) {
       console.error("Login error:", error);
       
