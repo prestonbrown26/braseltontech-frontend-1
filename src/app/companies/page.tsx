@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 const companies = [
   {
     id: "braseltontech-ai",
-    name: "braseltontech.ai",
+    name: "BraseltonTech",
     logo: "/images/braselton-tech-logo.jpg",
-    description: "braseltontech.ai is a technology company focused on innovative AI solutions and digital transformation.",
-    website: "https://braseltontech.ai",
+    description: "BraseltonTech is a technology company focused on innovative AI solutions and digital transformation.",
+    website: "https://www.braseltontech.com",
     contactName: "Preston Brown",
-    email: "info@braseltontech.ai",
+    email: "info@braseltontech.com",
     phone: "(555) 555-5555",
     address: "Braselton, GA"
   }

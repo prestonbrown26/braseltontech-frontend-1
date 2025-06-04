@@ -13,7 +13,7 @@ const navLinks = [
 ];
 
 const companiesList = [
-  { name: "braseltontech.ai", id: "braseltontech-ai" }
+  { name: "BraseltonTech", id: "braseltontech-ai" }
 ];
 
 export default function NavBar() {
