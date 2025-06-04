@@ -52,7 +52,7 @@ export default function NavBar() {
     <nav className="w-full bg-white px-12 py-3 flex items-center justify-between font-sans relative z-40 sticky top-0 border-b border-blue-100" style={{ fontFamily: 'Geist, Inter, Arial, sans-serif' }}>
       <motion.div whileHover={{ scale: 1.12 }} transition={{ duration: 0.1 }} className="inline-block">
         <Link href="/" className="flex items-center text-2xl font-extrabold text-gray-800 tracking-tight">
-          <img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/474663336_565692403086428_3697079815872425189_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mDN4scbfWEAQ7kNvwFVE3IJ&_nc_oc=AdmKgYnMvGvu6mV4SL8euPdHrPe81fjegRdO2TEFRMt15rUlBlWkkKQgoUqS7f57spVcJcPel12qMlzOoL5n0UBI&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=kjZW6_usxnzxiu2JbGZEvQ&oh=00_AfLzUOeBvjMSxr4oDk8OEPKOZPq69tMHSjjiuWfUGBOdOw&oe=683667B3" alt="Braselton Tech Logo" className="h-8 w-8 rounded-full mr-3 object-cover" />
+          <img src="/images/braselton-tech-logo.jpg" alt="Braselton Tech Logo" className="h-8 w-8 rounded-full mr-3 object-cover" />
           BraseltonTech
         </Link>
       </motion.div>

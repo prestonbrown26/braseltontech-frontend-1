@@ -7,7 +7,7 @@ const companies = [
   {
     id: "braseltontech-ai",
     name: "braseltontech.ai",
-    logo: "https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/474663336_565692403086428_3697079815872425189_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mDN4scbfWEAQ7kNvwFVE3IJ&_nc_oc=AdmKgYnMvGvu6mV4SL8euPdHrPe81fjegRdO2TEFRMt15rUlBlWkkKQgoUqS7f57spVcJcPel12qMlzOoL5n0UBI&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=kjZW6_usxnzxiu2JbGZEvQ&oh=00_AfLzUOeBvjMSxr4oDk8OEPKOZPq69tMHSjjiuWfUGBOdOw&oe=683667B3",
+    logo: "/images/braselton-tech-logo.jpg",
     description: "braseltontech.ai is a technology company focused on innovative AI solutions and digital transformation.",
     website: "https://braseltontech.ai",
     contactName: "Preston Brown",
@@ -26,7 +26,7 @@ export default function CompaniesPage() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-4 text-center flex items-center gap-4">
             Companies Helped by
             <img
-              src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.30808-6/474663336_565692403086428_3697079815872425189_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=mDN4scbfWEAQ7kNvwFVE3IJ&_nc_oc=AdmKgYnMvGvu6mV4SL8euPdHrPe81fjegRdO2TEFRMt15rUlBlWkkKQgoUqS7f57spVcJcPel12qMlzOoL5n0UBI&_nc_zt=23&_nc_ht=scontent-atl3-1.xx&_nc_gid=kjZW6_usxnzxiu2JbGZEvQ&oh=00_AfLzUOeBvjMSxr4oDk8OEPKOZPq69tMHSjjiuWfUGBOdOw&oe=683667B3"
+              src="/images/braselton-tech-logo.jpg"
               alt="Braselton Tech Logo"
               className="h-16 w-16 rounded-full object-cover inline-block align-middle"
             />
