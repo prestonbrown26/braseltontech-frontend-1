@@ -24,7 +24,7 @@ export default function Error({
         <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 border border-blue-100 text-center">
           <h1 className="text-3xl font-extrabold text-gray-800 mb-6">Something went wrong!</h1>
           <p className="text-gray-600 mb-6">
-            We're sorry, but there was an error loading this page.
+            We&apos;re sorry, but there was an error loading this page.
           </p>
           
           {process.env.NODE_ENV === 'development' && (
