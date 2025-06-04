@@ -16,8 +16,12 @@ export const metadata: Metadata = {
   title: "BraseltonTech",
   description: "BraseltonTech - Building the Next Tech Community",
   icons: {
-    icon: '/images/braselton-tech-logo.jpg',
-    apple: '/images/braselton-tech-logo.jpg',
+    icon: [
+      { url: '/images/braselton-tech-logo.jpg' }
+    ],
+    apple: [
+      { url: '/images/braselton-tech-logo.jpg' }
+    ],
   },
   openGraph: {
     title: 'BraseltonTech',
@@ -48,10 +52,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/images/braselton-tech-logo.jpg" />
-        <link rel="apple-touch-icon" href="/images/braselton-tech-logo.jpg" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
