@@ -65,8 +65,26 @@ export default function AdminPage() {
       router.push("/login");
       return;
     }
-    console.log("Admin token found, length:", t.length);
-    setToken(t);
+    
+    // Before setting the token, verify its validity
+    const verifyToken = async () => {
+      try {
+        // Try to make a simple API call to verify the token
+        await axios.get(API_ENDPOINTS.eventsAll, {
+          headers: { Authorization: `Bearer ${t}` }
+        });
+        // If it doesn't throw, token is valid
+        setToken(t);
+      } catch (error) {
+        console.error("Token verification failed:", error);
+        // Clear invalid token
+        localStorage.removeItem("admin_token");
+        Cookies.remove('admin_token', { path: '/' });
+        router.push("/login");
+      }
+    };
+    
+    verifyToken();
   }, [router]);
 
   useEffect(() => {

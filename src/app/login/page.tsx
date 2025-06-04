@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import NavBar from "@/components/NavBar";
@@ -14,17 +14,6 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from') || '/admin/';
-  const clearCookies = searchParams.get('clear') === 'true';
-
-  // Clear cookies if requested via URL parameter
-  useEffect(() => {
-    if (clearCookies) {
-      // Clear cookies and localStorage
-      localStorage.removeItem('admin_token');
-      Cookies.remove('admin_token', { path: '/' });
-      setError('Cookies cleared. You can now try logging in again.');
-    }
-  }, [clearCookies]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -128,17 +117,6 @@ export default function LoginPage() {
               ) : 'Login'}
             </button>
           </form>
-          
-          {/* Troubleshooting section */}
-          <div className="mt-6 pt-4 border-t border-blue-100">
-            <h3 className="text-sm font-semibold text-gray-700 mb-2">Having trouble logging in?</h3>
-            <ul className="text-xs text-gray-600 space-y-1">
-              <li>• If you see &quot;redirected too many times&quot; error, <a href="/login?clear=true" className="text-blue-600 hover:underline">click here to clear cookies</a></li>
-              <li>• Make sure you&apos;re using the correct admin email and password</li>
-              <li>• Try using an incognito/private browser window</li>
-              <li>• Clear your browser cache and cookies</li>
-            </ul>
-          </div>
         </div>
       </main>
       <Footer />
