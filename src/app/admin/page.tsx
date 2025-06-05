@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { format, parseISO } from "date-fns";
 import { API_ENDPOINTS, getEventDeleteUrl, getAdminContactSubmissionUrl } from "@/lib/api";
-import { getToken, clearToken, verifyToken, createAuthAxios } from "@/lib/auth";
+import { getToken, clearToken, createAuthAxios } from "@/lib/auth";
 
 function formatEventDate(dateStr: string) {
   if (!dateStr) return "";
@@ -62,22 +62,28 @@ export default function AdminPage() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // First check if we have a valid token
-        if (!verifyToken()) {
-          console.log("No valid token found, redirecting to login");
+        console.log('Admin page: Checking authentication');
+        
+        // First check if we have a valid token in localStorage
+        const token = getToken();
+        if (!token) {
+          console.log('Admin page: No token found in localStorage');
           router.push("/login");
           return;
         }
         
-        // Try to fetch with the token to verify it works
+        console.log('Admin page: Token found, verifying with API...');
+        
+        // Make a test API call to verify the token works
         const authAxios = createAuthAxios();
         await authAxios.get(API_ENDPOINTS.eventsAll);
         
-        // If we get here, token is valid
-        const token = getToken();
+        console.log('Admin page: Authentication successful');
+        // Set the token in state to trigger data loading
         setToken(token);
       } catch (error) {
-        console.error("Auth verification failed:", error);
+        console.error("Admin page: Authentication failed:", error);
+        // Clear localStorage and redirect to login
         clearToken();
         router.push("/login?auth=failed");
       }
@@ -88,8 +94,12 @@ export default function AdminPage() {
 
   // Fetch data once authenticated
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      console.log('Admin page: No token in state, waiting for auth');
+      return;
+    }
     
+    console.log('Admin page: Token available, fetching data');
     setLoading(true);
     setError("");
     
@@ -97,6 +107,7 @@ export default function AdminPage() {
       try {
         const authAxios = createAuthAxios();
         
+        console.log('Admin page: Fetching all admin data');
         const [eventsRes, mentorRes, sponsorRes, joinRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
           authAxios.get(API_ENDPOINTS.eventsAll),
           authAxios.get(API_ENDPOINTS.adminMentorSignups),
@@ -107,6 +118,8 @@ export default function AdminPage() {
           authAxios.get(API_ENDPOINTS.adminRsvps),
         ]);
         
+        console.log('Admin page: Data fetch successful');
+        
         setEvents(eventsRes.data);
         setMentorSignups(mentorRes.data);
         setSponsorSignups(sponsorRes.data);
@@ -115,22 +128,24 @@ export default function AdminPage() {
         setContactSubmissions(contactRes.data);
         setRsvps(rsvpRes.data);
       } catch (error) {
-        console.error("Admin data fetch error:", error);
+        console.error("Admin page: Data fetch error:", error);
         
         let errorMessage = "Failed to load admin data. Please check your login or try again.";
         
         if (axios.isAxiosError(error)) {
           if (error.response) {
+            console.error(`Admin page: Server responded with ${error.response.status}`);
             errorMessage += ` Server responded with status: ${error.response.status}`;
             
             if (error.response.status === 401) {
               errorMessage = "Your session has expired. Please log in again.";
               clearToken();
-              setTimeout(() => router.push("/login?auth=failed"), 2000);
+              setTimeout(() => router.push("/login?auth=failed"), 1000);
             } else if (error.response.status === 404) {
               errorMessage = "API endpoint not found. Please check backend configuration.";
             }
           } else if (error.request) {
+            console.error('Admin page: No response received from server');
             errorMessage = "No response from server. Please check your internet connection or server status.";
           }
         }
@@ -145,6 +160,7 @@ export default function AdminPage() {
   }, [token, router]);
 
   const handleLogout = () => {
+    console.log('Admin page: Logging out, clearing localStorage');
     clearToken();
     router.push("/login");
   };

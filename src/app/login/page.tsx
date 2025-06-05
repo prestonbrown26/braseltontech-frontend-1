@@ -16,14 +16,17 @@ export default function LoginPage() {
   const from = searchParams.get('from') || '/admin/';
   const authError = searchParams.get('auth');
 
-  // Clear any existing tokens and show appropriate errors
+  // Always clear existing tokens on login page load to prevent issues
   useEffect(() => {
+    // Clear any stored tokens to start fresh
     clearToken();
     
-    // Show error message if auth failed
+    // Show appropriate error message
     if (authError === 'failed') {
       setError('Your session has expired. Please log in again.');
     }
+    
+    console.log('Login page loaded, tokens cleared');
   }, [authError]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -36,18 +39,26 @@ export default function LoginPage() {
     setError('');
     
     try {
+      console.log('Attempting login with:', form.email);
+      
       const response = await axios.post(
         API_ENDPOINTS.adminLogin,
         { username: form.email, password: form.password }
       );
       
       if (response.data && response.data.access) {
-        // Store the token in localStorage only
+        console.log('Login successful, token received');
+        
+        // Store token in localStorage only - NO cookies
         setToken(response.data.access);
         
-        // Navigate to the requested page after successful login
-        router.push(from);
+        // Give a small delay for localStorage to be set
+        setTimeout(() => {
+          console.log('Redirecting to:', from);
+          router.push(from);
+        }, 100);
       } else {
+        console.error('Invalid response from server:', response.data);
         setError('Invalid response from server. Please try again.');
       }
     } catch (error) {
@@ -55,6 +66,7 @@ export default function LoginPage() {
       
       if (axios.isAxiosError(error)) {
         if (error.response) {
+          console.error('Server response error:', error.response.status);
           // Handle specific error responses
           if (error.response.status === 401) {
             setError('Invalid email or password');
@@ -64,6 +76,7 @@ export default function LoginPage() {
             setError(`Login failed: ${error.response.status} - ${error.response.statusText}`);
           }
         } else if (error.request) {
+          console.error('No response received');
           setError('No response from server. Please check your internet connection.');
         } else {
           setError('Login failed. Please try again later.');

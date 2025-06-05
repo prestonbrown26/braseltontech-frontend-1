@@ -26,19 +26,24 @@ export default function CreateEventPage() {
   useEffect(() => {
     async function checkAuth() {
       try {
+        console.log('Create event page: Checking authentication');
+        
         // First check if we have a valid token
         if (!isTokenValid()) {
+          console.log('Create event page: No valid token, redirecting to login');
           router.push('/login?from=/admin/create-event');
           return;
         }
+        
+        console.log('Create event page: Token valid, verifying with API');
         
         // Try to verify the token with an API call
         const authAxios = createAuthAxios();
         await authAxios.get(API_ENDPOINTS.eventsAll);
         
-        // If we get here, we're authenticated
+        console.log('Create event page: Authentication successful');
       } catch (error) {
-        console.error("Authentication failed:", error);
+        console.error("Create event page: Authentication failed:", error);
         router.push('/login?from=/admin/create-event&auth=failed');
       }
     }
@@ -60,6 +65,7 @@ export default function CreateEventPage() {
     setLoading(true);
     setError("");
     try {
+      console.log('Create event page: Submitting event data');
       const authAxios = createAuthAxios();
       const formData = new FormData();
       Object.entries(form).forEach(([key, value]) => formData.append(key, value));
@@ -70,9 +76,11 @@ export default function CreateEventPage() {
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
+      
+      console.log('Create event page: Event created successfully');
       router.push("/admin");
     } catch (error) {
-      console.error("Failed to create event:", error);
+      console.error("Create event page: Failed to create event:", error);
       setError("Failed to create event. Please check your input and try again.");
     } finally {
       setLoading(false);

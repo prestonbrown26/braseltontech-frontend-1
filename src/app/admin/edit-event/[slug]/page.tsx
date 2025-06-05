@@ -29,19 +29,24 @@ export default function EditEventPage() {
   useEffect(() => {
     async function checkAuth() {
       try {
+        console.log('Edit event page: Checking authentication');
+        
         // First check if we have a valid token
         if (!isTokenValid()) {
+          console.log('Edit event page: No valid token, redirecting to login');
           router.push(`/login?from=/admin/edit-event/${slug}`);
           return;
         }
+        
+        console.log('Edit event page: Token valid, verifying with API');
         
         // Try to verify the token with an API call
         const authAxios = createAuthAxios();
         await authAxios.get(API_ENDPOINTS.eventsAll);
         
-        // If we get here, we're authenticated
+        console.log('Edit event page: Authentication successful');
       } catch (error) {
-        console.error("Authentication failed:", error);
+        console.error("Edit event page: Authentication failed:", error);
         router.push(`/login?from=/admin/edit-event/${slug}&auth=failed`);
       }
     }
@@ -53,8 +58,11 @@ export default function EditEventPage() {
       setLoading(true);
       setError("");
       try {
+        console.log('Edit event page: Fetching event data for slug:', slug);
         const authAxios = createAuthAxios();
         const res = await authAxios.get(getEventUrl(slug));
+        
+        console.log('Edit event page: Event data received');
         
         setForm({
           title: res.data.title || "",
@@ -67,7 +75,7 @@ export default function EditEventPage() {
         });
         setGraphicUrl(res.data.graphic || null);
       } catch (error) {
-        console.error("Failed to load event:", error);
+        console.error("Edit event page: Failed to load event:", error);
         setError("Failed to load event details.");
       } finally {
         setLoading(false);
