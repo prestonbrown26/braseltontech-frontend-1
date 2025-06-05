@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { API_ENDPOINTS } from "@/lib/api";
@@ -41,25 +40,31 @@ export default function LoginPage() {
     try {
       console.log('Attempting login with:', form.email);
       
-      // Use the CORS-enabled endpoint for cross-domain login
-      console.log('Using CORS-enabled login endpoint');
+      // Use native fetch API which handles CORS better in some cases
+      const response = await fetch(API_ENDPOINTS.adminLoginCors, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        credentials: 'include', // Include cookies if same-origin
+        body: JSON.stringify({ 
+          username: form.email, 
+          password: form.password 
+        })
+      });
       
-      const response = await axios.post(
-        API_ENDPOINTS.adminLoginCors,
-        { username: form.email, password: form.password },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      );
+      if (!response.ok) {
+        throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+      }
       
-      if (response.data && response.data.access) {
+      const data = await response.json();
+      
+      if (data && data.access) {
         console.log('Login successful, token received');
         
         // Store token in localStorage only - NO cookies
-        setToken(response.data.access);
+        setToken(data.access);
         
         // Give a small delay for localStorage to be set
         setTimeout(() => {
@@ -67,30 +72,21 @@ export default function LoginPage() {
           router.push(from);
         }, 100);
       } else {
-        console.error('Invalid response from server:', response.data);
+        console.error('Invalid response from server:', data);
         setError('Invalid response from server. Please try again.');
       }
     } catch (error) {
       console.error("Login error:", error);
       
-      if (axios.isAxiosError(error)) {
-        if (error.response) {
-          console.error('Server response error:', error.response.status);
-          // Handle specific error responses
-          if (error.response.status === 401) {
-            setError('Invalid email or password');
-          } else if (error.response.status === 403) {
-            setError('Access forbidden. CSRF or CORS issue detected.');
-          } else if (error.response.status === 404) {
-            setError('Login service not available. Please check backend connection.');
-          } else {
-            setError(`Login failed: ${error.response.status} - ${error.response.statusText}`);
-          }
-        } else if (error.request) {
-          console.error('No response received');
-          setError('No response from server. Please check your internet connection.');
+      if (error instanceof Error) {
+        if (error.message.includes('401')) {
+          setError('Invalid email or password');
+        } else if (error.message.includes('403')) {
+          setError('Access forbidden. CSRF or CORS issue detected.');
+        } else if (error.message.includes('404')) {
+          setError('Login service not available. Please check backend connection.');
         } else {
-          setError('Login failed. Please try again later.');
+          setError(`Login failed: ${error.message}`);
         }
       } else {
         setError('Invalid email or password');
