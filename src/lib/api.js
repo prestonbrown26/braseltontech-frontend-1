@@ -23,6 +23,7 @@ export const API_ENDPOINTS = {
   events: `${API_BASE_URL}/events/`,
   eventsAll: `${API_BASE_URL}/events/all/`,
   adminLogin: `${API_BASE_URL}/admin/login/`,
+  adminLoginCors: `${API_BASE_URL}/admin/login-cors/`,  // CORS-enabled login endpoint
   adminMentorSignups: `${API_BASE_URL}/admin/mentor-signups/`,
   adminSponsorSignups: `${API_BASE_URL}/admin/sponsor-signups/`,
   adminJoinSignups: `${API_BASE_URL}/admin/join-signups/`,

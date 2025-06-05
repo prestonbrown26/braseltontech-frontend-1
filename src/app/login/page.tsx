@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { API_ENDPOINTS } from "@/lib/api";
+import { API_ENDPOINTS, BACKEND_URL } from "@/lib/api";
 import { setToken, clearToken } from "@/lib/auth";
 
 export default function LoginPage() {
@@ -41,9 +41,18 @@ export default function LoginPage() {
     try {
       console.log('Attempting login with:', form.email);
       
+      // Use the CORS-enabled endpoint for cross-domain login
+      console.log('Using CORS-enabled login endpoint');
+      
       const response = await axios.post(
-        API_ENDPOINTS.adminLogin,
-        { username: form.email, password: form.password }
+        API_ENDPOINTS.adminLoginCors,
+        { username: form.email, password: form.password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
       );
       
       if (response.data && response.data.access) {
@@ -70,6 +79,8 @@ export default function LoginPage() {
           // Handle specific error responses
           if (error.response.status === 401) {
             setError('Invalid email or password');
+          } else if (error.response.status === 403) {
+            setError('Access forbidden. CSRF or CORS issue detected.');
           } else if (error.response.status === 404) {
             setError('Login service not available. Please check backend connection.');
           } else {
