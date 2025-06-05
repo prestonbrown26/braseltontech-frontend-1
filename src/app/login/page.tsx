@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { API_ENDPOINTS } from "@/lib/api";
-import Cookies from 'js-cookie';
+import { setToken, isTokenValid } from "@/lib/auth";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -14,6 +14,13 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from') || '/admin/';
+
+  // Check if user is already logged in
+  useEffect(() => {
+    if (isTokenValid()) {
+      router.push(from);
+    }
+  }, [router, from]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,16 +36,8 @@ export default function LoginPage() {
         { username: form.email, password: form.password }
       );
       
-      // Store token in localStorage for client-side auth
-      localStorage.setItem('admin_token', response.data.access);
-      
-      // Also store in cookies for middleware
-      Cookies.set('admin_token', response.data.access, { 
-        expires: 7, // 7 days
-        path: '/',
-        secure: true, // Always use secure cookies in production
-        sameSite: 'lax' // Changed from 'strict' to 'lax' to allow redirects
-      });
+      // Use our auth utility to store the token
+      setToken(response.data.access);
       
       // Redirect to the admin page or the original destination
       router.push(from);

@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { getEventUrl, getEventUpdateUrl } from "@/lib/api";
+import { createAuthAxios, verifyToken } from "@/lib/auth";
 
 export default function EditEventPage() {
   const router = useRouter();
@@ -25,16 +25,25 @@ export default function EditEventPage() {
   const [graphic, setGraphic] = useState<File | null>(null);
   const [graphicUrl, setGraphicUrl] = useState<string | null>(null);
 
+  // Verify authentication first
+  useEffect(() => {
+    async function checkAuth() {
+      const isValid = await verifyToken();
+      if (!isValid) {
+        router.push(`/login?from=/admin/edit-event/${slug}`);
+      }
+    }
+    checkAuth();
+  }, [router, slug]);
+
   useEffect(() => {
     async function fetchEvent() {
       setLoading(true);
       setError("");
       try {
-        const token = localStorage.getItem("admin_token");
-        const res = await axios.get(
-          getEventUrl(slug),
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+        const authAxios = createAuthAxios();
+        const res = await authAxios.get(getEventUrl(slug));
+        
         setForm({
           title: res.data.title || "",
           date: res.data.date || "",
@@ -45,7 +54,8 @@ export default function EditEventPage() {
           description: res.data.description || ""
         });
         setGraphicUrl(res.data.graphic || null);
-      } catch {
+      } catch (error) {
+        console.error("Failed to load event:", error);
         setError("Failed to load event details.");
       } finally {
         setLoading(false);
@@ -70,17 +80,19 @@ export default function EditEventPage() {
     setSaving(true);
     setError("");
     try {
-      const token = localStorage.getItem("admin_token");
+      const authAxios = createAuthAxios();
       const formData = new FormData();
       Object.entries(form).forEach(([key, value]) => formData.append(key, value));
       if (graphic) formData.append("graphic", graphic);
-      await axios.patch(
+      
+      await authAxios.patch(
         getEventUpdateUrl(slug),
         formData,
-        { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
+        { headers: { 'Content-Type': 'multipart/form-data' } }
       );
       router.push("/admin");
-    } catch {
+    } catch (error) {
+      console.error("Failed to update event:", error);
       setError("Failed to update event. Please check your input and try again.");
     } finally {
       setSaving(false);

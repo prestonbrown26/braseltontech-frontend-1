@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { format, parseISO } from "date-fns";
 import { API_ENDPOINTS, getEventDeleteUrl, getAdminContactSubmissionUrl } from "@/lib/api";
-import Cookies from 'js-cookie';
+import { getToken, clearToken, verifyToken, createAuthAxios } from "@/lib/auth";
 
 function formatEventDate(dateStr: string) {
   if (!dateStr) return "";
@@ -59,49 +59,37 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
-    const t = localStorage.getItem("admin_token");
-    if (!t) {
-      console.log("No admin token found, redirecting to login");
-      router.push("/login");
-      return;
-    }
-    
-    // Before setting the token, verify its validity
-    const verifyToken = async () => {
-      try {
-        // Try to make a simple API call to verify the token
-        await axios.get(API_ENDPOINTS.eventsAll, {
-          headers: { Authorization: `Bearer ${t}` }
-        });
-        // If it doesn't throw, token is valid
-        setToken(t);
-      } catch (error) {
-        console.error("Token verification failed:", error);
-        // Clear invalid token
-        localStorage.removeItem("admin_token");
-        Cookies.remove('admin_token', { path: '/' });
+    const checkAuth = async () => {
+      const isValid = await verifyToken();
+      if (!isValid) {
         router.push("/login");
+        return;
       }
+      
+      const token = getToken();
+      setToken(token);
     };
     
-    verifyToken();
+    checkAuth();
   }, [router]);
 
   useEffect(() => {
     if (!token) return;
     setLoading(true);
     setError("");
+    
+    const authAxios = createAuthAxios();
+    
     async function fetchAll() {
       try {
-        const headers = { Authorization: `Bearer ${token}` };
         const [eventsRes, mentorRes, sponsorRes, joinRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
-          axios.get(API_ENDPOINTS.eventsAll, { headers }),
-          axios.get(API_ENDPOINTS.adminMentorSignups, { headers }),
-          axios.get(API_ENDPOINTS.adminSponsorSignups, { headers }),
-          axios.get(API_ENDPOINTS.adminJoinSignups, { headers }),
-          axios.get(API_ENDPOINTS.adminLevelupSignups, { headers }),
-          axios.get(API_ENDPOINTS.adminContactSubmissions, { headers }),
-          axios.get(API_ENDPOINTS.adminRsvps, { headers }),
+          authAxios.get(API_ENDPOINTS.eventsAll),
+          authAxios.get(API_ENDPOINTS.adminMentorSignups),
+          authAxios.get(API_ENDPOINTS.adminSponsorSignups),
+          authAxios.get(API_ENDPOINTS.adminJoinSignups),
+          authAxios.get(API_ENDPOINTS.adminLevelupSignups),
+          authAxios.get(API_ENDPOINTS.adminContactSubmissions),
+          authAxios.get(API_ENDPOINTS.adminRsvps),
         ]);
         setEvents(eventsRes.data);
         setMentorSignups(mentorRes.data);
@@ -142,10 +130,8 @@ export default function AdminPage() {
   }, [token, router]);
 
   const handleLogout = () => {
-    // Clear both localStorage and cookies
-    localStorage.removeItem("admin_token");
-    Cookies.remove('admin_token', { path: '/' });
-    // Redirect to login
+    // Clear tokens and redirect
+    clearToken();
     router.push("/login");
   };
 

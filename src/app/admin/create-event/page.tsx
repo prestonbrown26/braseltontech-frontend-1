@@ -1,11 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { API_ENDPOINTS } from "@/lib/api";
+import { createAuthAxios, verifyToken } from "@/lib/auth";
 
 export default function CreateEventPage() {
   const router = useRouter();
@@ -22,6 +22,17 @@ export default function CreateEventPage() {
   const [error, setError] = useState("");
   const [graphic, setGraphic] = useState<File | null>(null);
 
+  // Verify authentication first
+  useEffect(() => {
+    async function checkAuth() {
+      const isValid = await verifyToken();
+      if (!isValid) {
+        router.push('/login?from=/admin/create-event');
+      }
+    }
+    checkAuth();
+  }, [router]);
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
@@ -37,17 +48,19 @@ export default function CreateEventPage() {
     setLoading(true);
     setError("");
     try {
-      const token = localStorage.getItem("admin_token");
+      const authAxios = createAuthAxios();
       const formData = new FormData();
       Object.entries(form).forEach(([key, value]) => formData.append(key, value));
       if (graphic) formData.append("graphic", graphic);
-      await axios.post(
+      
+      await authAxios.post(
         API_ENDPOINTS.events,
         formData,
-        { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
+        { headers: { 'Content-Type': 'multipart/form-data' } }
       );
       router.push("/admin");
-    } catch {
+    } catch (error) {
+      console.error("Failed to create event:", error);
       setError("Failed to create event. Please check your input and try again.");
     } finally {
       setLoading(false);
