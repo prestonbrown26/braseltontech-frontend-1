@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { API_ENDPOINTS, BACKEND_URL } from "@/lib/api";
+import { API_ENDPOINTS } from "@/lib/api";
 import { setToken, clearToken } from "@/lib/auth";
 
 export default function LoginPage() {
