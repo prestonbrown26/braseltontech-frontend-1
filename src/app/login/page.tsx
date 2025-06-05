@@ -5,7 +5,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { API_ENDPOINTS } from "@/lib/api";
-import { setToken, isTokenValid, clearToken } from "@/lib/auth";
+import { setToken, clearToken } from "@/lib/auth";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -14,31 +14,17 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from') || '/admin/';
+  const authError = searchParams.get('auth');
 
-  // Clear any existing tokens on login page load 
-  // This helps prevent redirect loops
+  // Clear any existing tokens and show appropriate errors
   useEffect(() => {
     clearToken();
-  }, []);
-
-  // Check if user is already logged in
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (isTokenValid()) {
-        try {
-          // Verify with server before redirecting
-          const res = await axios.get('/api/auth-check');
-          if (res.data.authenticated) {
-            router.push(from);
-          }
-        } catch (error) {
-          console.error("Auth check error:", error);
-          // If there's an error, stay on login page
-        }
-      }
-    };
-    checkAuth();
-  }, [router, from]);
+    
+    // Show error message if auth failed
+    if (authError === 'failed') {
+      setError('Your session has expired. Please log in again.');
+    }
+  }, [authError]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -48,25 +34,28 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    
     try {
       const response = await axios.post(
         API_ENDPOINTS.adminLogin,
         { username: form.email, password: form.password }
       );
       
-      // Use our auth utility to store the token
-      setToken(response.data.access);
-      
-      // Add a small delay to ensure cookies are set before redirecting
-      setTimeout(() => {
+      if (response.data && response.data.access) {
+        // Store the token in localStorage only
+        setToken(response.data.access);
+        
+        // Navigate to the requested page after successful login
         router.push(from);
-      }, 300);
+      } else {
+        setError('Invalid response from server. Please try again.');
+      }
     } catch (error) {
       console.error("Login error:", error);
       
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          // The request was made and the server responded with a status code
+          // Handle specific error responses
           if (error.response.status === 401) {
             setError('Invalid email or password');
           } else if (error.response.status === 404) {
@@ -75,7 +64,6 @@ export default function LoginPage() {
             setError(`Login failed: ${error.response.status} - ${error.response.statusText}`);
           }
         } else if (error.request) {
-          // The request was made but no response was received
           setError('No response from server. Please check your internet connection.');
         } else {
           setError('Login failed. Please try again later.');

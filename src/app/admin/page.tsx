@@ -58,30 +58,45 @@ export default function AdminPage() {
     }
   }, []);
 
+  // Verify authentication on page load
   useEffect(() => {
     const checkAuth = async () => {
-      const isValid = await verifyToken();
-      if (!isValid) {
-        router.push("/login");
-        return;
+      try {
+        // First check if we have a valid token
+        if (!verifyToken()) {
+          console.log("No valid token found, redirecting to login");
+          router.push("/login");
+          return;
+        }
+        
+        // Try to fetch with the token to verify it works
+        const authAxios = createAuthAxios();
+        await authAxios.get(API_ENDPOINTS.eventsAll);
+        
+        // If we get here, token is valid
+        const token = getToken();
+        setToken(token);
+      } catch (error) {
+        console.error("Auth verification failed:", error);
+        clearToken();
+        router.push("/login?auth=failed");
       }
-      
-      const token = getToken();
-      setToken(token);
     };
     
     checkAuth();
   }, [router]);
 
+  // Fetch data once authenticated
   useEffect(() => {
     if (!token) return;
+    
     setLoading(true);
     setError("");
     
-    const authAxios = createAuthAxios();
-    
-    async function fetchAll() {
+    const fetchData = async () => {
       try {
+        const authAxios = createAuthAxios();
+        
         const [eventsRes, mentorRes, sponsorRes, joinRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
           authAxios.get(API_ENDPOINTS.eventsAll),
           authAxios.get(API_ENDPOINTS.adminMentorSignups),
@@ -91,6 +106,7 @@ export default function AdminPage() {
           authAxios.get(API_ENDPOINTS.adminContactSubmissions),
           authAxios.get(API_ENDPOINTS.adminRsvps),
         ]);
+        
         setEvents(eventsRes.data);
         setMentorSignups(mentorRes.data);
         setSponsorSignups(sponsorRes.data);
@@ -100,23 +116,21 @@ export default function AdminPage() {
         setRsvps(rsvpRes.data);
       } catch (error) {
         console.error("Admin data fetch error:", error);
-        // Show more detailed error information
+        
         let errorMessage = "Failed to load admin data. Please check your login or try again.";
         
         if (axios.isAxiosError(error)) {
           if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
             errorMessage += ` Server responded with status: ${error.response.status}`;
+            
             if (error.response.status === 401) {
               errorMessage = "Your session has expired. Please log in again.";
-              localStorage.removeItem("admin_token");
-              setTimeout(() => router.push("/login"), 2000);
+              clearToken();
+              setTimeout(() => router.push("/login?auth=failed"), 2000);
             } else if (error.response.status === 404) {
               errorMessage = "API endpoint not found. Please check backend configuration.";
             }
           } else if (error.request) {
-            // The request was made but no response was received
             errorMessage = "No response from server. Please check your internet connection or server status.";
           }
         }
@@ -125,12 +139,12 @@ export default function AdminPage() {
       } finally {
         setLoading(false);
       }
-    }
-    fetchAll();
+    };
+    
+    fetchData();
   }, [token, router]);
 
   const handleLogout = () => {
-    // Clear tokens and redirect
     clearToken();
     router.push("/login");
   };

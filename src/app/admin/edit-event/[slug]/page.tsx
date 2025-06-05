@@ -4,8 +4,8 @@ import { useRouter, useParams } from "next/navigation";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { getEventUrl, getEventUpdateUrl } from "@/lib/api";
-import { createAuthAxios, verifyToken } from "@/lib/auth";
+import { getEventUrl, getEventUpdateUrl, API_ENDPOINTS } from "@/lib/api";
+import { createAuthAxios, isTokenValid } from "@/lib/auth";
 
 export default function EditEventPage() {
   const router = useRouter();
@@ -28,9 +28,21 @@ export default function EditEventPage() {
   // Verify authentication first
   useEffect(() => {
     async function checkAuth() {
-      const isValid = await verifyToken();
-      if (!isValid) {
-        router.push(`/login?from=/admin/edit-event/${slug}`);
+      try {
+        // First check if we have a valid token
+        if (!isTokenValid()) {
+          router.push(`/login?from=/admin/edit-event/${slug}`);
+          return;
+        }
+        
+        // Try to verify the token with an API call
+        const authAxios = createAuthAxios();
+        await authAxios.get(API_ENDPOINTS.eventsAll);
+        
+        // If we get here, we're authenticated
+      } catch (error) {
+        console.error("Authentication failed:", error);
+        router.push(`/login?from=/admin/edit-event/${slug}&auth=failed`);
       }
     }
     checkAuth();

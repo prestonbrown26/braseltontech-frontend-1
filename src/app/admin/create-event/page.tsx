@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { API_ENDPOINTS } from "@/lib/api";
-import { createAuthAxios, verifyToken } from "@/lib/auth";
+import { createAuthAxios, isTokenValid } from "@/lib/auth";
 
 export default function CreateEventPage() {
   const router = useRouter();
@@ -25,9 +25,21 @@ export default function CreateEventPage() {
   // Verify authentication first
   useEffect(() => {
     async function checkAuth() {
-      const isValid = await verifyToken();
-      if (!isValid) {
-        router.push('/login?from=/admin/create-event');
+      try {
+        // First check if we have a valid token
+        if (!isTokenValid()) {
+          router.push('/login?from=/admin/create-event');
+          return;
+        }
+        
+        // Try to verify the token with an API call
+        const authAxios = createAuthAxios();
+        await authAxios.get(API_ENDPOINTS.eventsAll);
+        
+        // If we get here, we're authenticated
+      } catch (error) {
+        console.error("Authentication failed:", error);
+        router.push('/login?from=/admin/create-event&auth=failed');
       }
     }
     checkAuth();

@@ -1,25 +1,20 @@
-import Cookies from 'js-cookie';
 import axios from 'axios';
 import { API_ENDPOINTS } from './api';
 
-// Token management
+// Token management - only using localStorage
 const TOKEN_KEY = 'admin_token';
 const TOKEN_EXPIRY_KEY = 'admin_token_expiry';
 
 // Check if we're in a browser environment
 const isBrowser = typeof window !== 'undefined';
 
+// Get the auth token from localStorage
 export const getToken = () => {
   if (!isBrowser) return null;
   return localStorage.getItem(TOKEN_KEY);
 };
 
-export const getTokenExpiry = () => {
-  if (!isBrowser) return null;
-  const expiry = localStorage.getItem(TOKEN_EXPIRY_KEY);
-  return expiry ? parseInt(expiry, 10) : null;
-};
-
+// Store the token in localStorage
 export const setToken = (token) => {
   if (!isBrowser) return;
   
@@ -29,66 +24,54 @@ export const setToken = (token) => {
   // Set expiry time (24 hours from now)
   const expiryTime = Date.now() + 24 * 60 * 60 * 1000;
   localStorage.setItem(TOKEN_EXPIRY_KEY, expiryTime.toString());
-  
-  // Also store in cookies for middleware
-  Cookies.set(TOKEN_KEY, token, { 
-    expires: 1, // 1 day
-    path: '/',
-    secure: true,
-    sameSite: 'none' // Changed from 'lax' to 'none' to work with Vercel deployments
-  });
 };
 
+// Clear the token from localStorage
 export const clearToken = () => {
   if (!isBrowser) return;
-  
-  // Clear from localStorage
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(TOKEN_EXPIRY_KEY);
-  
-  // Clear from cookies - try both sameSite settings to ensure it's cleared
-  Cookies.remove(TOKEN_KEY, { path: '/', sameSite: 'none', secure: true });
-  Cookies.remove(TOKEN_KEY, { path: '/' });
 };
 
+// Check if the token is valid based on expiry time
 export const isTokenValid = () => {
+  if (!isBrowser) return false;
+  
   const token = getToken();
-  const expiry = getTokenExpiry();
+  if (!token) return false;
   
-  if (!token || !expiry) return false;
+  const expiry = localStorage.getItem(TOKEN_EXPIRY_KEY);
+  if (!expiry) return false;
   
-  // Check if token is expired
-  const now = Date.now();
-  return expiry > now;
+  return parseInt(expiry, 10) > Date.now();
 };
 
-// Create an axios instance with authentication
+// Create an axios instance with authentication header
 export const createAuthAxios = () => {
   const instance = axios.create();
   
-  // Add request interceptor to add token to all requests
+  // Add auth token to all requests
   instance.interceptors.request.use(
     (config) => {
-      const token = getToken();
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+      if (isBrowser) {
+        const token = getToken();
+        if (token) {
+          config.headers['Authorization'] = `Bearer ${token}`;
+        }
       }
       return config;
     },
     (error) => Promise.reject(error)
   );
   
-  // Add response interceptor to handle auth errors
+  // Handle auth errors
   instance.interceptors.response.use(
     (response) => response,
     (error) => {
-      // If unauthorized, clear tokens and redirect to login
-      if (error.response && error.response.status === 401) {
+      if (error.response && error.response.status === 401 && isBrowser) {
+        // Clear token and redirect to login
         clearToken();
-        // Only redirect if we're in the browser
-        if (isBrowser) {
-          window.location.href = '/login';
-        }
+        window.location.href = '/login?auth=failed';
       }
       return Promise.reject(error);
     }
@@ -97,7 +80,7 @@ export const createAuthAxios = () => {
   return instance;
 };
 
-// Verify token is valid by making an API call
+// Verify the token is valid by making an API call
 export const verifyToken = async () => {
   if (!isTokenValid()) {
     clearToken();
@@ -105,12 +88,12 @@ export const verifyToken = async () => {
   }
   
   try {
-    const token = getToken();
-    await axios.get(API_ENDPOINTS.eventsAll, {
-      headers: { Authorization: `Bearer ${token}` }
+    const response = await axios.get(API_ENDPOINTS.eventsAll, {
+      headers: { Authorization: `Bearer ${getToken()}` }
     });
-    return true;
-  } catch {
+    return response.status === 200;
+  } catch (error) {
+    console.error("Token verification failed:", error);
     clearToken();
     return false;
   }
