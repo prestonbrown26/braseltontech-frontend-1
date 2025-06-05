@@ -29,6 +29,10 @@ export default function NavBar() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsAdmin(!!localStorage.getItem("braseltontech_admin_token"));
+      
+      // Add debug logging
+      console.log('NavBar: Current pathname:', window.location.pathname);
+      console.log('NavBar: Admin status:', !!localStorage.getItem("braseltontech_admin_token"));
     }
   }, []);
 
@@ -275,7 +279,7 @@ export default function NavBar() {
               transition={{ duration: 0.1 }}
               className="bg-blue-700 text-white font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-800 transition ml-2"
               type="button"
-              onClick={() => redirectToAdmin()}
+              onClick={() => redirectToAdmin(router)}
             >
               Admin
             </motion.button>
@@ -342,7 +346,7 @@ export default function NavBar() {
                   transition={{ duration: 0.1 }}
                   className="bg-blue-700 text-white font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-800 transition ml-2"
                   type="button"
-                  onClick={() => redirectToAdmin()}
+                  onClick={() => redirectToAdmin(router)}
                 >
                   Admin
                 </motion.button>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_ENDPOINTS } from './api';
+import { API_ENDPOINTS, BACKEND_URL } from './api';
 
 // Token management - ONLY using localStorage, NO cookies
 const TOKEN_KEY = 'braseltontech_admin_token';
@@ -7,6 +7,9 @@ const TOKEN_EXPIRY_KEY = 'braseltontech_admin_token_expiry';
 
 // Check if we're in a browser environment
 const isBrowser = typeof window !== 'undefined';
+
+// Check if we're using same domain for frontend and backend
+const isSameDomain = !BACKEND_URL || BACKEND_URL === '';
 
 // Get the auth token from localStorage
 export const getToken = () => {
@@ -61,6 +64,12 @@ export const isTokenValid = () => {
 export const createAuthAxios = () => {
   const instance = axios.create();
   
+  // Set withCredentials for same-domain requests (if applicable)
+  if (isSameDomain) {
+    instance.defaults.withCredentials = true;
+    console.log('Using same-domain auth with credentials');
+  }
+  
   // Add auth token to all requests
   instance.interceptors.request.use(
     (config) => {
@@ -109,7 +118,8 @@ export const verifyToken = async () => {
   try {
     console.log('Verifying token with API call...');
     const response = await axios.get(API_ENDPOINTS.eventsAll, {
-      headers: { Authorization: `Bearer ${getToken()}` }
+      headers: { Authorization: `Bearer ${getToken()}` },
+      withCredentials: isSameDomain // Include credentials for same-domain requests
     });
     console.log('Token verification successful');
     return response.status === 200;

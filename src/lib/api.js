@@ -1,6 +1,7 @@
-// Base URLs - separate frontend and backend
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
-export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+// Base URLs - configured for Render deployment
+// Use relative URLs for same-domain API requests when possible
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "/api";
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";  // Empty string for same domain
 export const ADMIN_URL = `${BACKEND_URL}/admin`;
 export const FRONTEND_ADMIN_URL = `/admin`;  // This is the frontend admin page
 
@@ -10,6 +11,7 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.log('Backend URL:', BACKEND_URL);
   console.log('Admin URL:', ADMIN_URL);
   console.log('Frontend Admin URL:', FRONTEND_ADMIN_URL);
+  console.log('Using same domain?', BACKEND_URL === '');
 }
 
 export const API_ENDPOINTS = {
@@ -30,9 +32,16 @@ export const API_ENDPOINTS = {
 };
 
 // Helper function to redirect to frontend admin
-export const redirectToAdmin = () => {
-  if (typeof window !== 'undefined') {
-    // Redirect to the frontend admin page, not the backend admin
+// Now accepts router parameter so we can use Next.js navigation
+export const redirectToAdmin = (router) => {
+  console.log('Redirecting to frontend admin page');
+  
+  if (router) {
+    // Use Next.js router if provided (preferred method)
+    router.push(FRONTEND_ADMIN_URL);
+  } else if (typeof window !== 'undefined') {
+    // Fallback to direct navigation if router not provided
+    console.log('Router not provided, using window.location');
     window.location.href = FRONTEND_ADMIN_URL;
   }
 };
