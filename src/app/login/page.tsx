@@ -5,7 +5,7 @@ import axios from "axios";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { API_ENDPOINTS } from "@/lib/api";
-import { setToken, isTokenValid } from "@/lib/auth";
+import { setToken, isTokenValid, clearToken } from "@/lib/auth";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -15,11 +15,29 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const from = searchParams.get('from') || '/admin/';
 
+  // Clear any existing tokens on login page load 
+  // This helps prevent redirect loops
+  useEffect(() => {
+    clearToken();
+  }, []);
+
   // Check if user is already logged in
   useEffect(() => {
-    if (isTokenValid()) {
-      router.push(from);
-    }
+    const checkAuth = async () => {
+      if (isTokenValid()) {
+        try {
+          // Verify with server before redirecting
+          const res = await axios.get('/api/auth-check');
+          if (res.data.authenticated) {
+            router.push(from);
+          }
+        } catch (error) {
+          console.error("Auth check error:", error);
+          // If there's an error, stay on login page
+        }
+      }
+    };
+    checkAuth();
   }, [router, from]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -39,8 +57,10 @@ export default function LoginPage() {
       // Use our auth utility to store the token
       setToken(response.data.access);
       
-      // Redirect to the admin page or the original destination
-      router.push(from);
+      // Add a small delay to ensure cookies are set before redirecting
+      setTimeout(() => {
+        router.push(from);
+      }, 300);
     } catch (error) {
       console.error("Login error:", error);
       

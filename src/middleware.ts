@@ -3,21 +3,35 @@ import type { NextRequest } from 'next/server';
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
+  // Get the pathname of the request (e.g. /, /about, /admin)
+  const path = request.nextUrl.pathname;
+  
+  // If the path doesn't start with /admin, ignore this middleware
+  if (!path.startsWith('/admin')) {
+    return NextResponse.next();
+  }
+  
+  // Specifically ignore the /admin/login path to prevent loops
+  if (path === '/admin/login') {
+    return NextResponse.next();
+  }
+  
+  // Check if the admin_token cookie exists
   const token = request.cookies.get('admin_token')?.value;
   
-  // If accessing admin pages and no token exists, redirect to login
+  // If no token, redirect to login
   if (!token) {
     const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('from', url.pathname);
+    // Add the current path as a "from" parameter to redirect back after login
+    loginUrl.searchParams.set('from', path);
     return NextResponse.redirect(loginUrl);
   }
   
-  // If token exists, allow access to admin pages
+  // If token exists, allow the request
   return NextResponse.next();
 }
 
-// Only apply middleware to admin routes, excluding the login page
+// Specify which paths this middleware will run on
 export const config = {
   matcher: [
     '/admin/:path*'

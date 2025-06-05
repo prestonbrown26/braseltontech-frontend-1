@@ -6,19 +6,22 @@ import { API_ENDPOINTS } from './api';
 const TOKEN_KEY = 'admin_token';
 const TOKEN_EXPIRY_KEY = 'admin_token_expiry';
 
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined';
+
 export const getToken = () => {
-  if (typeof window === 'undefined') return null;
+  if (!isBrowser) return null;
   return localStorage.getItem(TOKEN_KEY);
 };
 
 export const getTokenExpiry = () => {
-  if (typeof window === 'undefined') return null;
+  if (!isBrowser) return null;
   const expiry = localStorage.getItem(TOKEN_EXPIRY_KEY);
   return expiry ? parseInt(expiry, 10) : null;
 };
 
 export const setToken = (token) => {
-  if (typeof window === 'undefined') return;
+  if (!isBrowser) return;
   
   // Store in localStorage
   localStorage.setItem(TOKEN_KEY, token);
@@ -32,18 +35,19 @@ export const setToken = (token) => {
     expires: 1, // 1 day
     path: '/',
     secure: true,
-    sameSite: 'lax'
+    sameSite: 'none' // Changed from 'lax' to 'none' to work with Vercel deployments
   });
 };
 
 export const clearToken = () => {
-  if (typeof window === 'undefined') return;
+  if (!isBrowser) return;
   
   // Clear from localStorage
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(TOKEN_EXPIRY_KEY);
   
-  // Clear from cookies
+  // Clear from cookies - try both sameSite settings to ensure it's cleared
+  Cookies.remove(TOKEN_KEY, { path: '/', sameSite: 'none', secure: true });
   Cookies.remove(TOKEN_KEY, { path: '/' });
 };
 
@@ -82,7 +86,7 @@ export const createAuthAxios = () => {
       if (error.response && error.response.status === 401) {
         clearToken();
         // Only redirect if we're in the browser
-        if (typeof window !== 'undefined') {
+        if (isBrowser) {
           window.location.href = '/login';
         }
       }
