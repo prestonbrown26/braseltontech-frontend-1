@@ -2,12 +2,14 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
 export const ADMIN_URL = `${BACKEND_URL}/admin`;
+export const FRONTEND_ADMIN_URL = `/admin`;  // This is the frontend admin page
 
 // Log configured URLs in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.log('API Base URL:', API_BASE_URL);
   console.log('Backend URL:', BACKEND_URL);
   console.log('Admin URL:', ADMIN_URL);
+  console.log('Frontend Admin URL:', FRONTEND_ADMIN_URL);
 }
 
 export const API_ENDPOINTS = {
@@ -27,11 +29,11 @@ export const API_ENDPOINTS = {
   adminRsvps: `${API_BASE_URL}/admin/rsvps/`,
 };
 
-// Helper function to redirect to Django admin
+// Helper function to redirect to frontend admin
 export const redirectToAdmin = () => {
   if (typeof window !== 'undefined') {
-    // Redirect directly to the backend admin URL
-    window.location.href = ADMIN_URL;
+    // Redirect to the frontend admin page, not the backend admin
+    window.location.href = FRONTEND_ADMIN_URL;
   }
 };
 
