@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { redirectToAdmin } from "@/lib/api";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -27,7 +28,7 @@ export default function NavBar() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsAdmin(!!localStorage.getItem("admin_token"));
+      setIsAdmin(!!localStorage.getItem("braseltontech_admin_token"));
     }
   }, []);
 
@@ -269,23 +270,23 @@ export default function NavBar() {
         )}
         {isAdmin && (
           <>
-            <Link href="/admin">
-              <motion.button
-                whileHover={{ scale: 1.15 }}
-                transition={{ duration: 0.1 }}
-                className="bg-blue-700 text-white font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-800 transition ml-2"
-                type="button"
-              >
-                Admin
-              </motion.button>
-            </Link>
+            <motion.button
+              whileHover={{ scale: 1.15 }}
+              transition={{ duration: 0.1 }}
+              className="bg-blue-700 text-white font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-800 transition ml-2"
+              type="button"
+              onClick={() => redirectToAdmin()}
+            >
+              Admin
+            </motion.button>
             <motion.button
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.1 }}
               className="bg-white text-red-700 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-red-50 transition ml-2"
               type="button"
               onClick={() => {
-                localStorage.removeItem("admin_token");
+                localStorage.removeItem("braseltontech_admin_token");
+                localStorage.removeItem("braseltontech_admin_token_expiry");
                 setIsAdmin(false);
                 router.push("/");
               }}
@@ -336,23 +337,23 @@ export default function NavBar() {
             )}
             {isAdmin && (
               <>
-                <Link href="/admin">
-                  <motion.button
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ duration: 0.1 }}
-                    className="bg-blue-700 text-white font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-800 transition ml-2"
-                    type="button"
-                  >
-                    Admin
-                  </motion.button>
-                </Link>
+                <motion.button
+                  whileHover={{ scale: 1.15 }}
+                  transition={{ duration: 0.1 }}
+                  className="bg-blue-700 text-white font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-800 transition ml-2"
+                  type="button"
+                  onClick={() => redirectToAdmin()}
+                >
+                  Admin
+                </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.15 }}
                   transition={{ duration: 0.1 }}
                   className="bg-white text-red-700 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-red-50 transition ml-2"
                   type="button"
                   onClick={() => {
-                    localStorage.removeItem("admin_token");
+                    localStorage.removeItem("braseltontech_admin_token");
+                    localStorage.removeItem("braseltontech_admin_token_expiry");
                     setIsAdmin(false);
                     router.push("/");
                   }}

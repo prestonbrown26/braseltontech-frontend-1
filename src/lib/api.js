@@ -1,4 +1,14 @@
+// Base URLs - separate frontend and backend
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+export const ADMIN_URL = `${BACKEND_URL}/admin`;
+
+// Log configured URLs in development
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+  console.log('API Base URL:', API_BASE_URL);
+  console.log('Backend URL:', BACKEND_URL);
+  console.log('Admin URL:', ADMIN_URL);
+}
 
 export const API_ENDPOINTS = {
   contactSubmission: `${API_BASE_URL}/contact-submission/`,
@@ -15,6 +25,14 @@ export const API_ENDPOINTS = {
   adminLevelupSignups: `${API_BASE_URL}/admin/levelup-signups/`,
   adminContactSubmissions: `${API_BASE_URL}/admin/contact-submissions/`,
   adminRsvps: `${API_BASE_URL}/admin/rsvps/`,
+};
+
+// Helper function to redirect to Django admin
+export const redirectToAdmin = () => {
+  if (typeof window !== 'undefined') {
+    // Redirect directly to the backend admin URL
+    window.location.href = ADMIN_URL;
+  }
 };
 
 // Dynamic endpoint helpers
