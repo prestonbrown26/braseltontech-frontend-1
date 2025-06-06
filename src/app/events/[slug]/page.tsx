@@ -154,7 +154,7 @@ export default function EventDetailPage() {
         ) : (
           <div className="text-center p-6 bg-yellow-50 rounded-lg border border-yellow-200">
             <h3 className="text-xl font-bold text-yellow-600 mb-2">Event Not Found</h3>
-            <p className="text-gray-700">Sorry, we couldn't find the event you were looking for.</p>
+            <p className="text-gray-700">Sorry, we couldn&apos;t find the event you were looking for.</p>
             <Link href="/events" className="mt-4 inline-block px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
               Back to Events
             </Link>
