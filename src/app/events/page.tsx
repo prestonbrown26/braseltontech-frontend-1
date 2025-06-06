@@ -102,7 +102,12 @@ export default function EventsPage() {
                       <span className="font-semibold">{event.location_name as string}</span><br />
                       {event.location_address as string}
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center space-x-4">
+                      <Link href={`/events/${event.slug as string}`}>
+                        <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
+                          View Event
+                        </Button>
+                      </Link>
                       <Link href={`/events/${event.slug as string}/rsvp`}>
                         <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition w-auto">
                           RSVP
