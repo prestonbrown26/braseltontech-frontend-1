@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
-import { API_ENDPOINTS } from "@/lib/api";
 import { setToken, clearToken } from "@/lib/auth";
 
 export default function LoginPage() {
