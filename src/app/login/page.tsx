@@ -40,14 +40,17 @@ export default function LoginPage() {
     try {
       console.log('Attempting login with:', form.email);
       
-      // Use native fetch API which handles CORS better in some cases
-      const response = await fetch(API_ENDPOINTS.adminLoginCors, {
+      // Use the raw login direct endpoint (no /api/ prefix)
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+      const loginUrl = `${backendUrl}/login-raw/`;
+      console.log('Using login URL:', loginUrl);
+      
+      const response = await fetch(loginUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        credentials: 'include', // Include cookies if same-origin
         body: JSON.stringify({ 
           username: form.email, 
           password: form.password 
