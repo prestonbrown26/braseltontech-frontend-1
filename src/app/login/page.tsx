@@ -54,11 +54,26 @@ export default function LoginPage() {
         })
       });
       
-      if (!response.ok) {
-        throw new Error(`Login failed: ${response.status} ${response.statusText}`);
+      console.log('Response status:', response.status);
+      
+      // Handle different response types
+      const contentType = response.headers.get('content-type');
+      console.log('Response content type:', contentType);
+      
+      if (!contentType || !contentType.includes('application/json')) {
+        // Not JSON, try to get text
+        const text = await response.text();
+        console.error('Response is not JSON:', text.substring(0, 100) + '...');
+        throw new Error('Server returned invalid format. Expected JSON but got HTML.');
       }
       
       const data = await response.json();
+      console.log('Response data received');
+      
+      if (!response.ok) {
+        console.error('Server error:', data);
+        throw new Error(data.error || `Login failed: ${response.status} ${response.statusText}`);
+      }
       
       if (data && data.access) {
         console.log('Login successful, token received');
@@ -79,17 +94,9 @@ export default function LoginPage() {
       console.error("Login error:", error);
       
       if (error instanceof Error) {
-        if (error.message.includes('401')) {
-          setError('Invalid email or password');
-        } else if (error.message.includes('403')) {
-          setError('Access forbidden. CSRF or CORS issue detected.');
-        } else if (error.message.includes('404')) {
-          setError('Login service not available. Please check backend connection.');
-        } else {
-          setError(`Login failed: ${error.message}`);
-        }
+        setError(`Login failed: ${error.message}`);
       } else {
-        setError('Invalid email or password');
+        setError('An unknown error occurred during login.');
       }
     } finally {
       setLoading(false);
