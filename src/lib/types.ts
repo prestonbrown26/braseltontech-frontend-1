@@ -8,6 +8,7 @@ export interface Event {
   location: string;
   slug: string;
   graphic: string | null;
+  graphic_url?: string | null;
   capacity: number | null;
   is_featured: boolean;
   registration_link: string | null;

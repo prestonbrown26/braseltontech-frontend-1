@@ -87,7 +87,7 @@ export default function EventDetailPage() {
                 {event.graphic ? (
                   <div className="relative w-full h-80 md:h-96 rounded-xl overflow-hidden">
                     <Image
-                      src={event.graphic}
+                      src={event.graphic_url || event.graphic}
                       alt={event.title}
                       fill
                       style={{ objectFit: "cover" }}
