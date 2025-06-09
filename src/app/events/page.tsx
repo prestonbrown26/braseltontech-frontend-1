@@ -43,6 +43,11 @@ export default function EventsPage() {
       setError("");
       try {
         const res = await axios.get(API_ENDPOINTS.eventsAll);
+        console.log("Events data:", res.data);
+        // Debug event graphics
+        res.data.forEach((event: Record<string, any>) => {
+          console.log(`Event: ${event.title}, Graphic: ${event.graphic}, GraphicURL: ${event.graphic_url}`);
+        });
         setEvents(res.data);
       } catch {
         setError("Could not load events.");
@@ -119,6 +124,9 @@ export default function EventsPage() {
                     <div className="flex-1 flex items-center justify-center mt-8 md:mt-0">
                       <img
                         src={
+                          (event as any).graphic_url ? (event as any).graphic_url :
+                          (event as any).slug === 'braseltontech-ai-learning-event' ? 
+                            'https://res.cloudinary.com/debagjz7e/image/upload/c_limit,w_1200/f_auto/q_auto/BTech-Ai-Event-Website-Graphic_mqgo2i.auto' :
                           event.graphic.startsWith('http')
                             ? event.graphic
                             : (process.env.NEXT_PUBLIC_API_BASE_URL + event.graphic)
