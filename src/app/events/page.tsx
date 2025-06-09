@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { format, parseISO } from "date-fns";
 import { API_ENDPOINTS } from "@/lib/api";
-import { Event } from "@/lib/types";
 
 function formatEventDate(dateStr: string) {
   if (!dateStr) return "";
