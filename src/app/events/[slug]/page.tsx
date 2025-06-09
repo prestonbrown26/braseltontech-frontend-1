@@ -36,6 +36,18 @@ export default function EventDetailPage() {
 
         const data = await response.json();
         console.log("Event data:", data);
+        
+        if (data.graphic) {
+          console.log("Event has graphic:", data.graphic);
+          console.log("Event has graphic_url:", data.graphic_url);
+        } else {
+          console.log("Event has no graphic");
+        }
+        
+        if (slug === 'braseltontech-ai-learning-event') {
+          console.log("This is the AI learning event - full data:", JSON.stringify(data, null, 2));
+        }
+        
         setEvent(data);
       } catch (err) {
         console.error("Error fetching event:", err);
@@ -64,6 +76,35 @@ export default function EventDetailPage() {
     return `${hour12}:${minutes} ${ampm}`;
   };
 
+  // Function to get proper image URL
+  const getImageUrl = (event: Event) => {
+    if (!event.graphic) return null;
+    
+    // Use specific URL for AI event
+    if (event.slug === 'braseltontech-ai-learning-event') {
+      const aiImageUrl = 'https://res.cloudinary.com/debagjz7e/image/upload/c_limit,w_1200/f_auto/q_auto/BTech-Ai-Event-Website-Graphic_mqgo2i.auto';
+      console.log("Using hardcoded URL for AI event:", aiImageUrl);
+      return aiImageUrl;
+    }
+    
+    // Use graphic_url if available
+    if (event.graphic_url) {
+      console.log("Using graphic_url:", event.graphic_url);
+      return event.graphic_url;
+    }
+    
+    // Use direct graphic if it's a URL
+    if (typeof event.graphic === 'string' && event.graphic.startsWith('http')) {
+      console.log("Using graphic as URL:", event.graphic);
+      return event.graphic;
+    }
+    
+    // Fall back to prepending API base URL
+    const fallbackUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL || ''}${event.graphic}`;
+    console.log("Using fallback URL:", fallbackUrl);
+    return fallbackUrl;
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#f0f6ff] to-[#a7c7ff]">
       <NavBar />
@@ -87,12 +128,19 @@ export default function EventDetailPage() {
                 {event.graphic ? (
                   <div className="relative w-full h-80 md:h-96 rounded-xl overflow-hidden">
                     <Image
-                      src={event.graphic_url || event.graphic}
+                      src={getImageUrl(event) || ''}
                       alt={event.title}
                       fill
                       style={{ objectFit: "cover" }}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       priority
+                      onError={(e) => {
+                        console.error("Image failed to load:", e);
+                        // Fall back to a direct cloudinary URL for the AI event
+                        if (event.slug === 'braseltontech-ai-learning-event') {
+                          (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/debagjz7e/image/upload/BTech-Ai-Event-Website-Graphic_mqgo2i';
+                        }
+                      }}
                     />
                   </div>
                 ) : (

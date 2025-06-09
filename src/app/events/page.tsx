@@ -60,12 +60,19 @@ export default function EventsPage() {
       try {
         const res = await axios.get(API_ENDPOINTS.eventsAll);
         console.log("Events data:", res.data);
-        // Debug event graphics
+        // More detailed debug logs for each event
         res.data.forEach((event: EventResponse) => {
-          console.log(`Event: ${event.title}, Graphic: ${event.graphic}, GraphicURL: ${event.graphic_url}`);
+          console.log(`Event: ${event.title}`);
+          console.log(`Graphic: ${event.graphic}`);
+          console.log(`GraphicURL: ${event.graphic_url}`);
+          console.log(`Slug: ${event.slug}`);
+          if (event.slug === 'braseltontech-ai-learning-event') {
+            console.log("Found AI event! Here's the full event data:", JSON.stringify(event, null, 2));
+          }
         });
         setEvents(res.data);
-      } catch {
+      } catch (err) {
+        console.error("Error fetching events:", err);
         setError("Could not load events.");
       } finally {
         setLoading(false);
@@ -105,7 +112,21 @@ export default function EventsPage() {
             ) : events.length === 0 ? (
               <div className="text-gray-600 text-center">No events found.</div>
             ) : (
-              events.map(event => (
+              events.map(event => {
+                // Debug logging outside of JSX
+                if (event.graphic) {
+                  console.log("Rendering image for:", event.title);
+                  const imageUrl = event.graphic_url 
+                    ? event.graphic_url 
+                    : event.slug === 'braseltontech-ai-learning-event'
+                      ? 'https://res.cloudinary.com/debagjz7e/image/upload/c_limit,w_1200/f_auto/q_auto/BTech-Ai-Event-Website-Graphic_mqgo2i.auto'
+                      : event.graphic.startsWith('http')
+                        ? event.graphic
+                        : (process.env.NEXT_PUBLIC_API_BASE_URL + event.graphic);
+                  console.log("Image URL:", imageUrl);
+                }
+                
+                return (
                 <section key={event.id} className="w-full bg-white rounded-2xl shadow-xl border border-blue-100 p-8 flex flex-col md:flex-row items-center md:items-stretch mb-6 max-w-6xl mx-auto">
                   <div className={event.graphic ? "flex-1 flex flex-col justify-center md:pr-8" : "w-full"}>
                     <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">{event.title}</h3>
@@ -154,12 +175,19 @@ export default function EventsPage() {
                           style={{ objectFit: "cover" }}
                           className="rounded-lg"
                           sizes="(max-width: 768px) 100vw, 400px"
+                          onError={(e) => {
+                            console.error("Image failed to load:", e);
+                            // Fall back to a direct cloudinary URL for the AI event
+                            if (event.slug === 'braseltontech-ai-learning-event') {
+                              (e.target as HTMLImageElement).src = 'https://res.cloudinary.com/debagjz7e/image/upload/BTech-Ai-Event-Website-Graphic_mqgo2i';
+                            }
+                          }}
                         />
                       </div>
                     </div>
                   )}
                 </section>
-              ))
+              )})
             )}
           </div>
         </div>
