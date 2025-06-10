@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { setToken, clearToken } from "@/lib/auth";
+import { API_ENDPOINTS } from "@/lib/api";
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -39,9 +40,8 @@ export default function LoginPage() {
     try {
       console.log('Attempting login with:', form.email);
       
-      // Use the raw login direct endpoint (no /api/ prefix)
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
-      const loginUrl = `${backendUrl}/login-raw/`;
+      // Use the correct backend API endpoint for login-raw
+      const loginUrl = API_ENDPOINTS.adminLoginRaw;
       console.log('Using login URL:', loginUrl);
       
       const response = await fetch(loginUrl, {
