@@ -54,12 +54,7 @@ export default function RSVPPage() {
     try {
       await axios.post(
         getEventRsvpUrl(slug),
-        { ...form },
-        {
-          headers: {
-            "X-API-Key": process.env.NEXT_PUBLIC_RSVP_API_KEY,
-          },
-        }
+        { ...form }
       );
       setSubmitted(true);
     } catch {
