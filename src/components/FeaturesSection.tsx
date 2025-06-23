@@ -8,7 +8,7 @@ export default function FeaturesSection() {
   const [index, setIndex] = useState(0);
   const [whoWeAre, setWhoWeAre] = useState("Braselton Tech is a non-profit initiative to in partnership with the Advanced Technology Development Center (ATDC) headquartered at Georgia Tech.");
   const [mission, setMission] = useState("To develop a technology ecosystem that attracts technology companies, investors, and the talent required to scale.");
-  const [whatIsATDC, setWhatIsATDC] = useState("ATDC is a Georgia economic development organization funded by the state legislature and managed under the Georgia Tech Enterprise Organization Institute. It is the oldest technology business accelerator in the U.S. and its graduating companies have raised over $3 billion in venture capital.");
+  const [whatIsATDC, setWhatIsATDC] = useState("ATDC is a Georgia economic development organization funded by the state legislature and managed under the Georgia Tech Enterprise Organization Institute. It is the oldest technology business accelerator in the U.S. and its portfolio members have raised over $3 billion in venture capital.");
   const [whoWeAreTitle, setWhoWeAreTitle] = useState("Who Are We?");
   const [missionTitle, setMissionTitle] = useState("Our Mission");
   const [whatIsATDCTitle, setWhatIsATDCTitle] = useState("What is ATDC?");

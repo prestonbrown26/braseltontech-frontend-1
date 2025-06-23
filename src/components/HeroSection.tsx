@@ -24,7 +24,6 @@ export default function HeroSection() {
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [heroTitle, setHeroTitle] = useState("Welcome to BraseltonTech");
-  const [heroSubtitle, setHeroSubtitle] = useState("Be bold. Be brave. Be tech.");
   const [heroDesc, setHeroDesc] = useState("We help our members create, develop, and scale technology companies.");
 
   useEffect(() => {
@@ -228,7 +227,6 @@ export default function HeroSection() {
             className="w-full"
           >
             <AdminEditableText value={heroTitle} onChange={setHeroTitle} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 mb-2 leading-tight tracking-tight font-sans drop-shadow-[0_8px_40px_rgba(44,0,80,0.15)] md:text-left text-center" as="h1" />
-            <AdminEditableText value={heroSubtitle} onChange={setHeroSubtitle} className="text-lg sm:text-xl font-bold text-gray-800 mb-2 w-full md:text-left text-center" as="div" />
             <AdminEditableText value={heroDesc} onChange={setHeroDesc} className="text-base sm:text-lg text-gray-700 mb-6 max-w-xl font-sans leading-relaxed md:text-left text-center" as="p" />
             <div className="w-full flex md:justify-start justify-center">
               <Link href="/about">
