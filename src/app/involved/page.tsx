@@ -11,7 +11,7 @@ export default function InvolvedPage() {
   const [sponsorTitle, setSponsorTitle] = useState("Become a Sponsor");
   const [sponsorBody, setSponsorBody] = useState("Support the Future of Technology in Northeast Georgia. Braselton Tech is seeking sponsors to help fuel innovation and entrepreneurship in the region. Join us in building a thriving community of startups, mentors, and investors dedicated to shaping the future of technology.");
   const [mentorTitle, setMentorTitle] = useState("Become a Mentor");
-  const [mentorBody, setMentorBody] = useState("Empower the next generation of entrepreneurs. Share your experience and insights with aspiring founders at Braselton Tech. As a mentor, you'll play a vital role in helping early-stage startups grow, overcome challenges, and reach their full potential.");
+  const [mentorBody, setMentorBody] = useState("Empower the next generation of entrepreneurs. Share your experience and insights with aspiring founders at Braselton Tech. As a mentor, you&apos;ll play a vital role in helping early-stage startups grow, overcome challenges, and reach their full potential.");
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#f0f6ff] to-[#a7c7ff]">

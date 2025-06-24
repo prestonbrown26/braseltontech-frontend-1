@@ -57,7 +57,7 @@ export default function AIIntegrationPage() {
         <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
           <h1 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">Integrate AI Into Your Business</h1>
           {!submitted && (
-            <div className="text-gray-700 text-base text-center mb-6">Ready to transform your business with AI? Complete the form below to get started with our AI solutions services. We'll help you identify opportunities for AI integration and develop a customized plan to improve your operations, reduce costs, and gain competitive advantages.</div>
+            <div className="text-gray-700 text-base text-center mb-6">Ready to transform your business with AI? Complete the form below to get started with our AI solutions services. We&apos;ll help you identify opportunities for AI integration and develop a customized plan to improve your operations, reduce costs, and gain competitive advantages.</div>
           )}
           {submitted ? (
             <div className="flex flex-col items-center justify-center py-16">
