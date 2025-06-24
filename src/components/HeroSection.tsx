@@ -159,11 +159,18 @@ export default function HeroSection() {
         >
           <div className="text-2xl font-bold text-blue-700 mb-2 text-center">More Events Coming Soon</div>
           <div className="text-gray-700 text-center">Stay tuned for new opportunities and gatherings!</div>
-          <Link href="/events">
-            <Button className="mt-6 bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-              See Events
-            </Button>
-          </Link>
+          <div className="flex gap-4 justify-center mt-6">
+            <Link href="/events">
+              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                See Events
+              </Button>
+            </Link>
+            <Link href="/involved/ai-learning-event">
+              <Button className="bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                Request Event
+              </Button>
+            </Link>
+          </div>
         </motion.div>
       );
     }
