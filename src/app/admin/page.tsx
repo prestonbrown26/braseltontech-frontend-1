@@ -40,6 +40,7 @@ export default function AdminPage() {
   const [mentorSignups, setMentorSignups] = useState<Array<Record<string, unknown>>>([]);
   const [sponsorSignups, setSponsorSignups] = useState<Array<Record<string, unknown>>>([]);
   const [levelupSignups, setLevelupSignups] = useState<Array<Record<string, unknown>>>([]);
+  const [aiLearningEventRequests, setAiLearningEventRequests] = useState<Array<Record<string, unknown>>>([]);
   const [contactSubmissions, setContactSubmissions] = useState<Array<Record<string, unknown>>>([]);
   const [rsvps, setRsvps] = useState<Array<Record<string, unknown>>>([]);
   const [loading, setLoading] = useState(true);
@@ -107,11 +108,12 @@ export default function AdminPage() {
         const authAxios = createAuthAxios();
         
         console.log('Admin page: Fetching all admin data');
-        const [eventsRes, mentorRes, sponsorRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
+        const [eventsRes, mentorRes, sponsorRes, levelupRes, aiEventRes, contactRes, rsvpRes] = await Promise.all([
           authAxios.get(API_ENDPOINTS.eventsAll),
           authAxios.get(API_ENDPOINTS.adminMentorSignups),
           authAxios.get(API_ENDPOINTS.adminSponsorSignups),
           authAxios.get(API_ENDPOINTS.adminLevelupSignups),
+          authAxios.get(API_ENDPOINTS.adminAILearningEventRequests),
           authAxios.get(API_ENDPOINTS.adminContactSubmissions),
           authAxios.get(API_ENDPOINTS.adminRsvps),
         ]);
@@ -122,6 +124,7 @@ export default function AdminPage() {
         setMentorSignups(mentorRes.data);
         setSponsorSignups(sponsorRes.data);
         setLevelupSignups(levelupRes.data);
+        setAiLearningEventRequests(aiEventRes.data);
         setContactSubmissions(contactRes.data);
         setRsvps(rsvpRes.data);
       } catch (error) {
@@ -183,6 +186,7 @@ export default function AdminPage() {
             <Button onClick={() => setActiveTab("mentor")} variant={activeTab === "mentor" ? "default" : "outline"}>Mentor Signups</Button>
             <Button onClick={() => setActiveTab("sponsor")} variant={activeTab === "sponsor" ? "default" : "outline"}>Sponsor Signups</Button>
             <Button onClick={() => setActiveTab("levelup")} variant={activeTab === "levelup" ? "default" : "outline"}>AI Integration</Button>
+            <Button onClick={() => setActiveTab("aievent")} variant={activeTab === "aievent" ? "default" : "outline"}>AI Learning Events</Button>
             <Button onClick={() => setActiveTab("contact")} variant={activeTab === "contact" ? "default" : "outline"}>Contact</Button>
             <Button onClick={() => setActiveTab("rsvp")} variant={activeTab === "rsvp" ? "default" : "outline"}>RSVPs</Button>
             <Button onClick={handleLogout} variant="outline" className="bg-red-50 hover:bg-red-100">Logout</Button>
@@ -348,6 +352,49 @@ export default function AdminPage() {
                           <td className="p-2 max-w-xs truncate" title={l.about_startup as string}>{l.about_startup as string}</td>
                           <td className="p-2 max-w-xs truncate" title={l.why_help as string}>{l.why_help as string}</td>
                           <td className="p-2">{l.submitted_at ? format(parseISO(l.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {activeTab === "aievent" && (
+                <div>
+                  <h2 className="text-xl font-bold mb-2">AI Learning Event Requests</h2>
+                  <table className="w-full min-w-[900px] text-left border-collapse mb-8 overflow-x-auto">
+                    <thead>
+                      <tr className="bg-blue-50">
+                        <th className="p-2">ID</th>
+                        <th className="p-2">Contact Name</th>
+                        <th className="p-2">Organization</th>
+                        <th className="p-2">Email</th>
+                        <th className="p-2">Phone</th>
+                        <th className="p-2">Location</th>
+                        <th className="p-2">Expected Attendees</th>
+                        <th className="p-2">AI Experience Level</th>
+                        <th className="p-2">Industry</th>
+                        <th className="p-2">Preferred Topics</th>
+                        <th className="p-2">Timeline</th>
+                        <th className="p-2">Additional Notes</th>
+                        <th className="p-2">Submitted At</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {aiLearningEventRequests.map((a: Record<string, unknown>) => (
+                        <tr key={a.id as React.Key} className="border-b">
+                          <td className="p-2">{a.id as string}</td>
+                          <td className="p-2 font-semibold">{a.first_name as string} {a.last_name as string}</td>
+                          <td className="p-2">{a.organization as string}</td>
+                          <td className="p-2">{a.email as string}</td>
+                          <td className="p-2">{a.phone as string}</td>
+                          <td className="p-2">{a.city as string}, {a.state as string}</td>
+                          <td className="p-2">{a.expected_attendees as string}</td>
+                          <td className="p-2">{a.ai_experience_level as string}</td>
+                          <td className="p-2">{a.industry as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={a.preferred_topics as string}>{a.preferred_topics as string}</td>
+                          <td className="p-2">{a.timeline as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={a.additional_notes as string}>{a.additional_notes as string}</td>
+                          <td className="p-2">{a.submitted_at ? format(parseISO(a.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
                     </tbody>

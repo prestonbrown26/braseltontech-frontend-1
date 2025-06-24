@@ -29,6 +29,7 @@ export const API_ENDPOINTS = {
   mentorSignup: getApiUrl('/mentor-signup/'),
   sponsorSignup: getApiUrl('/sponsor-signup/'),
   levelUpSignup: getApiUrl('/level-up-signup/'),
+  aiLearningEventRequest: getApiUrl('/ai-learning-event-request/'),
   events: getApiUrl('/events/'),
   eventsAll: getApiUrl('/events/all/'),
   adminLogin: getApiUrl('/admin/login/'),
@@ -37,6 +38,7 @@ export const API_ENDPOINTS = {
   adminMentorSignups: getApiUrl('/admin/mentor-signups/'),
   adminSponsorSignups: getApiUrl('/admin/sponsor-signups/'),
   adminLevelupSignups: getApiUrl('/admin/level-up-signups/'),
+  adminAILearningEventRequests: getApiUrl('/admin/ai-learning-event-requests/'),
   adminContactSubmissions: getApiUrl('/admin/contact-submissions/'),
   adminRsvps: getApiUrl('/admin/rsvps/'),
 };
