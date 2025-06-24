@@ -145,7 +145,7 @@ export default function NavBar() {
                             <Link href="/involved" className="text-gray-800 font-light transition" style={{ fontWeight: 300 }}>Get Involved</Link>
                           </motion.div>
                           <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.12 }}>
-                            <Link href="/involved/levelup" className="text-gray-800 font-light transition" style={{ fontWeight: 300 }}>Level Up Your Startup</Link>
+                            <Link href="/involved/ai-integration" className="text-gray-800 font-light transition" style={{ fontWeight: 300 }}>Integrate AI Into Your Business</Link>
                           </motion.div>
                           <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.12 }}>
                             <Link href="/involved/sponsor" className="text-gray-800 font-light transition" style={{ fontWeight: 300 }}>Become a Sponsor</Link>

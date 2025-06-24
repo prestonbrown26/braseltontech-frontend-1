@@ -6,8 +6,8 @@ import AdminEditableText from "@/components/AdminEditableText";
 import { useState } from "react";
 
 export default function InvolvedPage() {
-  const [levelupTitle, setLevelupTitle] = useState("Level Up Your Startup");
-  const [levelupBody, setLevelupBody] = useState("Building something great? We're here to help. If you're an early-stage startup looking for guidance, funding support, or a community to grow with, Braselton Tech is here for you. Gain access to experienced mentors, a connected network, and the resources you need to take your idea to the next level. Join our growing community of founders and start building your future today.");
+  const [aiTitle, setAiTitle] = useState("Integrate AI Into Your Business");
+  const [aiBody, setAiBody] = useState("Ready to transform your business with AI? Braselton Tech provides comprehensive AI solutions services to help you integrate artificial intelligence into your operations. From process automation to data analytics, we help businesses of all sizes leverage AI to improve efficiency, reduce costs, and gain competitive advantages. Our expert team works with you to identify opportunities and implement tailored AI solutions that drive real results.");
   const [sponsorTitle, setSponsorTitle] = useState("Become a Sponsor");
   const [sponsorBody, setSponsorBody] = useState("Support the Future of Technology in Northeast Georgia. Braselton Tech is seeking sponsors to help fuel innovation and entrepreneurship in the region. Join us in building a thriving community of startups, mentors, and investors dedicated to shaping the future of technology.");
   const [mentorTitle, setMentorTitle] = useState("Become a Mentor");
@@ -19,12 +19,12 @@ export default function InvolvedPage() {
       <main className="flex-1 py-16 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <section className="bg-white rounded-2xl shadow-xl border border-blue-100 p-8 w-full">
-            <AdminEditableText value={levelupTitle} onChange={setLevelupTitle} className="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-4 text-center uppercase tracking-wide" as="h2" />
-            <AdminEditableText value={levelupBody} onChange={setLevelupBody} className="text-gray-700 text-base sm:text-lg leading-relaxed text-center" as="p" />
+            <AdminEditableText value={aiTitle} onChange={setAiTitle} className="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-4 text-center uppercase tracking-wide" as="h2" />
+            <AdminEditableText value={aiBody} onChange={setAiBody} className="text-gray-700 text-base sm:text-lg leading-relaxed text-center" as="p" />
             <div className="flex justify-center mt-6">
-              <a href="/involved/levelup">
+              <a href="/involved/ai-integration">
                 <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-                  Get Started
+                  Get AI Solutions
                 </Button>
               </a>
             </div>

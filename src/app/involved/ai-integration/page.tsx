@@ -6,10 +6,21 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { API_ENDPOINTS } from "@/lib/api";
 
-export default function LevelUpPage() {
+export default function AIIntegrationPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState({ first_name: "", last_name: "", startupName: "", email: "", phone: "", linkedin: "", website: "", about: "", why: "" });
+  const [form, setForm] = useState({ 
+    first_name: "", 
+    last_name: "", 
+    businessName: "", 
+    email: "", 
+    phone: "", 
+    linkedin: "", 
+    website: "", 
+    industry: "", 
+    currentChallenges: "", 
+    aiGoals: "" 
+  });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -23,13 +34,13 @@ export default function LevelUpPage() {
       await axios.post(API_ENDPOINTS.levelUpSignup, {
         first_name: form.first_name,
         last_name: form.last_name,
-        startup_name: form.startupName,
+        startup_name: form.businessName,
         email: form.email,
         phone: form.phone,
         linkedin: form.linkedin,
         website: form.website,
-        about_startup: form.about,
-        why_help: form.why,
+        about_startup: form.currentChallenges,
+        why_help: form.aiGoals,
       });
       setSubmitted(true);
     } catch {
@@ -44,9 +55,9 @@ export default function LevelUpPage() {
       <NavBar />
       <main className="flex-1 flex flex-col items-center justify-center py-16 px-4">
         <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 border border-blue-100">
-          <h1 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">Level Up Your Startup</h1>
+          <h1 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">Integrate AI Into Your Business</h1>
           {!submitted && (
-            <div className="text-gray-700 text-base text-center mb-6">If you are seeking support for your startup, please complete the form below. This form is intended to gauge your interest and does not constitute a formal commitment. After receiving your submission, we will follow up to discuss how Braselton Tech can help your company grow. Thank you for reaching out to us.</div>
+            <div className="text-gray-700 text-base text-center mb-6">Ready to transform your business with AI? Complete the form below to get started with our AI solutions services. We'll help you identify opportunities for AI integration and develop a customized plan to improve your operations, reduce costs, and gain competitive advantages.</div>
           )}
           {submitted ? (
             <div className="flex flex-col items-center justify-center py-16">
@@ -55,8 +66,8 @@ export default function LevelUpPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <div className="text-2xl font-bold text-gray-800 mb-2 text-center">Thank you for reaching out to Braselton Tech!</div>
-              <div className="text-base text-gray-700 text-center max-w-md">We&apos;ll be in touch soon.</div>
+              <div className="text-2xl font-bold text-gray-800 mb-2 text-center">Thank you for your interest in AI integration!</div>
+              <div className="text-base text-gray-700 text-center max-w-md">Our AI solutions team will review your information and contact you soon to discuss how we can help transform your business with artificial intelligence.</div>
             </div>
           ) : (
             <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -85,12 +96,12 @@ export default function LevelUpPage() {
                 />
               </div>
               <div>
-                <label htmlFor="startupName" className="block text-sm font-medium text-gray-700 mb-1">Start Up Name</label>
+                <label htmlFor="businessName" className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
                 <input
                   type="text"
-                  id="startupName"
-                  name="startupName"
-                  value={form.startupName}
+                  id="businessName"
+                  name="businessName"
+                  value={form.businessName}
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-blue-100 rounded-md bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
@@ -131,7 +142,7 @@ export default function LevelUpPage() {
                 />
               </div>
               <div>
-                <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+                <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">Business Website (optional)</label>
                 <input
                   type="url"
                   id="website"
@@ -142,26 +153,41 @@ export default function LevelUpPage() {
                 />
               </div>
               <div>
-                <label htmlFor="about" className="block text-sm font-medium text-gray-700 mb-1">Tell Us About Your Start Up</label>
-                <textarea
-                  id="about"
-                  name="about"
-                  value={form.about}
+                <label htmlFor="industry" className="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+                <input
+                  type="text"
+                  id="industry"
+                  name="industry"
+                  value={form.industry}
                   onChange={handleChange}
                   required
-                  rows={3}
+                  placeholder="e.g., Manufacturing, Healthcare, Retail, etc."
                   className="w-full px-4 py-2 border border-blue-100 rounded-md bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 />
               </div>
               <div>
-                <label htmlFor="why" className="block text-sm font-medium text-gray-700 mb-1">Why Do You Want Help From BraseltonTech?</label>
+                <label htmlFor="currentChallenges" className="block text-sm font-medium text-gray-700 mb-1">Current Business Challenges</label>
                 <textarea
-                  id="why"
-                  name="why"
-                  value={form.why}
+                  id="currentChallenges"
+                  name="currentChallenges"
+                  value={form.currentChallenges}
                   onChange={handleChange}
                   required
                   rows={3}
+                  placeholder="Describe the main challenges your business is facing that AI might help solve..."
+                  className="w-full px-4 py-2 border border-blue-100 rounded-md bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                />
+              </div>
+              <div>
+                <label htmlFor="aiGoals" className="block text-sm font-medium text-gray-700 mb-1">AI Integration Goals</label>
+                <textarea
+                  id="aiGoals"
+                  name="aiGoals"
+                  value={form.aiGoals}
+                  onChange={handleChange}
+                  required
+                  rows={3}
+                  placeholder="What specific AI solutions are you interested in? (e.g., process automation, data analytics, customer service, etc.)"
                   className="w-full px-4 py-2 border border-blue-100 rounded-md bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 />
               </div>
@@ -178,7 +204,7 @@ export default function LevelUpPage() {
                     </svg>
                     Submitting...
                   </>
-                ) : 'Submit'}
+                ) : 'Get AI Solutions'}
               </Button>
             </form>
           )}

@@ -7,16 +7,23 @@ import { useState } from "react";
 
 export default function CallToActionSection() {
   const [descs, setDescs] = useState([
+    "Ready to transform your business with AI? Braselton Tech provides comprehensive AI solutions services to help you integrate artificial intelligence into your operations and gain competitive advantages.",
     "Support Northeast Georgia's next wave of tech innovators. Braselton Tech is seeking sponsors to help provide resources and mentorship to growing startups.",
     "Share your knowledge to help startups grow their ideas and businesses."
   ]);
 
   const [titles, setTitles] = useState([
+    "AI Solutions",
     "Sponsor us",
     "Mentor with us"
   ]);
 
   const cards = [
+    {
+      title: "AI Solutions",
+      desc: "Ready to transform your business with AI? Braselton Tech provides comprehensive AI solutions services to help you integrate artificial intelligence into your operations and gain competitive advantages.",
+      button: "Get AI Solutions"
+    },
     {
       title: "Sponsor us",
       desc: "Support Northeast Georgia's next wave of tech innovators. Braselton Tech is seeking sponsors to help provide resources and mentorship to growing startups.",
@@ -46,6 +53,12 @@ export default function CallToActionSection() {
             <div className="flex-1 flex flex-col justify-end w-full">
               {card.button === "Become a mentor" ? (
                 <Link href="/involved/mentor">
+                  <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition w-full max-w-xs mx-auto">
+                    {card.button}
+                  </Button>
+                </Link>
+              ) : card.button === "Get AI Solutions" ? (
+                <Link href="/involved/ai-integration">
                   <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition w-full max-w-xs mx-auto">
                     {card.button}
                   </Button>
