@@ -18,7 +18,6 @@ export const API_ENDPOINTS = {
   contactSubmission: `${API_BASE_URL}/contact-submission/`,
   mentorSignup: `${API_BASE_URL}/mentor-signup/`,
   sponsorSignup: `${API_BASE_URL}/sponsor-signup/`,
-  joinSignup: `${API_BASE_URL}/join-signup/`,
   levelUpSignup: `${API_BASE_URL}/levelup-signup/`,
   events: `${API_BASE_URL}/events/`,
   eventsAll: `${API_BASE_URL}/events/all/`,
@@ -27,7 +26,6 @@ export const API_ENDPOINTS = {
   adminLoginRaw: `${API_BASE_URL}/login-raw/`, // Only supported login-raw endpoint
   adminMentorSignups: `${API_BASE_URL}/admin/mentor-signups/`,
   adminSponsorSignups: `${API_BASE_URL}/admin/sponsor-signups/`,
-  adminJoinSignups: `${API_BASE_URL}/admin/join-signups/`,
   adminLevelupSignups: `${API_BASE_URL}/admin/levelup-signups/`,
   adminContactSubmissions: `${API_BASE_URL}/admin/contact-submissions/`,
   adminRsvps: `${API_BASE_URL}/admin/rsvps/`,

@@ -39,7 +39,6 @@ export default function AdminPage() {
   const [events, setEvents] = useState<Array<Record<string, unknown>>>([]);
   const [mentorSignups, setMentorSignups] = useState<Array<Record<string, unknown>>>([]);
   const [sponsorSignups, setSponsorSignups] = useState<Array<Record<string, unknown>>>([]);
-  const [joinSignups, setJoinSignups] = useState<Array<Record<string, unknown>>>([]);
   const [levelupSignups, setLevelupSignups] = useState<Array<Record<string, unknown>>>([]);
   const [contactSubmissions, setContactSubmissions] = useState<Array<Record<string, unknown>>>([]);
   const [rsvps, setRsvps] = useState<Array<Record<string, unknown>>>([]);
@@ -108,11 +107,10 @@ export default function AdminPage() {
         const authAxios = createAuthAxios();
         
         console.log('Admin page: Fetching all admin data');
-        const [eventsRes, mentorRes, sponsorRes, joinRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
+        const [eventsRes, mentorRes, sponsorRes, levelupRes, contactRes, rsvpRes] = await Promise.all([
           authAxios.get(API_ENDPOINTS.eventsAll),
           authAxios.get(API_ENDPOINTS.adminMentorSignups),
           authAxios.get(API_ENDPOINTS.adminSponsorSignups),
-          authAxios.get(API_ENDPOINTS.adminJoinSignups),
           authAxios.get(API_ENDPOINTS.adminLevelupSignups),
           authAxios.get(API_ENDPOINTS.adminContactSubmissions),
           authAxios.get(API_ENDPOINTS.adminRsvps),
@@ -123,7 +121,6 @@ export default function AdminPage() {
         setEvents(eventsRes.data);
         setMentorSignups(mentorRes.data);
         setSponsorSignups(sponsorRes.data);
-        setJoinSignups(joinRes.data);
         setLevelupSignups(levelupRes.data);
         setContactSubmissions(contactRes.data);
         setRsvps(rsvpRes.data);
@@ -185,7 +182,6 @@ export default function AdminPage() {
             <Button onClick={() => setActiveTab("events")} variant={activeTab === "events" ? "default" : "outline"}>Events</Button>
             <Button onClick={() => setActiveTab("mentor")} variant={activeTab === "mentor" ? "default" : "outline"}>Mentor Signups</Button>
             <Button onClick={() => setActiveTab("sponsor")} variant={activeTab === "sponsor" ? "default" : "outline"}>Sponsor Signups</Button>
-            <Button onClick={() => setActiveTab("join")} variant={activeTab === "join" ? "default" : "outline"}>Join Signups</Button>
             <Button onClick={() => setActiveTab("levelup")} variant={activeTab === "levelup" ? "default" : "outline"}>Level Up</Button>
             <Button onClick={() => setActiveTab("contact")} variant={activeTab === "contact" ? "default" : "outline"}>Contact</Button>
             <Button onClick={() => setActiveTab("rsvp")} variant={activeTab === "rsvp" ? "default" : "outline"}>RSVPs</Button>
@@ -313,39 +309,6 @@ export default function AdminPage() {
                           <td className="p-2">{s.address as string}</td>
                           <td className="p-2">{s.website as string}</td>
                           <td className="p-2">{s.submitted_at ? format(parseISO(s.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-              {activeTab === "join" && (
-                <div>
-                  <h2 className="text-xl font-bold mb-2">Join Signups</h2>
-                  <table className="w-full min-w-[900px] text-left border-collapse mb-8 overflow-x-auto">
-                    <thead>
-                      <tr className="bg-blue-50">
-                        <th className="p-2">ID</th>
-                        <th className="p-2">Name</th>
-                        <th className="p-2">Email</th>
-                        <th className="p-2">Phone</th>
-                        <th className="p-2">LinkedIn</th>
-                        <th className="p-2">About</th>
-                        <th className="p-2">Why Join</th>
-                        <th className="p-2">Submitted At</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {joinSignups.map((j: Record<string, unknown>) => (
-                        <tr key={j.id as React.Key} className="border-b">
-                          <td className="p-2">{j.id as string}</td>
-                          <td className="p-2 font-semibold">{j.first_name as string} {j.last_name as string}</td>
-                          <td className="p-2">{j.email as string}</td>
-                          <td className="p-2">{j.phone as string}</td>
-                          <td className="p-2">{j.linkedin as string}</td>
-                          <td className="p-2">{j.about as string}</td>
-                          <td className="p-2">{j.why_join as string}</td>
-                          <td className="p-2">{j.submitted_at ? format(parseISO(j.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
                     </tbody>
