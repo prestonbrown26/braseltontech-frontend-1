@@ -328,6 +328,7 @@ export default function AdminPage() {
                         <th className="p-2">Phone</th>
                         <th className="p-2">LinkedIn</th>
                         <th className="p-2">Website</th>
+                        <th className="p-2">Industry</th>
                         <th className="p-2">Current Challenges</th>
                         <th className="p-2">AI Goals</th>
                         <th className="p-2">Submitted At</th>
@@ -343,6 +344,7 @@ export default function AdminPage() {
                           <td className="p-2">{l.phone as string}</td>
                           <td className="p-2">{l.linkedin as string}</td>
                           <td className="p-2">{l.website as string}</td>
+                          <td className="p-2">{l.industry as string}</td>
                           <td className="p-2 max-w-xs truncate" title={l.about_startup as string}>{l.about_startup as string}</td>
                           <td className="p-2 max-w-xs truncate" title={l.why_help as string}>{l.why_help as string}</td>
                           <td className="p-2">{l.submitted_at ? format(parseISO(l.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>

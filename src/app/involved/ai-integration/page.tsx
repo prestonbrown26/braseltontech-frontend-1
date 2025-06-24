@@ -39,6 +39,7 @@ export default function AIIntegrationPage() {
         phone: form.phone,
         linkedin: form.linkedin,
         website: form.website,
+        industry: form.industry,
         about_startup: form.currentChallenges,
         why_help: form.aiGoals,
       });
