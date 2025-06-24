@@ -14,21 +14,31 @@ if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   console.log('Using same domain?', BACKEND_URL === '');
 }
 
+// Helper function to get the correct API URL
+const getApiUrl = (endpoint) => {
+  // If we have a backend URL, use it directly
+  if (BACKEND_URL && BACKEND_URL !== '') {
+    return `${BACKEND_URL}/api${endpoint}`;
+  }
+  // Otherwise use the API_BASE_URL (which will be proxied by Next.js)
+  return `${API_BASE_URL}${endpoint}`;
+};
+
 export const API_ENDPOINTS = {
-  contactSubmission: `${API_BASE_URL}/contact-submission/`,
-  mentorSignup: `${API_BASE_URL}/mentor-signup/`,
-  sponsorSignup: `${API_BASE_URL}/sponsor-signup/`,
-  levelUpSignup: `${API_BASE_URL}/level-up-signup/`,
-  events: `${API_BASE_URL}/events/`,
-  eventsAll: `${API_BASE_URL}/events/all/`,
-  adminLogin: `${API_BASE_URL}/admin/login/`,
-  adminLoginCors: `${API_BASE_URL}/admin/login-cors/`,  // CORS-enabled login endpoint
-  adminLoginRaw: `${API_BASE_URL}/login-raw/`, // Only supported login-raw endpoint
-  adminMentorSignups: `${API_BASE_URL}/admin/mentor-signups/`,
-  adminSponsorSignups: `${API_BASE_URL}/admin/sponsor-signups/`,
-  adminLevelupSignups: `${API_BASE_URL}/admin/level-up-signups/`,
-  adminContactSubmissions: `${API_BASE_URL}/admin/contact-submissions/`,
-  adminRsvps: `${API_BASE_URL}/admin/rsvps/`,
+  contactSubmission: getApiUrl('/contact-submission/'),
+  mentorSignup: getApiUrl('/mentor-signup/'),
+  sponsorSignup: getApiUrl('/sponsor-signup/'),
+  levelUpSignup: getApiUrl('/level-up-signup/'),
+  events: getApiUrl('/events/'),
+  eventsAll: getApiUrl('/events/all/'),
+  adminLogin: getApiUrl('/admin/login/'),
+  adminLoginCors: getApiUrl('/admin/login-cors/'),  // CORS-enabled login endpoint
+  adminLoginRaw: getApiUrl('/login-raw/'), // Only supported login-raw endpoint
+  adminMentorSignups: getApiUrl('/admin/mentor-signups/'),
+  adminSponsorSignups: getApiUrl('/admin/sponsor-signups/'),
+  adminLevelupSignups: getApiUrl('/admin/level-up-signups/'),
+  adminContactSubmissions: getApiUrl('/admin/contact-submissions/'),
+  adminRsvps: getApiUrl('/admin/rsvps/'),
 };
 
 // Helper function to redirect to frontend admin
@@ -47,11 +57,11 @@ export const redirectToAdmin = (router) => {
 };
 
 // Dynamic endpoint helpers
-export const getEventUrl = (slug) => `${API_BASE_URL}/events/${slug}/`;
-export const getEventUpdateUrl = (slug) => `${API_BASE_URL}/events/${slug}/update/`;
-export const getEventDeleteUrl = (id) => `${API_BASE_URL}/events/${id}/delete/`;
-export const getEventRsvpUrl = (slug) => `${API_BASE_URL}/events/${slug}/rsvp/`;
-export const getAdminContactSubmissionUrl = (id) => `${API_BASE_URL}/admin/contact-submissions/${id}/`;
+export const getEventUrl = (slug) => getApiUrl(`/events/${slug}/`);
+export const getEventUpdateUrl = (slug) => getApiUrl(`/events/${slug}/update/`);
+export const getEventDeleteUrl = (id) => getApiUrl(`/events/${id}/delete/`);
+export const getEventRsvpUrl = (slug) => getApiUrl(`/events/${slug}/rsvp/`);
+export const getAdminContactSubmissionUrl = (id) => getApiUrl(`/admin/contact-submissions/${id}/`);
 
 export async function fetchFromAPI(endpoint, options = {}) {
   const res = await fetch(`${API_BASE_URL}/api/${endpoint}`, options);
