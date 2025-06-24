@@ -182,7 +182,7 @@ export default function AdminPage() {
             <Button onClick={() => setActiveTab("events")} variant={activeTab === "events" ? "default" : "outline"}>Events</Button>
             <Button onClick={() => setActiveTab("mentor")} variant={activeTab === "mentor" ? "default" : "outline"}>Mentor Signups</Button>
             <Button onClick={() => setActiveTab("sponsor")} variant={activeTab === "sponsor" ? "default" : "outline"}>Sponsor Signups</Button>
-            <Button onClick={() => setActiveTab("levelup")} variant={activeTab === "levelup" ? "default" : "outline"}>Level Up</Button>
+            <Button onClick={() => setActiveTab("levelup")} variant={activeTab === "levelup" ? "default" : "outline"}>AI Integration</Button>
             <Button onClick={() => setActiveTab("contact")} variant={activeTab === "contact" ? "default" : "outline"}>Contact</Button>
             <Button onClick={() => setActiveTab("rsvp")} variant={activeTab === "rsvp" ? "default" : "outline"}>RSVPs</Button>
             <Button onClick={handleLogout} variant="outline" className="bg-red-50 hover:bg-red-100">Logout</Button>
@@ -317,19 +317,19 @@ export default function AdminPage() {
               )}
               {activeTab === "levelup" && (
                 <div>
-                  <h2 className="text-xl font-bold mb-2">Level Up Signups</h2>
+                  <h2 className="text-xl font-bold mb-2">AI Integration Signups</h2>
                   <table className="w-full min-w-[900px] text-left border-collapse mb-8 overflow-x-auto">
                     <thead>
                       <tr className="bg-blue-50">
                         <th className="p-2">ID</th>
                         <th className="p-2">Contact Name</th>
-                        <th className="p-2">Startup Name</th>
+                        <th className="p-2">Business Name</th>
                         <th className="p-2">Email</th>
                         <th className="p-2">Phone</th>
                         <th className="p-2">LinkedIn</th>
                         <th className="p-2">Website</th>
-                        <th className="p-2">About Startup</th>
-                        <th className="p-2">Why Help</th>
+                        <th className="p-2">Current Challenges</th>
+                        <th className="p-2">AI Goals</th>
                         <th className="p-2">Submitted At</th>
                       </tr>
                     </thead>
@@ -343,8 +343,8 @@ export default function AdminPage() {
                           <td className="p-2">{l.phone as string}</td>
                           <td className="p-2">{l.linkedin as string}</td>
                           <td className="p-2">{l.website as string}</td>
-                          <td className="p-2">{l.about_startup as string}</td>
-                          <td className="p-2">{l.why_help as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={l.about_startup as string}>{l.about_startup as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={l.why_help as string}>{l.why_help as string}</td>
                           <td className="p-2">{l.submitted_at ? format(parseISO(l.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                         </tr>
                       ))}
