@@ -19,7 +19,7 @@ export default function InvolvedPage() {
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#f0f6ff] to-[#a7c7ff]">
       <NavBar />
       <main className="flex-1 py-16 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           <section className="bg-white rounded-2xl shadow-xl border border-blue-100 p-8 w-full">
             <AdminEditableText value={aiTitle} onChange={setAiTitle} className="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-4 text-center uppercase tracking-wide" as="h2" />
             <AdminEditableText value={aiBody} onChange={setAiBody} className="text-gray-700 text-base sm:text-lg leading-relaxed text-center" as="p" />

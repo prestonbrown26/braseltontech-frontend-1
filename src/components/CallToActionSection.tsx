@@ -8,12 +8,14 @@ import { useState } from "react";
 export default function CallToActionSection() {
   const [descs, setDescs] = useState([
     "Ready to transform your business with AI? Braselton Tech provides comprehensive AI solutions services to help you integrate artificial intelligence into your operations and gain competitive advantages.",
+    "Want to bring AI education to your community? Let us know where you'd like to host an AI learning event! We'll work with you to plan and organize a workshop tailored to your area's needs.",
     "Support Northeast Georgia's next wave of tech innovators. Braselton Tech is seeking sponsors to help provide resources and mentorship to growing startups.",
     "Share your knowledge to help startups grow their ideas and businesses."
   ]);
 
   const [titles, setTitles] = useState([
     "AI Solutions",
+    "Have an AI Learning Event Near You",
     "Sponsor us",
     "Mentor with us"
   ]);
@@ -23,6 +25,11 @@ export default function CallToActionSection() {
       title: "AI Solutions",
       desc: "Ready to transform your business with AI? Braselton Tech provides comprehensive AI solutions services to help you integrate artificial intelligence into your operations and gain competitive advantages.",
       button: "Get AI Solutions"
+    },
+    {
+      title: "Have an AI Learning Event Near You",
+      desc: "Want to bring AI education to your community? Let us know where you'd like to host an AI learning event! We'll work with you to plan and organize a workshop tailored to your area's needs.",
+      button: "Request Event"
     },
     {
       title: "Sponsor us",
@@ -38,7 +45,7 @@ export default function CallToActionSection() {
 
   return (
     <section className="w-full flex flex-col items-center justify-center bg-gradient-to-r from-[#f0f6ff] to-[#a7c7ff] px-6 py-20 gap-12 text-center relative overflow-hidden mt-0 border-t-8 border-white">
-      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 md:gap-10 items-stretch justify-center z-10">
+      <div className="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch justify-center z-10">
         {cards.map((card, i) => (
           <motion.div
             key={card.title}
@@ -59,6 +66,12 @@ export default function CallToActionSection() {
                 </Link>
               ) : card.button === "Get AI Solutions" ? (
                 <Link href="/involved/ai-integration">
+                  <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition w-full max-w-xs mx-auto">
+                    {card.button}
+                  </Button>
+                </Link>
+              ) : card.button === "Request Event" ? (
+                <Link href="/involved/ai-learning-event">
                   <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-8 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition w-full max-w-xs mx-auto">
                     {card.button}
                   </Button>
