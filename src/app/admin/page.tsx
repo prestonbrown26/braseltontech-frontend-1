@@ -574,6 +574,8 @@ export default function AdminPage() {
                         <th className="p-2">ID</th>
                         <th className="p-2">Event Name</th>
                         <th className="p-2">Name</th>
+                        <th className="p-2">Email</th>
+                        <th className="p-2">Phone</th>
                         <th className="p-2">Business</th>
                         <th className="p-2">What Liked</th>
                         <th className="p-2">What Improved</th>
@@ -592,6 +594,8 @@ export default function AdminPage() {
                               : (events.find((e: Record<string, unknown>) => e.id === f.event)?.title as string || (f.event as string))}
                           </td>
                           <td className="p-2">{f.first_name as string} {f.last_name as string}</td>
+                          <td className="p-2">{f.email as string}</td>
+                          <td className="p-2">{f.phone as string}</td>
                           <td className="p-2">{f.business_name as string}</td>
                           <td className="p-2 max-w-xs truncate" title={f.what_liked as string}>{f.what_liked as string}</td>
                           <td className="p-2 max-w-xs truncate" title={f.what_improved as string}>{f.what_improved as string}</td>
