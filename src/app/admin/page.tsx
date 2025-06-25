@@ -43,6 +43,7 @@ export default function AdminPage() {
   const [aiLearningEventRequests, setAiLearningEventRequests] = useState<Array<Record<string, unknown>>>([]);
   const [contactSubmissions, setContactSubmissions] = useState<Array<Record<string, unknown>>>([]);
   const [rsvps, setRsvps] = useState<Array<Record<string, unknown>>>([]);
+  const [eventFeedback, setEventFeedback] = useState<Array<Record<string, unknown>>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [rsvpEventFilter, setRsvpEventFilter] = useState<string>("all");
@@ -108,7 +109,7 @@ export default function AdminPage() {
         const authAxios = createAuthAxios();
         
         console.log('Admin page: Fetching all admin data');
-        const [eventsRes, mentorRes, sponsorRes, levelupRes, aiEventRes, contactRes, rsvpRes] = await Promise.all([
+        const [eventsRes, mentorRes, sponsorRes, levelupRes, aiEventRes, contactRes, rsvpRes, feedbackRes] = await Promise.all([
           authAxios.get(API_ENDPOINTS.eventsAll),
           authAxios.get(API_ENDPOINTS.adminMentorSignups),
           authAxios.get(API_ENDPOINTS.adminSponsorSignups),
@@ -116,6 +117,7 @@ export default function AdminPage() {
           authAxios.get(API_ENDPOINTS.adminAILearningEventRequests),
           authAxios.get(API_ENDPOINTS.adminContactSubmissions),
           authAxios.get(API_ENDPOINTS.adminRsvps),
+          authAxios.get(API_ENDPOINTS.adminEventFeedback),
         ]);
         
         console.log('Admin page: Data fetch successful');
@@ -127,6 +129,7 @@ export default function AdminPage() {
         setAiLearningEventRequests(aiEventRes.data);
         setContactSubmissions(contactRes.data);
         setRsvps(rsvpRes.data);
+        setEventFeedback(feedbackRes.data);
       } catch (error) {
         console.error("Admin page: Data fetch error:", error);
         
@@ -189,6 +192,7 @@ export default function AdminPage() {
             <Button onClick={() => setActiveTab("aievent")} variant={activeTab === "aievent" ? "default" : "outline"}>AI Learning Events</Button>
             <Button onClick={() => setActiveTab("contact")} variant={activeTab === "contact" ? "default" : "outline"}>Contact</Button>
             <Button onClick={() => setActiveTab("rsvp")} variant={activeTab === "rsvp" ? "default" : "outline"}>RSVPs</Button>
+            <Button onClick={() => setActiveTab("feedback")} variant={activeTab === "feedback" ? "default" : "outline"}>Event Feedback</Button>
             <Button onClick={handleLogout} variant="outline" className="bg-red-50 hover:bg-red-100">Logout</Button>
           </div>
           {loading ? (
@@ -557,6 +561,45 @@ export default function AdminPage() {
                             <td className="p-2">{r.submitted_at ? format(parseISO(r.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                           </tr>
                         ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {activeTab === "feedback" && (
+                <div>
+                  <h2 className="text-xl font-bold mb-2">Event Feedback</h2>
+                  <table className="w-full min-w-[900px] text-left border-collapse mb-8 overflow-x-auto">
+                    <thead>
+                      <tr className="bg-blue-50">
+                        <th className="p-2">ID</th>
+                        <th className="p-2">Event Name</th>
+                        <th className="p-2">Name</th>
+                        <th className="p-2">Business</th>
+                        <th className="p-2">What Liked</th>
+                        <th className="p-2">What Improved</th>
+                        <th className="p-2">Next Topics</th>
+                        <th className="p-2">Additional Comments</th>
+                        <th className="p-2">Submitted At</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {eventFeedback.map((f: Record<string, unknown>) => (
+                        <tr key={f.id as React.Key} className="border-b">
+                          <td className="p-2">{f.id as string}</td>
+                          <td className="p-2 font-semibold">
+                            {typeof f.event === "object" && f.event !== null && "title" in f.event
+                              ? (f.event as { title?: unknown }).title as string
+                              : (events.find((e: Record<string, unknown>) => e.id === f.event)?.title as string || (f.event as string))}
+                          </td>
+                          <td className="p-2">{f.first_name as string} {f.last_name as string}</td>
+                          <td className="p-2">{f.business_name as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={f.what_liked as string}>{f.what_liked as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={f.what_improved as string}>{f.what_improved as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={f.next_topics as string}>{f.next_topics as string}</td>
+                          <td className="p-2 max-w-xs truncate" title={f.additional_comments as string}>{f.additional_comments as string}</td>
+                          <td className="p-2">{f.submitted_at ? format(parseISO(f.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

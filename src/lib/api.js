@@ -41,6 +41,7 @@ export const API_ENDPOINTS = {
   adminAILearningEventRequests: getApiUrl('/admin/ai-learning-event-requests/'),
   adminContactSubmissions: getApiUrl('/admin/contact-submissions/'),
   adminRsvps: getApiUrl('/admin/rsvps/'),
+  adminEventFeedback: getApiUrl('/admin/event-feedback/'),
 };
 
 // Helper function to redirect to frontend admin

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, isAfter, startOfDay } from "date-fns";
 import AdminEditableText from "./AdminEditableText";
 import { AnimatePresence } from "framer-motion";
 
@@ -82,6 +82,17 @@ export default function HeroSection() {
     return `${hour}:${minute}${ampm}`; // ✅ Fixed interpolation
   }
 
+  function isEventPast(eventDate?: string) {
+    if (!eventDate) return false;
+    try {
+      const eventDateObj = parseISO(eventDate);
+      const today = startOfDay(new Date());
+      return isAfter(today, eventDateObj);
+    } catch {
+      return false;
+    }
+  }
+
   let cardContent;
   if (loading) {
     cardContent = (
@@ -132,12 +143,20 @@ export default function HeroSection() {
             <span className="font-semibold">{event.location_name}</span>
           </div>
           <div className="flex gap-4 justify-center mt-2">
-            <Link href={`/events/${event.slug}/rsvp`}> {/* ✅ Fixed interpolation */}
-              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-                RSVP
-              </Button>
-            </Link>
-            <Link href={`/events#${event.slug}`} scroll={false}> {/* ✅ Fixed interpolation */}
+            {isEventPast(event.date) ? (
+              <Link href={`/events/${event.slug}/feedback`}>
+                <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                  Feedback
+                </Button>
+              </Link>
+            ) : (
+              <Link href={`/events/${event.slug}/rsvp`}>
+                <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                  RSVP
+                </Button>
+              </Link>
+            )}
+            <Link href={`/events#${event.slug}`} scroll={false}>
               <Button className="bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
                 Learn More
               </Button>
@@ -208,12 +227,20 @@ export default function HeroSection() {
           <span className="font-semibold">{event.location_name}</span>
         </div>
         <div className="flex gap-4 justify-center mt-2">
-          <Link href={`/events/${event.slug}/rsvp`}> {/* ✅ Fixed interpolation */}
-            <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-              RSVP
-            </Button>
-          </Link>
-          <Link href={`/events#${event.slug}`} scroll={false}> {/* ✅ Fixed interpolation */}
+          {isEventPast(event.date) ? (
+            <Link href={`/events/${event.slug}/feedback`}>
+              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                Feedback
+              </Button>
+            </Link>
+          ) : (
+            <Link href={`/events/${event.slug}/rsvp`}>
+              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                RSVP
+              </Button>
+            </Link>
+          )}
+          <Link href={`/events#${event.slug}`} scroll={false}>
             <Button className="bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
               Learn More
             </Button>
