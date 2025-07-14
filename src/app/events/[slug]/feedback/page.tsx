@@ -32,7 +32,7 @@ export default function EventFeedbackPage() {
       try {
         const res = await axios.get(
           process.env.NEXT_PUBLIC_API_BASE_URL
-            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${slug}/`
+            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events/${slug}/`
             : `http://localhost:8000/api/events/${slug}/`
         );
         setEventTitle(res.data.title);
@@ -59,7 +59,7 @@ export default function EventFeedbackPage() {
     try {
       await axios.post(
         process.env.NEXT_PUBLIC_API_BASE_URL
-          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/${slug}/feedback/`
+          ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events/${slug}/feedback/`
           : `http://localhost:8000/api/events/${slug}/feedback/`,
         { ...form }
       );

@@ -33,7 +33,7 @@ export default function HeroSection() {
       try {
         const res = await axios.get(
           process.env.NEXT_PUBLIC_API_BASE_URL
-            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/` // ✅ Fixed string interpolation
+            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/events/` // ✅ Fixed API endpoint
             : "http://localhost:8000/api/events/"
         );
         setEvents(res.data);

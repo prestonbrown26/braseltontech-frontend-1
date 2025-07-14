@@ -20,9 +20,9 @@ export default function EventDetailPage() {
       try {
         setLoading(true);
         const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "";
-        console.log(`Fetching event with slug: ${slug} from ${backendUrl}/events/${slug}/`);
+        console.log(`Fetching event with slug: ${slug} from ${backendUrl}/api/events/${slug}/`);
         
-        const response = await fetch(`${backendUrl}/events/${slug}/`, {
+        const response = await fetch(`${backendUrl}/api/events/${slug}/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
