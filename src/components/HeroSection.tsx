@@ -9,6 +9,7 @@ import AdminEditableText from "./AdminEditableText";
 import { AnimatePresence } from "framer-motion";
 
 interface EventType {
+  title?: string;
   graphic?: string;
   description?: string;
   date?: string;
@@ -32,8 +33,8 @@ export default function HeroSection() {
       try {
         const res = await axios.get(
           process.env.NEXT_PUBLIC_API_BASE_URL
-            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/all/` // ✅ Fixed string interpolation
-            : "http://localhost:8000/api/events/all/"
+            ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/events/` // ✅ Fixed string interpolation
+            : "http://localhost:8000/api/events/"
         );
         setEvents(res.data);
       } catch {
@@ -120,6 +121,7 @@ export default function HeroSection() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
+          <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{event.title}</h3>
           {event.graphic ? (
             <img
               src={event.graphic.startsWith("http") ? event.graphic : `${process.env.NEXT_PUBLIC_API_BASE_URL}${event.graphic}`} // ✅ Fixed interpolation
@@ -127,7 +129,7 @@ export default function HeroSection() {
               className="mb-6 rounded-2xl object-contain w-full max-w-2xl max-h-[420px] min-h-[220px] mx-auto"
             />
           ) : (
-            <p className="text-gray-700 text-base leading-relaxed text-center mb-3">{event.description}</p>
+            <p className="text-gray-700 text-base leading-relaxed text-center mb-6">{event.description}</p>
           )}
           <div className="font-semibold mb-2 text-center text-blue-700">
             {formatEventDate(event.date)}
@@ -206,13 +208,16 @@ export default function HeroSection() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
+        <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">{event.title}</h3>
         {event.graphic ? (
           <img
             src={event.graphic.startsWith("http") ? event.graphic : `${process.env.NEXT_PUBLIC_API_BASE_URL}${event.graphic}`} // ✅ Fixed interpolation
             alt="Event Graphic"
             className="mb-6 rounded-2xl object-contain w-full max-w-2xl max-h-[420px] min-h-[220px] mx-auto"
           />
-        ) : null}
+        ) : (
+          <p className="text-gray-700 text-base leading-relaxed text-center mb-6">{event.description}</p>
+        )}
         <div className="font-semibold mb-2 text-center text-blue-700">
           {formatEventDate(event.date)}
           {event.start_time && (
