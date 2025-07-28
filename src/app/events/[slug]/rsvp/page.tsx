@@ -18,6 +18,7 @@ export default function RSVPPage() {
     email: "",
     phone: "",
     number_of_attendees: 1,
+    ai_experience_level: "",
     opt_in_call: false,
   });
   const [eventTitle, setEventTitle] = useState<string>("");
@@ -40,8 +41,9 @@ export default function RSVPPage() {
     if (slug) fetchEvent();
   }, [slug]);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value, type, checked } = e.target;
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    const { name, value, type } = e.target;
+    const checked = e.target instanceof HTMLInputElement ? e.target.checked : false;
     setForm((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -158,6 +160,29 @@ export default function RSVPPage() {
                   required
                   className="w-full px-4 py-2 border border-blue-100 rounded-md bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 />
+              </div>
+              <div>
+                <label htmlFor="ai_experience_level" className="block text-sm font-medium text-gray-700 mb-1">AI Experience Level (1-10)</label>
+                <select
+                  id="ai_experience_level"
+                  name="ai_experience_level"
+                  value={form.ai_experience_level}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-blue-100 rounded-md bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                >
+                  <option value="">Select AI Experience Level</option>
+                  <option value="1">1 (Beginner)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5 (Intermediate)</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10 (Expert)</option>
+                </select>
               </div>
               <div>
                 <div className="flex items-center gap-2">

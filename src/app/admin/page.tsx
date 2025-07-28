@@ -530,6 +530,7 @@ export default function AdminPage() {
                         <th className="p-2">Email</th>
                         <th className="p-2">Phone</th>
                         <th className="p-2"># Attendees</th>
+                        <th className="p-2">AI Experience Level</th>
                         <th className="p-2">Opt-in Call</th>
                         <th className="p-2">Submitted At</th>
                       </tr>
@@ -557,6 +558,7 @@ export default function AdminPage() {
                             <td className="p-2">{r.email as string}</td>
                             <td className="p-2">{r.phone as string}</td>
                             <td className="p-2">{r.number_of_attendees as string}</td>
+                            <td className="p-2">{r.ai_experience_level as string || "-"}</td>
                             <td className="p-2">{r.opt_in_call ? "Yes" : "No"}</td>
                             <td className="p-2">{r.submitted_at ? format(parseISO(r.submitted_at as string), "EEEE, MMMM do, h:mmaaa") + " EST" : ""}</td>
                           </tr>
