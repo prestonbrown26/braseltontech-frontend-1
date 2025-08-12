@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { format, parseISO, isAfter, startOfDay } from "date-fns";
+import { format, parseISO } from "date-fns";
 import AdminEditableText from "./AdminEditableText";
 import { AnimatePresence } from "framer-motion";
 
@@ -84,16 +84,7 @@ export default function HeroSection() {
     return `${hour}:${minute}${ampm}`; // ✅ Fixed interpolation
   }
 
-  function isEventPast(eventDate?: string) {
-    if (!eventDate) return false;
-    try {
-      const eventDateObj = parseISO(eventDate);
-      const today = startOfDay(new Date());
-      return isAfter(today, eventDateObj);
-    } catch {
-      return false;
-    }
-  }
+  // Removed isEventPast; hero now always shows Feedback button
 
   const visibleEvents = events.filter((e) => e.slug !== 'braseltontech-ai-learning-event');
   let cardContent;
