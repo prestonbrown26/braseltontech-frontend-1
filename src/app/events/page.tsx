@@ -112,7 +112,9 @@ export default function EventsPage() {
             ) : events.length === 0 ? (
               <div className="text-gray-600 text-center">No events found.</div>
             ) : (
-              events.map(event => {
+              events
+                .filter(event => event.slug !== 'braseltontech-ai-learning-event')
+                .map(event => {
                 // Debug logging outside of JSX
                 if (event.graphic) {
                   console.log("Rendering image for:", event.title);

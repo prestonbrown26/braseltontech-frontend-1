@@ -47,19 +47,20 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
+    const filtered = events.filter((e) => e.slug !== 'braseltontech-ai-learning-event');
     if (isHovered) return;
-    if (events.length === 1) {
+    if (filtered.length === 1) {
       const interval = setInterval(() => {
         setEventIndex((i) => (i + 1) % 2);
       }, 5000);
       return () => clearInterval(interval);
-    } else if (events.length > 1) {
+    } else if (filtered.length > 1) {
       const interval = setInterval(() => {
-        setEventIndex((i) => (i + 1) % events.length);
+        setEventIndex((i) => (i + 1) % filtered.length);
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [events.length, isHovered]);
+  }, [events, isHovered]);
 
   function formatEventDate(dateStr?: string) {
     if (!dateStr) return "";
@@ -94,6 +95,7 @@ export default function HeroSection() {
     }
   }
 
+  const visibleEvents = events.filter((e) => e.slug !== 'braseltontech-ai-learning-event');
   let cardContent;
   if (loading) {
     cardContent = (
@@ -101,15 +103,15 @@ export default function HeroSection() {
         Loading events...
       </div>
     );
-  } else if (events.length === 0) {
+  } else if (visibleEvents.length === 0) {
     cardContent = (
       <div className="w-full max-w-md bg-white/95 rounded-2xl shadow-xl border border-blue-100 px-8 py-7 flex flex-col items-center text-gray-600 text-center">
         No events found.
       </div>
     );
-  } else if (events.length === 1) {
+  } else if (visibleEvents.length === 1) {
     if (eventIndex === 0) {
-      const event = events[0];
+      const event = visibleEvents[0];
       cardContent = (
         <motion.div
           key="event"
@@ -145,16 +147,10 @@ export default function HeroSection() {
             <span className="font-semibold">{event.location_name}</span>
           </div>
           <div className="flex gap-4 justify-center mt-2">
-            {isEventPast(event.date) ? (
+            {(
               <Link href={`/events/${event.slug}/feedback`}>
                 <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
                   Feedback
-                </Button>
-              </Link>
-            ) : (
-              <Link href={`/events/${event.slug}/rsvp`}>
-                <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-                  RSVP
                 </Button>
               </Link>
             )}
@@ -196,7 +192,7 @@ export default function HeroSection() {
       );
     }
   } else {
-    const event = events[eventIndex];
+        const event = visibleEvents[eventIndex % visibleEvents.length];
     cardContent = (
       <motion.div
         key={eventIndex}
@@ -232,19 +228,11 @@ export default function HeroSection() {
           <span className="font-semibold">{event.location_name}</span>
         </div>
         <div className="flex gap-4 justify-center mt-2">
-          {isEventPast(event.date) ? (
-            <Link href={`/events/${event.slug}/feedback`}>
-              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-                Feedback
-              </Button>
-            </Link>
-          ) : (
-            <Link href={`/events/${event.slug}/rsvp`}>
-              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-                RSVP
-              </Button>
-            </Link>
-          )}
+          <Link href={`/events/${event.slug}/feedback`}>
+            <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+              Feedback
+            </Button>
+          </Link>
           <Link href={`/events#${event.slug}`} scroll={false}>
             <Button className="bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
               Learn More
