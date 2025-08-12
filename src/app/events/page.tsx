@@ -147,9 +147,9 @@ export default function EventsPage() {
                       {event.location_address}
                     </div>
                     <div className="flex justify-center space-x-4">
-                      <Link href={`/events/${event.slug}/rsvp`}>
+                      <Link href={`/events/${event.slug}/feedback`}>
                         <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
-                          RSVP
+                          Feedback
                         </Button>
                       </Link>
                     </div>
