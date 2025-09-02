@@ -84,7 +84,23 @@ export default function HeroSection() {
     return `${hour}:${minute}${ampm}`; // ✅ Fixed interpolation
   }
 
-  // Removed isEventPast; hero now always shows Feedback button
+  function isEventStarted(eventDate?: string, startTime?: string) {
+    if (!eventDate) return false;
+    try {
+      const date = parseISO(eventDate);
+      if (startTime) {
+        const [h, m] = startTime.split(":");
+        const hours = parseInt(h || "0", 10);
+        const minutes = parseInt(m || "0", 10);
+        date.setHours(hours, minutes, 0, 0);
+      } else {
+        date.setHours(0, 0, 0, 0);
+      }
+      return new Date().getTime() >= date.getTime();
+    } catch {
+      return false;
+    }
+  }
 
   const visibleEvents = events.filter((e) => e.slug !== 'braseltontech-ai-learning-event');
   let cardContent;
@@ -138,10 +154,16 @@ export default function HeroSection() {
             <span className="font-semibold">{event.location_name}</span>
           </div>
           <div className="flex gap-4 justify-center mt-2">
-            {(
+            {isEventStarted(event.date, event.start_time) ? (
               <Link href={`/events/${event.slug}/feedback`}>
                 <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
                   Feedback
+                </Button>
+              </Link>
+            ) : (
+              <Link href={`/events/${event.slug}/rsvp`}>
+                <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                  RSVP
                 </Button>
               </Link>
             )}
@@ -219,11 +241,19 @@ export default function HeroSection() {
           <span className="font-semibold">{event.location_name}</span>
         </div>
         <div className="flex gap-4 justify-center mt-2">
-          <Link href={`/events/${event.slug}/feedback`}>
-            <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
-              Feedback
-            </Button>
-          </Link>
+          {isEventStarted(event.date, event.start_time) ? (
+            <Link href={`/events/${event.slug}/feedback`}>
+              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                Feedback
+              </Button>
+            </Link>
+          ) : (
+            <Link href={`/events/${event.slug}/rsvp`}>
+              <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
+                RSVP
+              </Button>
+            </Link>
+          )}
           <Link href={`/events#${event.slug}`} scroll={false}>
             <Button className="bg-white text-blue-700 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
               Learn More

@@ -32,6 +32,24 @@ function formatEventTime(timeStr: string) {
   return `${hour}:${minute}${ampm}`;
 }
 
+function isEventStarted(eventDate?: string, startTime?: string) {
+  if (!eventDate) return false;
+  try {
+    const date = parseISO(eventDate);
+    if (startTime) {
+      const [h, m] = startTime.split(":");
+      const hours = parseInt(h || "0", 10);
+      const minutes = parseInt(m || "0", 10);
+      date.setHours(hours, minutes, 0, 0);
+    } else {
+      date.setHours(0, 0, 0, 0);
+    }
+    return new Date().getTime() >= date.getTime();
+  } catch {
+    return false;
+  }
+}
+
 // Extended interface to handle API response format
 interface EventResponse extends Record<string, unknown> {
   id: number;
@@ -147,11 +165,20 @@ export default function EventsPage() {
                       {event.location_address}
                     </div>
                     <div className="flex justify-center space-x-4">
-                      <Link href={`/events/${event.slug}/feedback`}>
-                        <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
-                          Feedback
-                        </Button>
-                      </Link>
+                      {isEventStarted(event.date, event.start_time)}
+                      {isEventStarted(event.date, event.start_time) ? (
+                        <Link href={`/events/${event.slug}/feedback`}>
+                          <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
+                            Feedback
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Link href={`/events/${event.slug}/rsvp`}>
+                          <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
+                            RSVP
+                          </Button>
+                        </Link>
+                      )}
                     </div>
                   </div>
                   {typeof event.graphic === "string" && event.graphic && (
