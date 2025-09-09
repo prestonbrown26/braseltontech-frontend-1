@@ -3,18 +3,13 @@ const nextConfig = {
   // Enable static exports for better error handling
   output: 'standalone',
   
-  // Enable trailing slashes to avoid 404s with or without trailing slashes
-  trailingSlash: true,
+  // Disable trailing slashes to prevent redirect loops
+  trailingSlash: false,
   
   // Handle redirects and rewrites
   async redirects() {
     return [
-      // Redirect /admin to /admin/ to avoid 404 errors
-      {
-        source: '/admin',
-        destination: '/admin/',
-        permanent: true,
-      },
+      // No redirects needed with trailingSlash: false
     ];
   },
   
