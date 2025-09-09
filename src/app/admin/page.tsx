@@ -506,6 +506,49 @@ export default function AdminPage() {
               {activeTab === "rsvp" && (
                 <div>
                   <h2 className="text-xl font-bold mb-2">RSVPs</h2>
+                  <div className="mb-4 p-4 bg-blue-50 rounded-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-700">
+                          {rsvps.length}
+                        </div>
+                        <div className="text-sm text-gray-600">Total RSVPs</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-700">
+                          {rsvps.reduce((total: number, r: Record<string, unknown>) => 
+                            total + (Number(r.number_of_attendees) || 0), 0
+                          )}
+                        </div>
+                        <div className="text-sm text-gray-600">Total Attendees</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-orange-700">
+                          {rsvps
+                            .filter((r: Record<string, unknown>) =>
+                              rsvpEventFilter === "all" ||
+                              (
+                                typeof r.event === "object" && r.event !== null && "id" in r.event
+                                  ? String((r.event as { id: unknown }).id)
+                                  : String(r.event)
+                              ) === rsvpEventFilter
+                            )
+                            .reduce((total: number, r: Record<string, unknown>) => 
+                              total + (Number(r.number_of_attendees) || 0), 0
+                            )}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {rsvpEventFilter === "all" ? "All Events" : "Filtered Attendees"}
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-700">
+                          {rsvps.filter((r: Record<string, unknown>) => r.opt_in_call).length}
+                        </div>
+                        <div className="text-sm text-gray-600">Opt-in Calls</div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="mb-4 flex items-center gap-2">
                     <label htmlFor="rsvp-event-filter" className="font-medium text-gray-700">Filter by Event:</label>
                     <select
