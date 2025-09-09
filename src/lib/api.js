@@ -1,7 +1,7 @@
 // Base URLs - configured for Render deployment
 // Use relative URLs for same-domain API requests when possible
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "/api";
-export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";  // Empty string for same domain
+export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "https://braseltontech-backend-1.onrender.com";  // Default to backend URL
 export const ADMIN_URL = `${BACKEND_URL}/admin`;
 export const FRONTEND_ADMIN_URL = `/admin`;  // Custom React admin page
 
