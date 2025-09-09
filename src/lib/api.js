@@ -31,7 +31,7 @@ export const API_ENDPOINTS = {
   levelUpSignup: getApiUrl('/level-up-signup/'),
   aiLearningEventRequest: getApiUrl('/ai-learning-event-request/'),
   events: getApiUrl('/events/'),
-  eventsAll: getApiUrl('/events/all/'),
+  eventsAll: BACKEND_URL ? `${BACKEND_URL}/events/all/` : '/events/all/', // Direct backend endpoint
   adminLogin: getApiUrl('/admin/login/'),
   adminLoginCors: getApiUrl('/admin/login-cors/'),  // CORS-enabled login endpoint
   adminLoginRaw: BACKEND_URL ? `${BACKEND_URL}/login-raw/` : '/login-raw/', // Direct backend endpoint
