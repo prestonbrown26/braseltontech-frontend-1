@@ -3,7 +3,7 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "/api";
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";  // Empty string for same domain
 export const ADMIN_URL = `${BACKEND_URL}/admin`;
-export const FRONTEND_ADMIN_URL = `https://braseltontech-backend-1.onrender.com/admin/`;  // Redirect to Django admin
+export const FRONTEND_ADMIN_URL = `/admin`;  // Custom React admin page
 
 // Log configured URLs in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
@@ -34,7 +34,7 @@ export const API_ENDPOINTS = {
   eventsAll: getApiUrl('/events/all/'),
   adminLogin: getApiUrl('/admin/login/'),
   adminLoginCors: getApiUrl('/admin/login-cors/'),  // CORS-enabled login endpoint
-  adminLoginRaw: getApiUrl('/login-raw/'), // Only supported login-raw endpoint
+  adminLoginRaw: BACKEND_URL ? `${BACKEND_URL}/login-raw/` : '/login-raw/', // Direct backend endpoint
   adminMentorSignups: getApiUrl('/admin/mentor-signups/'),
   adminSponsorSignups: getApiUrl('/admin/sponsor-signups/'),
   adminLevelupSignups: getApiUrl('/admin/level-up-signups/'),

@@ -9,16 +9,11 @@ const nextConfig = {
   // Handle redirects and rewrites
   async redirects() {
     return [
-      // Redirect /admin to Django admin on backend
+      // Redirect /admin to /admin/ to avoid 404 errors
       {
         source: '/admin',
-        destination: 'https://braseltontech-backend-1.onrender.com/admin/',
-        permanent: false, // Use 302 redirect to allow for future changes
-      },
-      {
-        source: '/admin/',
-        destination: 'https://braseltontech-backend-1.onrender.com/admin/',
-        permanent: false, // Use 302 redirect to allow for future changes
+        destination: '/admin/',
+        permanent: true,
       },
     ];
   },
