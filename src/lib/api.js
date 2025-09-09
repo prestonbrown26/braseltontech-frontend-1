@@ -3,7 +3,7 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "/api";
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "";  // Empty string for same domain
 export const ADMIN_URL = `${BACKEND_URL}/admin`;
-export const FRONTEND_ADMIN_URL = `/admin`;  // This is the frontend admin page
+export const FRONTEND_ADMIN_URL = `https://braseltontech-backend-1.onrender.com/admin/`;  // Redirect to Django admin
 
 // Log configured URLs in development
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
