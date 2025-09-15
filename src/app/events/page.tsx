@@ -32,7 +32,7 @@ function formatEventTime(timeStr: string) {
   return `${hour}:${minute}${ampm}`;
 }
 
-function isEventStarted(eventDate?: string, startTime?: string) {
+function isEventStarted(eventDate?: string) {
   if (!eventDate) return false;
   try {
     const date = parseISO(eventDate);
@@ -159,7 +159,7 @@ export default function EventsPage() {
                       {event.location_address}
                     </div>
                     <div className="flex justify-center space-x-4">
-                      {isEventStarted(event.date, event.start_time) ? (
+                      {isEventStarted(event.date) ? (
                         <Link href={`/events/${event.slug}/feedback`}>
                           <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
                             Feedback

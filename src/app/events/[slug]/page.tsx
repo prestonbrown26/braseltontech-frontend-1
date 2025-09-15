@@ -8,7 +8,7 @@ import Image from "next/image";
 import { format, parseISO } from "date-fns";
 import { Event } from "@/lib/types";
 
-function isEventStarted(eventDate?: string, startTime?: string) {
+function isEventStarted(eventDate?: string) {
   if (!eventDate) return false;
   try {
     const date = parseISO(eventDate);
@@ -195,7 +195,7 @@ export default function EventDetailPage() {
                 </div>
                 
                 <div className="flex gap-4 mt-4">
-                  {isEventStarted(event.date, event.start_time) ? (
+                  {isEventStarted(event.date) ? (
                     <Link 
                       href={`/events/${slug}/feedback`}
                       className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300"

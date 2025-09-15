@@ -84,7 +84,7 @@ export default function HeroSection() {
     return `${hour}:${minute}${ampm}`; // ✅ Fixed interpolation
   }
 
-  function isEventStarted(eventDate?: string, startTime?: string) {
+  function isEventStarted(eventDate?: string) {
     if (!eventDate) return false;
     try {
       const date = parseISO(eventDate);
@@ -148,7 +148,7 @@ export default function HeroSection() {
             <span className="font-semibold">{event.location_name}</span>
           </div>
           <div className="flex gap-4 justify-center mt-2">
-            {isEventStarted(event.date, event.start_time) ? (
+            {isEventStarted(event.date) ? (
               <Link href={`/events/${event.slug}/feedback`}>
                 <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
                   Feedback
@@ -235,7 +235,7 @@ export default function HeroSection() {
           <span className="font-semibold">{event.location_name}</span>
         </div>
         <div className="flex gap-4 justify-center mt-2">
-          {isEventStarted(event.date, event.start_time) ? (
+          {isEventStarted(event.date) ? (
             <Link href={`/events/${event.slug}/feedback`}>
               <Button className="bg-white text-gray-800 font-mono font-extrabold tracking-wide uppercase px-6 py-2 rounded-md shadow-lg border border-blue-100 hover:bg-blue-50 transition">
                 Feedback
