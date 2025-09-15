@@ -5,8 +5,20 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Event } from "@/lib/types";
+
+function isEventStarted(eventDate?: string, startTime?: string) {
+  if (!eventDate) return false;
+  try {
+    const date = parseISO(eventDate);
+    // Set to 9:00 AM on the event day instead of using the event's start time
+    date.setHours(9, 0, 0, 0);
+    return new Date().getTime() >= date.getTime();
+  } catch {
+    return false;
+  }
+}
 
 export default function EventDetailPage() {
   const params = useParams();
@@ -183,12 +195,21 @@ export default function EventDetailPage() {
                 </div>
                 
                 <div className="flex gap-4 mt-4">
-                  <Link 
-                    href={`/events/${slug}/rsvp`}
-                    className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300"
-                  >
-                    RSVP Now
-                  </Link>
+                  {isEventStarted(event.date, event.start_time) ? (
+                    <Link 
+                      href={`/events/${slug}/feedback`}
+                      className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                      Feedback
+                    </Link>
+                  ) : (
+                    <Link 
+                      href={`/events/${slug}/rsvp`}
+                      className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                      RSVP Now
+                    </Link>
+                  )}
                   <Link 
                     href="/events"
                     className="px-6 py-3 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300 transition duration-300"

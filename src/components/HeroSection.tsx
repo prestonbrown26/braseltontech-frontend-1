@@ -88,14 +88,8 @@ export default function HeroSection() {
     if (!eventDate) return false;
     try {
       const date = parseISO(eventDate);
-      if (startTime) {
-        const [h, m] = startTime.split(":");
-        const hours = parseInt(h || "0", 10);
-        const minutes = parseInt(m || "0", 10);
-        date.setHours(hours, minutes, 0, 0);
-      } else {
-        date.setHours(0, 0, 0, 0);
-      }
+      // Set to 9:00 AM on the event day instead of using the event's start time
+      date.setHours(9, 0, 0, 0);
       return new Date().getTime() >= date.getTime();
     } catch {
       return false;
