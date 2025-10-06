@@ -32,12 +32,32 @@ function formatEventTime(timeStr: string) {
   return `${hour}:${minute}${ampm}`;
 }
 
-function isEventStarted(eventDate?: string) {
+function isFeedbackAvailable(eventDate?: string) {
   if (!eventDate) return false;
   try {
     const date = parseISO(eventDate);
-    // Set to 9:00 AM on the event day instead of using the event's start time
+    // Set to 9:00 AM on the event day for feedback availability
     date.setHours(9, 0, 0, 0);
+    return new Date().getTime() >= date.getTime();
+  } catch {
+    return false;
+  }
+}
+
+function isEventStarted(eventDate?: string, startTime?: string) {
+  if (!eventDate) return false;
+  try {
+    const date = parseISO(eventDate);
+    
+    if (startTime) {
+      // Parse the start time and set it on the event date
+      const [hours, minutes] = startTime.split(':').map(Number);
+      date.setHours(hours, minutes, 0, 0);
+    } else {
+      // If no start time, default to 9:00 AM
+      date.setHours(9, 0, 0, 0);
+    }
+    
     return new Date().getTime() >= date.getTime();
   } catch {
     return false;
@@ -159,16 +179,17 @@ export default function EventsPage() {
                       {event.location_address}
                     </div>
                     <div className="flex justify-center space-x-4">
-                      {isEventStarted(event.date) ? (
-                        <Link href={`/events/${event.slug}/feedback`}>
-                          <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
-                            Feedback
-                          </Button>
-                        </Link>
-                      ) : (
+                      {!isEventStarted(event.date, event.start_time) && (
                         <Link href={`/events/${event.slug}/rsvp`}>
                           <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
                             RSVP
+                          </Button>
+                        </Link>
+                      )}
+                      {isFeedbackAvailable(event.date) && (
+                        <Link href={`/events/${event.slug}/feedback`}>
+                          <Button className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-md shadow-lg hover:bg-blue-700 transition w-auto">
+                            Feedback
                           </Button>
                         </Link>
                       )}
